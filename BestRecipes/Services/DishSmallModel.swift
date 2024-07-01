@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct DishSmallModel: Identifiable, Codable {
+    var id: String
+}
