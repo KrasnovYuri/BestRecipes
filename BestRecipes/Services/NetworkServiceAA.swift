@@ -31,7 +31,7 @@ actor NetworkServiceAA {
     }
 
     // get dish by ID
-    func getDishById(id: String) async throws -> DishBigModel {
+    func getDishById(id: Int) async throws -> DishBigModel {
         guard let url = URLManager.shared.createURL(id: id) else {
             throw NetworkError.badURL
         }
@@ -97,20 +97,22 @@ actor NetworkServiceAA {
     }
 
     //get random dishes
-    func getRandomDishes(numberLimit: Int) async throws -> [DishSmallModel] {
+    func getRandomDishes(numberLimit: Int) async throws -> [DishBigModel] {
         guard let url = URLManager.shared.createURL(numberOfDishes: numberLimit) else {
             throw NetworkError.badURL
         }
-        print(url.description)
         do {
             let responce = try await URLSession.shared.data(from: url)
+            print("we have data")
             let data = responce.0
-            print(data)
             let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            print("we have decoder")
             do {
-                let randomDishes = try decoder.decode([DishSmallModel].self, from: data)
-                print(randomDishes)
-                return randomDishes
+                print("do in")
+                let result = try decoder.decode(RecipeData.self, from: data)
+                print("finish!")
+                return result.recipes
             } catch {
                 throw NetworkError.badData
             }
