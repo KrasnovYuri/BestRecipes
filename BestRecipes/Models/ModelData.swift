@@ -11,10 +11,10 @@ import Foundation
 class ModelData: ObservableObject {
 
     @Published var smallDishesAuto = [DishSmallModel]()
-    @Published var dish = DishBigModel(id: "")
+//    @Published var dish = DishBigModel(id: 0)
     @Published var smallDishesCource = [DishSmallModel]()
     @Published var smallDishesCuisine = [DishSmallModel]()
-    @Published var randomDishes = [DishSmallModel]()
+    @Published var randomDishes = [DishBigModel]()
 
     let service = NetworkServiceAA()
 
@@ -26,10 +26,10 @@ class ModelData: ObservableObject {
     }
 
     //get dish by ID
-    func fetchDishById(id: String) async throws {
+    func fetchDishById(id: Int) async throws {
         var fetchedDishById: DishBigModel
         fetchedDishById = try await service.getDishById(id: id)
-        dish = fetchedDishById
+//        dish = fetchedDishById
     }
 
     //get dishes by course
@@ -48,8 +48,10 @@ class ModelData: ObservableObject {
 
     //get random dishes
     func fetchRandomDishes(numberLimit: Int) async throws {
-        var fetchedRandomDishes: [DishSmallModel]
+        var fetchedRandomDishes: [DishBigModel] = []
+        print(fetchedRandomDishes.count)
         fetchedRandomDishes = try await service.getRandomDishes(numberLimit: numberLimit)
+        print(fetchedRandomDishes.count)
         randomDishes = fetchedRandomDishes
     }
 }

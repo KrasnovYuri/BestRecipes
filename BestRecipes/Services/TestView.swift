@@ -13,18 +13,22 @@ struct TestView: View {
     
     var body: some View {
         NavigationView {
-            List(modelData.randomDishes) { dish in
-                Text(dish.id)
+            HStack {
+                ForEach(modelData.randomDishes) { dish in
+                    Text(dish.title)
+                }
             }
             .navigationTitle("Random Dishes")
             .task {
                 do {
-                    try await modelData.fetchRandomDishes(numberLimit: 1)
+                    try await modelData.fetchRandomDishes(numberLimit: 3)
                 } catch {
                     print(error)
                 }
             }
+            
         }
+        
     }
 }
 

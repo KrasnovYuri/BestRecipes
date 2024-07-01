@@ -8,5 +8,7 @@
 import Foundation
 
 struct DishSmallModel: Identifiable, Codable {
-    var id: String
+    var id: Int
+    var title: String
+    var imageType: String
 }
