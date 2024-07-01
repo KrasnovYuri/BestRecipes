@@ -22,6 +22,7 @@
 		92117AB62C32D8260010C7B3 /* TextData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AB52C32D8260010C7B3 /* TextData.swift */; };
 		92117AB82C32D8460010C7B3 /* NetworkServiceAA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AB72C32D8460010C7B3 /* NetworkServiceAA.swift */; };
 		92117ABA2C32D8680010C7B3 /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AB92C32D8680010C7B3 /* URLManager.swift */; };
+		92117ABC2C32ECE10010C7B3 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117ABB2C32ECE10010C7B3 /* TestView.swift */; };
 		92EA88A12C31CDB300FD3423 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92EA889A2C31CDB300FD3423 /* Poppins-Light.ttf */; };
 		92EA88A22C31CDB300FD3423 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92EA889B2C31CDB300FD3423 /* Poppins-Medium.ttf */; };
 		92EA88A32C31CDB300FD3423 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92EA889C2C31CDB300FD3423 /* Poppins-ExtraBold.ttf */; };
@@ -50,6 +51,7 @@
 		92117AB52C32D8260010C7B3 /* TextData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextData.swift; sourceTree = "<group>"; };
 		92117AB72C32D8460010C7B3 /* NetworkServiceAA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceAA.swift; sourceTree = "<group>"; };
 		92117AB92C32D8680010C7B3 /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
+		92117ABB2C32ECE10010C7B3 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		92EA889A2C31CDB300FD3423 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
 		92EA889B2C31CDB300FD3423 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		92EA889C2C31CDB300FD3423 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				92117AB52C32D8260010C7B3 /* TextData.swift */,
 				92117AB72C32D8460010C7B3 /* NetworkServiceAA.swift */,
 				92117AB92C32D8680010C7B3 /* URLManager.swift */,
+				92117ABB2C32ECE10010C7B3 /* TestView.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				92117AB42C32D8140010C7B3 /* DishSmallModel.swift in Sources */,
 				920A251C2C319602004CAA1A /* Onboarding.swift in Sources */,
 				92EA88AD2C31D5F600FD3423 /* Color+Ext.swift in Sources */,
+				92117ABC2C32ECE10010C7B3 /* TestView.swift in Sources */,
 				92117AB22C32D7F80010C7B3 /* DishBigModel.swift in Sources */,
 				92117AAE2C32D6FC0010C7B3 /* TrendingNowView.swift in Sources */,
 				92117AB62C32D8260010C7B3 /* TextData.swift in Sources */,
