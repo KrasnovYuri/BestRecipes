@@ -8,8 +8,23 @@
 import SwiftUI
 
 struct TestView: View {
+    
+    @StateObject private var modelData = ModelData()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            List(modelData.randomDishes) { dish in
+                Text(dish.id)
+            }
+            .navigationTitle("Random Dishes")
+            .task {
+                do {
+                    try await modelData.fetchRandomDishes(numberLimit: 1)
+                } catch {
+                    print(error)
+                }
+            }
+        }
     }
 }
 
