@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44E00E4D2C345492003DA7EB /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E00E4C2C345492003DA7EB /* TestModel.swift */; };
 		7AB0857C2C343AE800FEF512 /* DishModelId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB0857B2C343AE800FEF512 /* DishModelId.swift */; };
 		920A251A2C319602004CAA1A /* BestRecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A25192C319602004CAA1A /* BestRecipesApp.swift */; };
 		920A251C2C319602004CAA1A /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A251B2C319602004CAA1A /* Onboarding.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		44E00E4C2C345492003DA7EB /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		7AB0857B2C343AE800FEF512 /* DishModelId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishModelId.swift; sourceTree = "<group>"; };
 		920A25162C319602004CAA1A /* BestRecipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BestRecipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		920A25192C319602004CAA1A /* BestRecipesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestRecipesApp.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				92117AB72C32D8460010C7B3 /* NetworkServiceAA.swift */,
 				92117AB92C32D8680010C7B3 /* URLManager.swift */,
 				92117ABB2C32ECE10010C7B3 /* TestView.swift */,
+				44E00E4C2C345492003DA7EB /* TestModel.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				92117AAA2C32D6500010C7B3 /* SavedRecipesView.swift in Sources */,
 				92117AB42C32D8140010C7B3 /* DishSmallModel.swift in Sources */,
 				920A251C2C319602004CAA1A /* Onboarding.swift in Sources */,
+				44E00E4D2C345492003DA7EB /* TestModel.swift in Sources */,
 				92EA88AD2C31D5F600FD3423 /* Color+Ext.swift in Sources */,
 				92117ABC2C32ECE10010C7B3 /* TestView.swift in Sources */,
 				7AB0857C2C343AE800FEF512 /* DishModelId.swift in Sources */,

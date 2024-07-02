@@ -15,16 +15,12 @@ struct TestView: View {
 
     var body: some View {
         NavigationView {
-            Text(modelData.dishById.title)
-//            Button {
-//                print(URLManager.shared.createURL(id: 645265)!)
-//            } label: {
-//                Text("1124")
-//            }
+            
+           
         }
         .task {
             do {
-                try await modelData.fetchDishById(id: 645265)
+                try await modelData.fetchDishById(id: 645275)
             } catch {
                 print(error)
             }

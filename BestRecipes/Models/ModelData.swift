@@ -11,8 +11,7 @@ import Foundation
 class ModelData: ObservableObject {
 
     @Published var smallDishesAuto = [DishSmallModel]()
-    
-    @Published var dishById: RecipeDetails = RecipeDetails(vegetarian: true, vegan: true, glutenFree: true, dairyFree: true, veryHealthy: true, cheap: true, veryPopular: true, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 10, gaps: "", preparationMinutes: 12, cookingMinutes: 12, aggregateLikes: 12, healthScore: 12, creditsText: "", sourceName: "", pricePerServing: 0.0, extendedIngredients: [], id: 312412, title: "", readyInMinutes: 123, servings: 123, sourceUrl: "", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], instructions: "", analyzedInstructions: [], spoonacularScore: 0.0, spoonacularSourceUrl: "")
+    @Published var dishById: Recipe123 = Recipe123(vegetarian: true, vegan: true, glutenFree: true, dairyFree: true, veryHealthy: true, cheap: true, veryPopular: true, sustainable: true, weightWatcherSmartPoints: 1, gaps: "", lowFodmap: true, aggregateLikes: 2, spoonacularScore: 2, healthScore: 2, creditsText: "", license: "", sourceName: "", pricePerServing: 0.0, extendedIngredients: [], id: 1, title: "", readyInMinutes: 1, servings: 1, sourceUrl: "", image: "", imageType: "", nutrition: Nutrition(nutrients: [], properties: [], flavonoids: [], ingredients: [], caloricBreakdown: CaloricBreakdown(percentProtein: 0.0, percentFat: 0.0, percentCarbs: 0.0), weightPerServing: Weight(amount: 1, unit: "")), summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: "", analyzedInstructions: [], spoonacularSourceUrl: "")
 
     // MARK: - it works
     @Published var recipeByCourse = RecipeByCourseResponse(results: [], offset: 0, number: 0, totalResults: 0)
@@ -30,7 +29,7 @@ class ModelData: ObservableObject {
 
 //    get dish by ID
     func fetchDishById(id: Int) async throws {
-        var fetchedDishById: RecipeDetails
+        var fetchedDishById: Recipe123
         fetchedDishById = try await service.getDishById(id: id)
         dishById = fetchedDishById
     }

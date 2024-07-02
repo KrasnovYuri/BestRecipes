@@ -26,7 +26,6 @@ struct RecipeDetails: Codable, Identifiable {
     let sourceName: String
     let pricePerServing: Double
     let extendedIngredients: [ExtendedIngredient]
-    //
     let id: Int
     let title: String
     let readyInMinutes: Int
@@ -38,8 +37,12 @@ struct RecipeDetails: Codable, Identifiable {
     let cuisines: [String]
     let dishTypes: [String]
     let diets: [String]
+    // ??
+    let occasions: [String]?
     let instructions: String
     let analyzedInstructions: [AnalyzedInstruction]
+    //??
+    let originalId: Int?
     let spoonacularScore: Double
     let spoonacularSourceUrl: String
 }
