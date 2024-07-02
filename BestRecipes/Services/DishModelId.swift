@@ -4,80 +4,100 @@
 //
 //  Created by Evgeniy K on 02.07.2024.
 //
-
 import Foundation
 
-// MARK: - RecipeInformation
-struct RecipeInformationID: Identifiable, Codable {
-    let vegetarian, vegan, glutenFree, dairyFree: Bool
-    let veryHealthy, cheap, veryPopular, sustainable: Bool
+struct RecipeDetails: Codable, Identifiable {
+    let vegetarian: Bool
+    let vegan: Bool
+    let glutenFree: Bool
+    let dairyFree: Bool
+    let veryHealthy: Bool
+    let cheap: Bool
+    let veryPopular: Bool
+    let sustainable: Bool
     let lowFodmap: Bool
     let weightWatcherSmartPoints: Int
     let gaps: String
-    let preparationMinutes, cookingMinutes, aggregateLikes, healthScore: Int
-    let creditsText, sourceName: String
+    let preparationMinutes: Int?
+    let cookingMinutes: Int?
+    let aggregateLikes: Int
+    let healthScore: Int
+    let creditsText: String
+    let sourceName: String
     let pricePerServing: Double
-    let extendedIngredients: [ExtendedIngredientID]
+    let extendedIngredients: [ExtendedIngredient]
+    //
     let id: Int
     let title: String
-    let readyInMinutes, servings: Int
+    let readyInMinutes: Int
+    let servings: Int
     let sourceUrl: String
     let image: String
     let imageType: String
     let summary: String
-    let cuisines, dishTypes, diets, occasions: [String]
+    let cuisines: [String]
+    let dishTypes: [String]
+    let diets: [String]
     let instructions: String
-    let analyzedInstructions: [AnalyzedInstructionID]
-    let originalId: String?
+    let analyzedInstructions: [AnalyzedInstruction]
     let spoonacularScore: Double
+    let spoonacularSourceUrl: String
 }
 
-// MARK: - ExtendedIngredient
-struct ExtendedIngredientID: Identifiable, Codable {
+struct ExtendedIngredient: Codable, Identifiable {
     let id: Int
-    let aisle, image, consistency, name: String
-    let nameClean, original, originalName: String
-    let amount: Double
+    let aisle: String
+    let image: String
+    let consistency: String
+    let name: String
+    let nameClean: String
+    let original: String
+    let originalName: String
+    let amount: Int
     let unit: String
     let meta: [String]
     let measures: MeasuresID
+    //
 }
 
-// MARK: - Measures
 struct MeasuresID: Codable {
-    let us, metric: MeasureID
+    let us: MeasureInfoUS
+    let metric: MeasureInfoMetric
 }
 
-// MARK: - Measure
-struct MeasureID: Codable {
+struct MeasureInfoUS: Codable {
     let amount: Double
-    let unitShort, unitLong: String
+    let unitShort: String
+    let unitLong: String
+}
+struct MeasureInfoMetric: Codable {
+    let amount: Double
+    let unitShort: String
+    let unitLong: String
 }
 
-// MARK: - AnalyzedInstruction
-struct AnalyzedInstructionID: Codable {
+struct AnalyzedInstruction: Codable {
     let name: String
-    let steps: [StepID]
+    let steps: [Step]
 }
 
-// MARK: - Step
-struct StepID: Codable {
+struct Step: Codable {
     let number: Int
     let step: String
-    let ingredients, equipment: [EntID]
-    let length: LengthID?
+    let ingredients: [IngredientReference]
+    let equipment: [EquipmentReference]
 }
 
-// MARK: - Ent
-struct EntID: Codable {
+struct IngredientReference: Codable, Identifiable {
     let id: Int
-    let name, localizedName: String
+    let name: String
+    let localizedName: String
     let image: String
 }
 
-// MARK: - Length
-struct LengthID: Codable {
-    let number: Int
-    let unit: String
+struct EquipmentReference: Codable, Identifiable {
+    let id: Int
+    let name: String
+    let localizedName: String
+    let image: String
 }
-

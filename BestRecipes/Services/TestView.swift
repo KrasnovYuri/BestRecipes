@@ -15,20 +15,19 @@ struct TestView: View {
 
     var body: some View {
         NavigationView {
-
-            HStack {
-                ForEach(modelData.randomDishes) { dish in
-                    Text(dish.title)
-                }
+            Text(modelData.dishById.title)
+//            Button {
+//                print(URLManager.shared.createURL(id: 645265)!)
+//            } label: {
+//                Text("1124")
+//            }
+        }
+        .task {
+            do {
+                try await modelData.fetchDishById(id: 645265)
+            } catch {
+                print(error)
             }
-            .task {
-                do {
-                    try await modelData.fetchRandomDishes(numberLimit: 3)
-                } catch {
-                    print(error)
-                }
-            }
-            .navigationTitle("Random Dishes")
         }
     }
 }

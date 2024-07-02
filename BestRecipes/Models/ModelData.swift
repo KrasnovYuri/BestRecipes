@@ -12,7 +12,7 @@ class ModelData: ObservableObject {
 
     @Published var smallDishesAuto = [DishSmallModel]()
     
-//    @Published var dishById = DishBigModel(id: 0, title: "", readyInMinutes: 0, servings: 0, image: nil, sourceUrl: URL(string: "")!, cuisines: [], dishTypes: [], diets: [], occasions: [], summary: "", instructions: "", extendedIngredients: [], pricePerServing: 0)
+    @Published var dishById: RecipeDetails = RecipeDetails(vegetarian: true, vegan: true, glutenFree: true, dairyFree: true, veryHealthy: true, cheap: true, veryPopular: true, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 10, gaps: "", preparationMinutes: 12, cookingMinutes: 12, aggregateLikes: 12, healthScore: 12, creditsText: "", sourceName: "", pricePerServing: 0.0, extendedIngredients: [], id: 312412, title: "", readyInMinutes: 123, servings: 123, sourceUrl: "", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], instructions: "", analyzedInstructions: [], spoonacularScore: 0.0, spoonacularSourceUrl: "")
 
     // MARK: - it works
     @Published var recipeByCourse = RecipeByCourseResponse(results: [], offset: 0, number: 0, totalResults: 0)
@@ -28,12 +28,12 @@ class ModelData: ObservableObject {
         smallDishesAuto = fetchedSmallDishesAuto
     }
 
-    //get dish by ID
-//    func fetchDishById(id: Int) async throws {
-//        var fetchedDishById: DishBigModel
-//        fetchedDishById = try await service.getDishById(id: id)
-//        dishById = fetchedDishById
-//    }
+//    get dish by ID
+    func fetchDishById(id: Int) async throws {
+        var fetchedDishById: RecipeDetails
+        fetchedDishById = try await service.getDishById(id: id)
+        dishById = fetchedDishById
+    }
 
     // MARK: - get dishes by courses
     func fetchDishByCources(course: Course, numberLimit: Int) async throws {
