@@ -16,17 +16,13 @@ struct TestView: View {
     var body: some View {
         NavigationView {
             HStack {
-                Text(modelData.dishById.summary)
+                Text(modelData.randomDishes.count.description)
             }
-//            Button {
-//                print(URLManager.shared.createURL(id: 645265)!)
-//            } label: {
-//                Text("1124")
-//            }
+
         }
         .task {
             do {
-                try await modelData.fetchDishById3(id: 3)
+                try await modelData.fetchRandomDishes(numberLimit: 2)
             } catch {
                 print(error)
             }
