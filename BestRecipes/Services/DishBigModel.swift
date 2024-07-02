@@ -5,7 +5,7 @@
 //  Created by Юрий on 01.07.2024.
 //
 
-import Foundation
+//import Foundation
 //struct ResultInto: Codable {
 //    var results: [DishBigModel]
 //}
@@ -34,7 +34,6 @@ import Foundation
 //}
 
 import Foundation
-
 
 struct Ingredient : Identifiable, Codable  {
     let id: Int

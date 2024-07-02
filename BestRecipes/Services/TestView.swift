@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct TestView: View {
-    
+
+    // random dishes
+
     @StateObject private var modelData = ModelData()
-    
+
     var body: some View {
         NavigationView {
+
             HStack {
                 ForEach(modelData.randomDishes) { dish in
                     Text(dish.title)
                 }
             }
-            .navigationTitle("Random Dishes")
             .task {
                 do {
                     try await modelData.fetchRandomDishes(numberLimit: 3)
@@ -26,9 +28,8 @@ struct TestView: View {
                     print(error)
                 }
             }
-            
+            .navigationTitle("Random Dishes")
         }
-        
     }
 }
 
