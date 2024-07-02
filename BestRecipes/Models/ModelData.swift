@@ -11,9 +11,12 @@ import Foundation
 class ModelData: ObservableObject {
 
     @Published var smallDishesAuto = [DishSmallModel]()
-//    @Published var dish = DishBigModel(id: 0)
-    @Published var smallDishesCource = [DishSmallModel]()
-    @Published var smallDishesCuisine = [DishSmallModel]()
+    
+//    @Published var dishById = DishBigModel(id: 0, title: "", readyInMinutes: 0, servings: 0, image: nil, sourceUrl: URL(string: "")!, cuisines: [], dishTypes: [], diets: [], occasions: [], summary: "", instructions: "", extendedIngredients: [], pricePerServing: 0)
+
+    // MARK: - it works
+    @Published var recipeByCourse = RecipeByCourseResponse(results: [], offset: 0, number: 0, totalResults: 0)
+    @Published var recipeByCuisine = RecipeByCuisineResponse(results: [], offset: 0, number: 0, totalResults: 0)
     @Published var randomDishes = [DishBigModel]()
 
     let service = NetworkServiceAA()
@@ -26,27 +29,27 @@ class ModelData: ObservableObject {
     }
 
     //get dish by ID
-    func fetchDishById(id: Int) async throws {
-        var fetchedDishById: DishBigModel
-        fetchedDishById = try await service.getDishById(id: id)
-//        dish = fetchedDishById
-    }
+//    func fetchDishById(id: Int) async throws {
+//        var fetchedDishById: DishBigModel
+//        fetchedDishById = try await service.getDishById(id: id)
+//        dishById = fetchedDishById
+//    }
 
-    //get dishes by course
+    // MARK: - get dishes by courses
     func fetchDishByCources(course: Course, numberLimit: Int) async throws {
-        var fetchedDishByCources: [DishSmallModel]
+        var fetchedDishByCources: RecipeByCourseResponse
         fetchedDishByCources = try await service.getDishByCources(cource: course, numberLimit: numberLimit)
-        smallDishesCource = fetchedDishByCources
+        recipeByCourse = fetchedDishByCources
     }
 
-    //get dishes by cuisine
+    // MARK: - get dishes by cuisine
     func fetchDishByCuisine(cuisine: Cuisine, numberLimit: Int) async throws {
-        var fetchedDishByCuisine: [DishSmallModel]
+        var fetchedDishByCuisine: RecipeByCuisineResponse
         fetchedDishByCuisine = try await service.getDishByCuisine(cuisine: cuisine, numberLimit: numberLimit)
-        smallDishesCuisine = fetchedDishByCuisine
+        recipeByCuisine = fetchedDishByCuisine
     }
 
-    //get random dishes
+    // MARK: - get random dishes
     func fetchRandomDishes(numberLimit: Int) async throws {
         var fetchedRandomDishes: [DishBigModel] = []
         print(fetchedRandomDishes.count)

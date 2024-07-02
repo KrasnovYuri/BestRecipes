@@ -1,29 +1,28 @@
 //
-//  TestView.swift
+//  TestView4.swift
 //  BestRecipes
 //
-//  Created by Юрий on 01.07.2024.
+//  Created by Evgeniy K on 02.07.2024.
 //
 
 import SwiftUI
 
-struct TestView: View {
+struct TestView4: View {
 
-    // random dishes
+    // dishes by ID
 
     @StateObject private var modelData = ModelData()
 
     var body: some View {
-        NavigationView {
 
+        NavigationView {
             HStack {
-                ForEach(modelData.randomDishes) { dish in
-                    Text(dish.title)
-                }
+                //Text(modelData.dishById.summary)
+                //Text(modelData.dishById.title)
             }
             .task {
                 do {
-                    try await modelData.fetchRandomDishes(numberLimit: 3)
+                    //try await modelData
                 } catch {
                     print(error)
                 }
@@ -34,5 +33,5 @@ struct TestView: View {
 }
 
 #Preview {
-    TestView()
+    TestView4()
 }

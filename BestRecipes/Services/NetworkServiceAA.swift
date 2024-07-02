@@ -31,6 +31,7 @@ actor NetworkServiceAA {
     }
 
     // get dish by ID
+    // https://api.spoonacular.com/recipes/3/information?apiKey=856702108d404eedb8ebb7694ab6f67c
     func getDishById(id: Int) async throws -> DishBigModel {
         guard let url = URLManager.shared.createURL(id: id) else {
             throw NetworkError.badURL
@@ -40,20 +41,20 @@ actor NetworkServiceAA {
             let data = responce.0
             let decoder = JSONDecoder()
             do {
-                let dish = try decoder.decode(DishBigModel.self, from: data)
-                return dish
+                let dishById = try decoder.decode(DishBigModel.self, from: data)
+                print(dishById)
+                return dishById
             } catch {
                 throw NetworkError.badData
             }
-        }
-        catch {
+        } catch {
             throw NetworkError.badResponse
-
         }
     }
 
-    //get dishes by cource
-    func getDishByCources(cource: Course, numberLimit: Int) async throws -> [DishSmallModel] {
+    // MARK: - dishes by course
+
+    func getDishByCources(cource: Course, numberLimit: Int) async throws -> RecipeByCourseResponse {
         guard let url = URLManager.shared.createURL(course: cource, numberLimit: numberLimit) else {
             throw NetworkError.badURL
         }
@@ -62,20 +63,19 @@ actor NetworkServiceAA {
             let data = responce.0
             let decoder = JSONDecoder()
             do {
-                let smallDishes = try decoder.decode([DishSmallModel].self, from: data)
-                return smallDishes
+                let recipeByCourse = try decoder.decode(RecipeByCourseResponse.self, from: data)
+                return recipeByCourse
             } catch {
                 throw NetworkError.badData
             }
-        }
-        catch {
+        } catch {
             throw NetworkError.badResponse
-
         }
     }
 
-    //get dishes by cuisine
-    func getDishByCuisine(cuisine: Cuisine, numberLimit: Int) async throws -> [DishSmallModel] {
+    // MARK: - dishes by cuisine
+
+    func getDishByCuisine(cuisine: Cuisine, numberLimit: Int) async throws -> RecipeByCuisineResponse {
         guard let url = URLManager.shared.createURL(cuisine: cuisine, numberLimit: numberLimit) else {
             throw NetworkError.badURL
         }
@@ -84,19 +84,18 @@ actor NetworkServiceAA {
             let data = responce.0
             let decoder = JSONDecoder()
             do {
-                let smallDishes = try decoder.decode([DishSmallModel].self, from: data)
-                return smallDishes
+                let recipeByCuisine = try decoder.decode(RecipeByCuisineResponse.self, from: data)
+                return recipeByCuisine
             } catch {
                 throw NetworkError.badData
             }
-        }
-        catch {
+        } catch {
             throw NetworkError.badResponse
-
         }
     }
 
-    //get random dishes
+    // MARK: - get random dishes
+
     func getRandomDishes(numberLimit: Int) async throws -> [DishBigModel] {
         guard let url = URLManager.shared.createURL(numberOfDishes: numberLimit) else {
             throw NetworkError.badURL
@@ -116,8 +115,7 @@ actor NetworkServiceAA {
             } catch {
                 throw NetworkError.badData
             }
-        }
-        catch {
+        } catch {
             throw NetworkError.badResponse
         }
     }

@@ -5,7 +5,7 @@
 //  Created by Юрий on 01.07.2024.
 //
 
-import Foundation
+//import Foundation
 //struct ResultInto: Codable {
 //    var results: [DishBigModel]
 //}
@@ -35,7 +35,6 @@ import Foundation
 
 import Foundation
 
-
 struct Ingredient : Identifiable, Codable  {
     let id: Int
     let aisle: String
@@ -51,12 +50,10 @@ struct Ingredient : Identifiable, Codable  {
     let measures: Measures
 }
 
-
 struct Measures : Codable  {
     let us: MeasureDetails
     let metric: MeasureDetails
 }
-
 
 struct MeasureDetails : Codable  {
     let amount: Double
