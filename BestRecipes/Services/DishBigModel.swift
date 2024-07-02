@@ -50,12 +50,10 @@ struct Ingredient : Identifiable, Codable  {
     let measures: Measures
 }
 
-
 struct Measures : Codable  {
     let us: MeasureDetails
     let metric: MeasureDetails
 }
-
 
 struct MeasureDetails : Codable  {
     let amount: Double

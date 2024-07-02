@@ -31,6 +31,7 @@ actor NetworkServiceAA {
     }
 
     // get dish by ID
+    // https://api.spoonacular.com/recipes/3/information?apiKey=856702108d404eedb8ebb7694ab6f67c
     func getDishById(id: Int) async throws -> DishBigModel {
         guard let url = URLManager.shared.createURL(id: id) else {
             throw NetworkError.badURL
@@ -40,15 +41,14 @@ actor NetworkServiceAA {
             let data = responce.0
             let decoder = JSONDecoder()
             do {
-                let dish = try decoder.decode(DishBigModel.self, from: data)
-                return dish
+                let dishById = try decoder.decode(DishBigModel.self, from: data)
+                print(dishById)
+                return dishById
             } catch {
                 throw NetworkError.badData
             }
-        }
-        catch {
+        } catch {
             throw NetworkError.badResponse
-
         }
     }
 

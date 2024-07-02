@@ -11,13 +11,12 @@ import Foundation
 class ModelData: ObservableObject {
 
     @Published var smallDishesAuto = [DishSmallModel]()
-//    @Published var dish = DishBigModel(id: 0)
-    @Published var smallDishesCource = [DishSmallModel]()
-    //@Published var smallDishesCuisine = [DishSmallModel]()
+    
+//    @Published var dishById = DishBigModel(id: 0, title: "", readyInMinutes: 0, servings: 0, image: nil, sourceUrl: URL(string: "")!, cuisines: [], dishTypes: [], diets: [], occasions: [], summary: "", instructions: "", extendedIngredients: [], pricePerServing: 0)
 
     // MARK: - it works
-    @Published var recipeByCourse = RecipeByCourseResponse(results: [RecipeByCourse].init(), offset: 0, number: 0, totalResults: 0)
-    @Published var recipeByCuisine = RecipeByCuisineResponse(results: [RecipeByCuisine].init(), offset: 0, number: 0, totalResults: 0)
+    @Published var recipeByCourse = RecipeByCourseResponse(results: [], offset: 0, number: 0, totalResults: 0)
+    @Published var recipeByCuisine = RecipeByCuisineResponse(results: [], offset: 0, number: 0, totalResults: 0)
     @Published var randomDishes = [DishBigModel]()
 
     let service = NetworkServiceAA()
@@ -30,11 +29,11 @@ class ModelData: ObservableObject {
     }
 
     //get dish by ID
-    func fetchDishById(id: Int) async throws {
-        var fetchedDishById: DishBigModel
-        fetchedDishById = try await service.getDishById(id: id)
-//        dish = fetchedDishById
-    }
+//    func fetchDishById(id: Int) async throws {
+//        var fetchedDishById: DishBigModel
+//        fetchedDishById = try await service.getDishById(id: id)
+//        dishById = fetchedDishById
+//    }
 
     // MARK: - get dishes by courses
     func fetchDishByCources(course: Course, numberLimit: Int) async throws {
