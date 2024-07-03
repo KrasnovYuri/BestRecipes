@@ -15,7 +15,9 @@ struct TestView: View {
 
     var body: some View {
         NavigationView {
-            Text(modelData.dishById.title)
+            HStack {
+                Text(modelData.dishById.summary)
+            }
 //            Button {
 //                print(URLManager.shared.createURL(id: 645265)!)
 //            } label: {
@@ -24,7 +26,7 @@ struct TestView: View {
         }
         .task {
             do {
-                try await modelData.fetchDishById(id: 645265)
+                try await modelData.fetchDishById3(id: 3)
             } catch {
                 print(error)
             }

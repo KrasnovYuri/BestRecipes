@@ -17,7 +17,7 @@ struct TestView4: View {
 
         NavigationView {
             HStack {
-                //Text(modelData.dishById.summary)
+                Text(modelData.dishById.summary)
                 //Text(modelData.dishById.title)
             }
             .task {

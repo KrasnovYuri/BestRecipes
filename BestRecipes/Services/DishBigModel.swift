@@ -47,13 +47,13 @@ struct Ingredient : Identifiable, Codable  {
     let amount: Double
     let unit: String
     let meta: [String]
-    let measures: Measures
+    //let measures: Measures
 }
 
-struct Measures : Codable  {
-    let us: MeasureDetails
-    let metric: MeasureDetails
-}
+//struct Measures : Codable  {
+//    let us: MeasureDetails
+//    let metric: MeasureDetails
+//}
 
 struct MeasureDetails : Codable  {
     let amount: Double
