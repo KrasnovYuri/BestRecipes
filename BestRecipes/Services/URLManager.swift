@@ -26,8 +26,8 @@ class URLManager {
         URL(string: "https://api.spoonacular.com/recipes/complexSearch?apiKey=" + apiKey + "&course=" + course.rawValue + "&number=\(numberLimit)")
     }
     //get dishes by cuisine
-    func createURL (cuisine: Cuisine, numberLimit: Int) -> URL? {
-        URL(string: "https://api.spoonacular.com/recipes/complexSearch?apiKey=" + apiKey + "&cuisine=" + cuisine.rawValue + "&number=\(numberLimit)")
+    func createURL (cuisine: Cuisine.RawValue, numberLimit: Int) -> URL? {
+        URL(string: "https://api.spoonacular.com/recipes/complexSearch?apiKey=" + apiKey + "&cuisine=" + cuisine + "&number=\(numberLimit)")
     }
     //get random dishes
     func createURL(numberOfDishes: Int) -> URL? {

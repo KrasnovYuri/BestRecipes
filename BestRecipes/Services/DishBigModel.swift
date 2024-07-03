@@ -35,6 +35,23 @@
 
 import Foundation
 
+struct DishBigModel: Identifiable, Codable {
+    let id: Int
+    let title: String
+    let readyInMinutes: Int
+    let servings: Int
+    let image: URL?
+    let sourceUrl: URL
+    let cuisines: [String]
+    let dishTypes: [String]
+    let diets: [String]
+    let occasions: [String]
+    let summary: String
+    let instructions: String
+    let extendedIngredients: [Ingredient]
+    let pricePerServing: Double
+}
+
 struct Ingredient : Identifiable, Codable  {
     let id: Int
     let aisle: String
@@ -59,23 +76,6 @@ struct MeasureDetails : Codable  {
     let amount: Double
     let unitShort: String
     let unitLong: String
-}
-
-struct DishBigModel: Identifiable, Codable {
-    let id: Int
-    let title: String
-    let readyInMinutes: Int
-    let servings: Int
-    let image: URL?
-    let sourceUrl: URL
-    let cuisines: [String]
-    let dishTypes: [String]
-    let diets: [String]
-    let occasions: [String]
-    let summary: String
-    let instructions: String
-    let extendedIngredients: [Ingredient]
-    let pricePerServing: Double
 }
 
 struct RecipeData: Decodable {
