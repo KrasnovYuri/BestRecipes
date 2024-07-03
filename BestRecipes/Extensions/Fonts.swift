@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Poppins {
+enum Font {
     static let black = "Poppins-Black"
     static let bold = "Poppins-Bold"
     static let extraBold = "Poppins-ExtraBold"
