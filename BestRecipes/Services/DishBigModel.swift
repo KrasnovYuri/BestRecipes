@@ -5,7 +5,7 @@
 //  Created by Юрий on 01.07.2024.
 //
 
-import Foundation
+//import Foundation
 //struct ResultInto: Codable {
 //    var results: [DishBigModel]
 //}
@@ -35,35 +35,6 @@ import Foundation
 
 import Foundation
 
-
-struct Ingredient : Identifiable, Codable  {
-    let id: Int
-    let aisle: String
-    let image: URL?
-    let consistency: String
-    let name: String
-    let nameClean: String
-    let original: String
-    let originalName: String
-    let amount: Double
-    let unit: String
-    let meta: [String]
-    let measures: Measures
-}
-
-
-struct Measures : Codable  {
-    let us: MeasureDetails
-    let metric: MeasureDetails
-}
-
-
-struct MeasureDetails : Codable  {
-    let amount: Double
-    let unitShort: String
-    let unitLong: String
-}
-
 struct DishBigModel: Identifiable, Codable {
     let id: Int
     let title: String
@@ -79,6 +50,32 @@ struct DishBigModel: Identifiable, Codable {
     let instructions: String
     let extendedIngredients: [Ingredient]
     let pricePerServing: Double
+}
+
+struct Ingredient : Identifiable, Codable  {
+    let id: Int
+    let aisle: String
+    let image: URL?
+    let consistency: String
+    let name: String
+    let nameClean: String
+    let original: String
+    let originalName: String
+    let amount: Double
+    let unit: String
+    let meta: [String]
+    let measures: MeasuresUS
+}
+
+struct MeasuresUS : Codable  {
+    let us: MeasureDetails
+    let metric: MeasureDetails
+}
+
+struct MeasureDetails : Codable  {
+    let amount: Double
+    let unitShort: String
+    let unitLong: String
 }
 
 struct RecipeData: Decodable {

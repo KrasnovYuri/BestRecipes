@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Cuisine: String {
+enum Cuisine: String, CaseIterable {
     case african
     case asian
     case american
@@ -37,7 +37,7 @@ enum Cuisine: String {
     case vietnamese
 }
 
-enum Course: String {
+enum Course: String, CaseIterable {
     case mainCourse
     case sideDish
     case dessert

@@ -9,12 +9,17 @@ import SwiftUI
 
 struct HomeView: View {
     @State var index = 1
+    @State var userSearch = ""
     var body: some View {
-        VStack {
-            Spacer()
-            TabBarView(index: $index)
+        ZStack {
+            VStack {
+                TextField("search", text: $userSearch)
+                    .padding()
+                    .textFieldStyle(.roundedBorder)
+                    
+                Spacer()
+            }
         }
-        .ignoresSafeArea()
     }
 }
 

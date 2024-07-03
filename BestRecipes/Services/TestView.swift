@@ -8,25 +8,29 @@
 import SwiftUI
 
 struct TestView: View {
-    
+
+    // random dishes
+
     @StateObject private var modelData = ModelData()
-    
+
     var body: some View {
         NavigationView {
             HStack {
-                ForEach(modelData.randomDishes) { dish in
-                    Text(dish.title)
+                Button {
+                    print(URLManager.shared.createURL(id: 462912)!)
+                    
+                } label: {
+                    Text("dasdfas")
                 }
+//                .task {
+//                    do {
+//                        try await modelData.fetchDishByCuisine(cuisine: Cuisine.cajun.rawValue, numberLimit: 5)
+//                    } catch {
+//                        
+//                    }
+//                }
             }
-            .navigationTitle("Random Dishes")
-            .task {
-                do {
-                    try await modelData.fetchRandomDishes(numberLimit: 3)
-                } catch {
-                    print(error)
-                }
-            }
-            
+
         }
         
     }
