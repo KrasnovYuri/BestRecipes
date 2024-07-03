@@ -10,7 +10,8 @@ import Foundation
 class URLManager {
     static let shared = URLManager() ; private init (){ }
 
-    let apiKey = "856702108d404eedb8ebb7694ab6f67c"
+    let apiKey = "85e8df70a57b4a00a21894085314de89"
+    let apiKey2 = "856702108d404eedb8ebb7694ab6f67c"
     //get dishes by name with autocomplete
     func createURL (_ name: String, numberLimit: Int) -> URL? {
         var urlString = "https://api.spoonacular.com/recipes/autocomplete?apiKey=" + apiKey + "&query=\(name)" + "&number=\(numberLimit)"
