@@ -57,6 +57,7 @@ struct TrendingDishElement: View {
                 Text("How to \(dish.title)")
                     .lineLimit(1)
                     .font(.custom(Font.medium, size: 22))
+                    .foregroundStyle(.brBlack)
                 Spacer()
             }
             HStack {
