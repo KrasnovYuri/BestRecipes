@@ -12,18 +12,22 @@ class ModelData: ObservableObject {
     
     // trending 5 dishes
     @Published var trendingDishes: [RecipeDetails] = []
-    //trending categories
-    @Published var categoriesCuisine: [String] = []
-    @Published var categoriesDishes: [[RecipeDetails]] = [[]]
+    //popular categories
+    @Published var courceArray = Course.allCases.map {$0.rawValue}
+    @Published var popularDishes: [RecipeDetails] = []
+    //recent recipe
+    @Published var recentDishes: [RecipeDetails] = []
+    //Cuisine recipes
+    @Published var cuisineArray = Cuisine.allCases.map {$0.rawValue}
+    @Published var cuisineDishes: [RecipeDetails] = []
     //search array
     @Published var searchDishes: [RecipeDetails] = []
     //v3
-//    @Published var dishById = RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 0, healthScore: 2, creditsText: "", sourceName: "", pricePerServing: 0.1, extendedIngredients: [], id: 2, title: "", readyInMinutes: 2, servings: 1, sourceURL: "", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 0.2)
-//    
+    //    @Published var dishById = RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 0, healthScore: 2, creditsText: "", sourceName: "", pricePerServing: 0.1, extendedIngredients: [], id: 2, title: "", readyInMinutes: 2, servings: 1, sourceURL: "", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 0.2)
+    //
     // MARK: - it works
     @Published var recipeByCourse = RecipeByCourseResponse(results: [], offset: 0, number: 0, totalResults: 0)
     @Published var recipeByCuisine: [RecipeByCuisine] = []
-    @Published var randomDishes : [RecipeByCuisine] = []
     
     let service = NetworkServiceAA()
     
@@ -39,7 +43,7 @@ class ModelData: ObservableObject {
     }
     
     // get dishes by courses
-    func fetchDishByCources(course: Course, numberLimit: Int) async throws -> [RecipeByCourse] {
+    func fetchDishByCources(course: Course.RawValue, numberLimit: Int) async throws -> [RecipeByCourse] {
         try await service.getDishByCources(cource: course, numberLimit: numberLimit)
     }
     
@@ -55,7 +59,7 @@ class ModelData: ObservableObject {
     
     func fetchAllData() async throws {
         do {
-            var trendingDishesSmall = try await fetchRandomDishes(numberLimit: 5)
+            let trendingDishesSmall = try await fetchRandomDishes(numberLimit: 5)
             for dish in trendingDishesSmall {
                 trendingDishes.append(try await fetchDishById(id: dish.id))
             }
@@ -64,31 +68,22 @@ class ModelData: ObservableObject {
             print("Fetch trending dishes")
         }
         do {
-            getRandomCategories()
-            let categoriesFor = categoriesCuisine
-            var categoriesDishes: [[RecipeDetails]] = [[]]
-            for index in categoriesFor.indices {
-                let dishes = try await fetchDishByCuisine(cuisine: categoriesFor[index], numberLimit: 5)
-                for dish in dishes {
-                    let dishId = try await fetchDishById(id: dish.id)
-                    categoriesDishes[index].append(dishId)
-                }
-            }
-            self.categoriesDishes = categoriesDishes
-            
-        } catch {
-            print("Fetch categories dishes")
-        }
-    }
-    
-    func getRandomCategories () {
-        let curceArray = Cuisine.allCases.map {$0.rawValue}
-        var randomCuisine: [String] = []
-        for _ in 0...6 {
-            if let check = curceArray.randomElement() {
-                randomCuisine.append ( check )
+            let courseStr = courceArray[0]
+            let popularDishesIn = try await fetchDishByCources(course: courseStr, numberLimit: 10)
+            for dish in popularDishesIn {
+                popularDishes.append(try await fetchDishById(id: dish.id))
             }
         }
-        categoriesCuisine = randomCuisine
+        
     }
+
+
+
+init() {
+    trendingDishes = [(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Edoman", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 214212, title: "Very cool dish with garlic", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),]
+    popularDishes = [(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Kitchen paris norn", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 214213, title: "Meat with cheese and another", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),]
+    recentDishes = [(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Kitchen moscow norn", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 216213, title: "Pork and another", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),]
+    recipeByCourse = recipeByCourse
+    recipeByCuisine = recipeByCuisine
+}
 }
