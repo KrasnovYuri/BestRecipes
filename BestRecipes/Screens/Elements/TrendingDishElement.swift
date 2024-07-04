@@ -53,9 +53,12 @@ struct TrendingDishElement: View {
                 }
             }
             .frame(width: bigSize ? 343 : 280, height: 180)
-            Text("How to \(dish.title)")
-                .lineLimit(1)
-                .font(.custom(Font.medium, size: 22))
+            HStack {
+                Text("How to \(dish.title)")
+                    .lineLimit(1)
+                    .font(.custom(Font.medium, size: 22))
+                Spacer()
+            }
             HStack {
                 AsyncImage(url: URLManager.shared.createURLForImage(id: dish.id, size: .size90), transaction: .init(animation: .easeInOut)) { imageIn in
                     switch imageIn {

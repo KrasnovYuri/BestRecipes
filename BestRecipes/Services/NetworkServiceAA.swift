@@ -59,7 +59,7 @@ actor NetworkServiceAA {
     
     // MARK: - dishes by course
     
-    func getDishByCources(cource: Course, numberLimit: Int) async throws -> [RecipeByCourse] {
+    func getDishByCources(cource: Course.RawValue, numberLimit: Int) async throws -> [RecipeByCourse] {
         guard let url = URLManager.shared.createURL(course: cource, numberLimit: numberLimit) else {
             throw NetworkError.badURL
         }
