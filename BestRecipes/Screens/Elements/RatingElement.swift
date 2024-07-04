@@ -30,5 +30,5 @@ struct RatingElement: View {
 }
 
 #Preview {
-    RatingElement(bg: true, rating: 100.0)
+    RatingElement(bg: true, rating: 80.0)
 }

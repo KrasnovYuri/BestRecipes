@@ -10,9 +10,10 @@ import SwiftUI
 struct MainView: View {
     @State var index = 1
     @State var searchIn = true
+    @ObservedObject var modelData = ModelData()
     var body: some View {
         ZStack {
-           HomeView()
+            HomeView(modelData: modelData)
             VStack {
                 Spacer()
                 if searchIn {
