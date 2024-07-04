@@ -17,7 +17,7 @@ struct TestView: View {
         NavigationView {
             HStack {
                 Button {
-                    print(URLManager.shared.createURL(id: 462912)!)
+                    print(URLManager.shared.createURLForImage(id: 462112, size: .size314))
                     
                 } label: {
                     Text("dasdfas")
