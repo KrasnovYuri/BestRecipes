@@ -30,6 +30,9 @@
 		92117AB82C32D8460010C7B3 /* NetworkServiceAA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AB72C32D8460010C7B3 /* NetworkServiceAA.swift */; };
 		92117ABA2C32D8680010C7B3 /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AB92C32D8680010C7B3 /* URLManager.swift */; };
 		92117ABC2C32ECE10010C7B3 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117ABB2C32ECE10010C7B3 /* TestView.swift */; };
+		922258A92C36D6CD0009A768 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922258A82C36D6CD0009A768 /* SearchBar.swift */; };
+		922258AC2C36EB990009A768 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922258AB2C36EB990009A768 /* SearchView.swift */; };
+		922258AE2C36F7240009A768 /* SearchDishElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922258AD2C36F7240009A768 /* SearchDishElement.swift */; };
 		92EA88A12C31CDB300FD3423 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92EA889A2C31CDB300FD3423 /* Poppins-Light.ttf */; };
 		92EA88A22C31CDB300FD3423 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92EA889B2C31CDB300FD3423 /* Poppins-Medium.ttf */; };
 		92EA88A32C31CDB300FD3423 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92EA889C2C31CDB300FD3423 /* Poppins-ExtraBold.ttf */; };
@@ -67,6 +70,9 @@
 		92117AB92C32D8680010C7B3 /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
 		92117ABB2C32ECE10010C7B3 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		921B6E8A2C3437B2002E812E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		922258A82C36D6CD0009A768 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		922258AB2C36EB990009A768 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		922258AD2C36F7240009A768 /* SearchDishElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDishElement.swift; sourceTree = "<group>"; };
 		92EA889A2C31CDB300FD3423 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
 		92EA889B2C31CDB300FD3423 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		92EA889C2C31CDB300FD3423 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -96,6 +102,8 @@
 				44E00E5C2C368B66003DA7EB /* RatingElement.swift */,
 				44E00E5E2C368B7D003DA7EB /* TrendingDishElement.swift */,
 				44E00E602C368B96003DA7EB /* CategoryDishElement.swift */,
+				922258A82C36D6CD0009A768 /* SearchBar.swift */,
+				922258AD2C36F7240009A768 /* SearchDishElement.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -139,6 +147,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		922258AA2C36EB670009A768 /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				922258AB2C36EB990009A768 /* SearchView.swift */,
+			);
+			path = SearchView;
+			sourceTree = "<group>";
+		};
 		92AF5A202C31E1960012CAC8 /* Aplication */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +172,7 @@
 				92AF5A232C31E2170012CAC8 /* TabBar */,
 				92AF5A242C31E2570012CAC8 /* HomeView */,
 				92AF5A252C31E2770012CAC8 /* SavedRecipesView */,
+				922258AA2C36EB670009A768 /* SearchView */,
 				92AF5A262C31E2A40012CAC8 /* RecipeDetailView */,
 				92AF5A272C31E3180012CAC8 /* TrendingNowView */,
 			);
@@ -347,6 +364,7 @@
 				44E00E4F2C357D39003DA7EB /* MainView.swift in Sources */,
 				92117AB42C32D8140010C7B3 /* DishSmallModel.swift in Sources */,
 				44E00E632C368BDD003DA7EB /* UserDefaultsService.swift in Sources */,
+				922258A92C36D6CD0009A768 /* SearchBar.swift in Sources */,
 				920A251C2C319602004CAA1A /* Onboarding.swift in Sources */,
 				44E00E5D2C368B66003DA7EB /* RatingElement.swift in Sources */,
 				92EA88AD2C31D5F600FD3423 /* Color+Ext.swift in Sources */,
@@ -356,6 +374,8 @@
 				92117AAE2C32D6FC0010C7B3 /* TrendingNowView.swift in Sources */,
 				92117AB62C32D8260010C7B3 /* TextData.swift in Sources */,
 				92EA88AB2C31CE7D00FD3423 /* Fonts.swift in Sources */,
+				922258AC2C36EB990009A768 /* SearchView.swift in Sources */,
+				922258AE2C36F7240009A768 /* SearchDishElement.swift in Sources */,
 				92117ABA2C32D8680010C7B3 /* URLManager.swift in Sources */,
 				92117AA82C32D5D30010C7B3 /* HomeView.swift in Sources */,
 				920A251A2C319602004CAA1A /* BestRecipesApp.swift in Sources */,
