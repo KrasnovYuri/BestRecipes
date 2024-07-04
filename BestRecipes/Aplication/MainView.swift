@@ -10,9 +10,18 @@ import SwiftUI
 struct MainView: View {
     @State var index = 1
     @State var searchIn = true
+    @StateObject var modelData = ModelData()
+    
     var body: some View {
+        var homeView = HomeView(modelData: modelData)
+        var savedRecipesView = SavedRecipesView(modelData: modelData)
         ZStack {
-           HomeView()
+            if index == 0 {
+                homeView
+            }
+            if index == 1 {
+                savedRecipesView
+            }
             VStack {
                 Spacer()
                 if searchIn {
@@ -21,9 +30,17 @@ struct MainView: View {
                     
             }
             .ignoresSafeArea()
-
+            .onAppear{
+                Task {
+                    do {
+                        try await modelData.fetchAllData()
+                    }
+                }
+            }
+            
             
         }
+        
         
     }
 }
