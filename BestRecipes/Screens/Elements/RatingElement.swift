@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct RatingElement: View {
+    @State var bg: Bool
     @State var rating: Double
     var body: some View {
         ZStack {
-             RoundedRectangle(cornerRadius: 10)
-                .foregroundStyle(.brGray)
+            if bg {
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundStyle(.thinMaterial)
+            }
             HStack {
                 Image(systemName: "star.fill")
                     .resizable()
@@ -27,5 +30,5 @@ struct RatingElement: View {
 }
 
 #Preview {
-    RatingElement(rating: 100.0)
+    RatingElement(bg: true, rating: 100.0)
 }
