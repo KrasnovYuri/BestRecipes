@@ -38,6 +38,8 @@ struct HomeView: View {
                 }
                 .frame(height: 60)
                 .padding(.horizontal, 16)
+                SearchBar(searchText: $userSearch)
+                    .padding(.horizontal, 16)
                 //trending now
                 VStack {
                     HStack{
