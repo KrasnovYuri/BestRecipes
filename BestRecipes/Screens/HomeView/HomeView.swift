@@ -11,7 +11,7 @@ struct HomeView: View {
     @State var index = 1
     @State var userSearch = ""
     @State var userChoiseCourse = "mainCourse"
-    @ObservedObject var modelData: ModelData
+    @StateObject var modelData: ModelData
     var body: some View {
         NavigationView {
             ScrollView(.vertical) {
@@ -22,6 +22,7 @@ struct HomeView: View {
                         .font(.custom(Font.bold, size: 24))
                     Spacer()
                 }
+                .padding(.horizontal, 16)
                 // search
                 ZStack {
                     RoundedRectangle(cornerRadius: 15)
@@ -36,6 +37,7 @@ struct HomeView: View {
                     .padding(.horizontal, 10)
                 }
                 .frame(height: 60)
+                .padding(.horizontal, 16)
                 SearchBar(searchText: $userSearch)
                 //trending now
                 VStack {
@@ -59,28 +61,37 @@ struct HomeView: View {
                             
                         }
                     }
-                    ScrollView(.horizontal) {
-                        ForEach( modelData.trendingDishes, id: \.id) { dish in
-                            ZStack {
-                                TrendingDishElement(bigSize: false, dish: dish)
-                                VStack {
-                                    HStack {
-                                        RatingElement(bg: true, rating: dish.spoonacularScore)
-                                        Spacer()
-                                        Button {
-                                            //TODO:  add to favorite
-                                        } label : {
-                                            //need add check to fav and logic
-                                            FavoriteElement(checkFavorite: true)
+                    .padding(.horizontal, 16)
+                    //Scroll view
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach( modelData.trendingDishes, id: \.id) { dish in
+                                ZStack {
+                                    TrendingDishElement(bigSize: false, dish: dish)
+//                                        .frame(width: 280)
+                                        
+                                    VStack {
+                                        HStack {
+                                            RatingElement(bg: true, rating: dish.spoonacularScore)
+                                            Spacer()
+                                            Button {
+                                                //TODO:  add to favorite
+                                            } label : {
+                                                //need add check to fav and logic
+                                                FavoriteElement(checkFavorite: true)
+                                            }
                                         }
+                                        .padding(12)
+                                        Spacer()
                                     }
-                                    .padding(10)
-                                    Spacer()
                                 }
+                                .padding(.leading, 16)
+                                
+                                
                             }
-                            
                         }
                     }
+                    
                     .frame(height: 280)
                 }
                 //Popular category
@@ -90,13 +101,18 @@ struct HomeView: View {
                             .font(.custom(Font.medium, size: 20))
                         Spacer()
                     }
+                    .padding(.horizontal, 16)
                     //Course list
-                    ScrollView(.horizontal) {
-                        LazyHStack{
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack{
                             ForEach(modelData.courceArray, id: \.self) { course in
                                 Button {
                                     userChoiseCourse = course
-                                    // TODO: some action oof loading new
+                                    Task {
+                                        do {
+                                            try await modelData.fetchDishByCourse(course)
+                                        }
+                                    }
                                 } label : {
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 10)
@@ -133,6 +149,7 @@ struct HomeView: View {
                                         }
                                     }
                                 }
+                                .padding(.leading, 16)
                                 .padding(.top, 5)
                             }
                         }
@@ -151,6 +168,7 @@ struct HomeView: View {
                             Text("Recent recipe")
                                 .font(.custom(Font.medium, size: 20))
                         }
+                        .padding(.horizontal, 16)
                         Spacer()
                         HStack {
                             NavigationLink {
@@ -183,6 +201,7 @@ struct HomeView: View {
                             Text("Popular kitchens")
                                 .font(.custom(Font.medium, size: 20))
                         }
+                        .padding(.horizontal, 16)
                         Spacer()
                         HStack {
                             NavigationLink {
@@ -216,8 +235,8 @@ struct HomeView: View {
                 }
                 Spacer(minLength: 150)
             }
-            // под вопросом
-            .padding(16)
+
+           
         }
         
     }

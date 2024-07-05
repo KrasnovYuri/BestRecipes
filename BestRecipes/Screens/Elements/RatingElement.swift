@@ -20,8 +20,10 @@ struct RatingElement: View {
                 Image(systemName: "star.fill")
                     .resizable()
                     .scaledToFit()
+                    .foregroundStyle(.brBlack)
                 Text("\(String(format: "%0.1f",rating/20))")
                     .font(.custom(Font.medium, size: 14))
+                    .foregroundStyle(.brBlack)
             }
             .frame(height: 14)
         }
