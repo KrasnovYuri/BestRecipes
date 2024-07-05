@@ -18,7 +18,7 @@ struct SearchView: View {
             SearchBar(searchText: $searchText)
                 .padding()
             ForEach(modelData.searchDishes, id: \.id) { dish in
-                SearchDishElement(title: "How to make yam & vegetable sauce at home", image: "testImage", rating: 5.0, ingredientsCount: 9, cookingTime: 25, bigSize: true)
+                SearchDishElement(rating: 5.0, dish: dish)
             }
         }
     }

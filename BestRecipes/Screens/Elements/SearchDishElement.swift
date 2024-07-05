@@ -8,45 +8,51 @@
 import SwiftUI
 
 struct SearchDishElement: View {
-    let title: String
-    let image: String
     let rating: Double
-    let ingredientsCount: Int
-    let cookingTime: Int
     
-    @State var bigSize: Bool
+    @State var dish: RecipeDetails
     
     var body: some View {
-        ZStack {
-            Image(image)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 363, height: 220)
-                .cornerRadius(20)
-            
-            RatingElement(bg: bigSize, rating: rating)
-                .offset(x: -140, y: -80)
-            
-            Spacer()
-                .frame(height: 90)
-            
+        ZStack{
+            AsyncImage(url: URLManager.shared.createURLForImage(id: dish.id, size: .size480), transaction: .init(animation: .easeInOut(duration: 1))) { imageIn in
+                switch imageIn {
+                case .success(let imageIn):
+                    imageIn.resizable()
+                        .scaledToFill()
+                        .frame(width: 343, height: 200)
+                default:
+                    ZStack {
+                        Color(.white)
+                        Image(systemName: "timer")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundStyle(.gray)
+                            .frame(width: 50)
+                    }
+                }
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            RatingElement(bg: true, rating: rating)
+                .offset(CGSize(width: -130.0, height: -70.0))
             VStack(alignment: .leading, spacing: 4) {
-                Text(title)
+                Text(dish.title)
                     .font(.custom(Font.bold, size: 16))
+                    .shadow(radius: 10)
                     .multilineTextAlignment(.leading)
                     .frame(width: 320, alignment: .bottomLeading)
                 
-                Text("\(ingredientsCount) Ingredients | \(cookingTime) minutes")
+                Text("\(dish.extendedIngredients.count) Ingredients | \(dish.readyInMinutes) minutes")
                     .font(.custom(Font.medium, size: 14))
+                    .shadow(radius: 10)
                 
             }
             .foregroundColor(.white)
-            .offset(x: -5, y: 60)
+            .offset(x: -5, y: 50)
         }
     }
 }
 
 #Preview {
-    SearchDishElement(title: "How to make yam & vegetable sauce at home", image: "testImage", rating: 5.0, ingredientsCount: 9, cookingTime: 25, bigSize: true)
+    SearchDishElement(rating: 5.0, dish: (RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 0, healthScore: 2, creditsText: "Afrolems", sourceName: "", pricePerServing: 0.1, extendedIngredients: [], id: 21232, title: "Almond Bark – Renee Charles of Four Weddings Canada- Celebrity Chef of the week", readyInMinutes: 12, servings: 1, sourceURL: "", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 0.2)))
 }
 
