@@ -10,34 +10,49 @@ import SwiftUI
 
 struct SearchBar: View {
     
-    @State var searchRecipe = ""
+    @Binding var searchText: String
+    @State var searchViewPresented = false
+    
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         HStack {
             Image(.search)
             
-            TextField("Search recipes", text: $searchRecipe)
+            TextField("Search recipes", text: $searchText)
                 .font(.custom(Font.regular, fixedSize: 16))
+                .autocorrectionDisabled()
+                .onSubmit {
+                    searchViewPresented.toggle()
+                }
             
-            if !searchRecipe.isEmpty {
+            if !searchText.isEmpty {
                 Button {
-                    searchRecipe = ""
+                    UIApplication.shared.endEditing()
+                    searchText = ""
+                    presentationMode.wrappedValue.dismiss()
                 } label: {
                     Image(.plus)
                         .rotationEffect(.degrees(45))
                 }
             }
         }
-        .padding()
+        .padding(.vertical, 8)
+        .padding(.horizontal, 16)
+        
         .background(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(searchRecipe.isEmpty ? Color(.brGray) : Color(.brRed))
+            RoundedRectangle(cornerRadius: 15)
+                .stroke(lineWidth: 0.5)
+                .foregroundStyle(searchText.isEmpty ? Color(.brGray) : Color(.brRed))
         )
-        .padding()
+        .overlay(
+            NavigationLink(destination: SearchView(modelData: ModelData(), searchText: $searchText), isActive: $searchViewPresented) {}
+        )
     }
+    
 }
 
 #Preview {
-    SearchBar()
+    SearchBar(searchText: .constant(""))
 }
 

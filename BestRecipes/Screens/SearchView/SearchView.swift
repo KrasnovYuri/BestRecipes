@@ -8,14 +8,22 @@
 import SwiftUI
 
 struct SearchView: View {
+    
+    @ObservedObject var modelData: ModelData
+    @Binding var searchText: String
+    
+    
     var body: some View {
         ScrollView {
-            SearchBar()
-            
+            SearchBar(searchText: $searchText)
+                .padding()
+            ForEach(modelData.trendingDishes, id: \.id) { dish in
+                SearchDishElement(title: "How to make yam & vegetable sauce at home", image: "testImage", rating: 5.0, ingredientsCount: 9, cookingTime: 25, bigSize: true)
+            }
         }
     }
 }
 
 #Preview {
-    SearchView()
+    SearchView(modelData: ModelData(), searchText: .constant(""))
 }
