@@ -43,6 +43,7 @@ struct CategoryDishElement: View {
             VStack {
                 Spacer()
                 Text(dish.title)
+                    .foregroundStyle(.brBlack)
                     .multilineTextAlignment(.center)
                     .font(.custom(Font.medium, size: 14))
                     .lineLimit(2)
@@ -57,6 +58,7 @@ struct CategoryDishElement: View {
                         }
                         HStack {
                             Text("\(dish.readyInMinutes) Mins")
+                                .foregroundStyle(.brBlack)
                                 .font(.custom(Font.medium, size: 12))
                             Spacer()
                         }

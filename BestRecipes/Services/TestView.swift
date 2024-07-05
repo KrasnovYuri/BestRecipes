@@ -12,13 +12,15 @@ struct TestView: View {
     // random dishes
 
     @StateObject private var modelData = ModelData()
+    var check = 1
 
     var body: some View {
         NavigationView {
             HStack {
                 Button {
-                    print(URLManager.shared.createURLForImage(id: 462112, size: .size314))
+                    print(URLManager.shared.createURL("chick", numberLimit: 3)!)
                     
+                
                 } label: {
                     Text("dasdfas")
                 }

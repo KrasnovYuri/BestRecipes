@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
-    @State var index = 1
+    @State var index = 0
     @State var searchIn = true
     @StateObject var modelData = ModelData()
     
