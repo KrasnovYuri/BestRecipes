@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct BestRecipesApp: App {
+    @AppStorage("isOnboarding") var isOnboarding: Bool = true
     var body: some Scene {
         WindowGroup {
-            MainView()
+            if isOnboarding {
+                StartView()
+            } else {
+                MainView()
+            }
         }
     }
 }
