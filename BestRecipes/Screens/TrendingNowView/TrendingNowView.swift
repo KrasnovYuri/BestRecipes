@@ -16,3 +16,4 @@ struct TrendingNowView: View {
 #Preview {
     TrendingNowView()
 }
+

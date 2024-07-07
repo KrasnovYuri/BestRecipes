@@ -22,6 +22,7 @@ class ModelData: ObservableObject {
     @Published var cuisineArray = Cuisine.allCases.map {$0.rawValue}
     @Published var cuisineDishes: [RecipeDetails] = []
     //search array
+    @Published var searchText: String = ""
     @Published var searchDishes: [RecipeDetails] = []
     //saved array "Saved" UserDefaults key
     var savedDishesID: [Int] = []
@@ -136,7 +137,19 @@ class ModelData: ObservableObject {
             print("problem with get dish by course")
         }
     }
-
+    func fetchSearch() async throws {
+        print("i am in fetch search")
+        do {
+            let searchArray = try await fetchSmallDishesAuto(name: searchText, numberLimit: 10)
+            var recipesName: [RecipeDetails] = []
+            for dish in searchArray {
+                recipesName.append(try await fetchDishById(id: dish.id))
+            }
+            searchDishes = recipesName
+        } catch {
+            print("problem with search")
+        }
+    }
 
 
 //init() {

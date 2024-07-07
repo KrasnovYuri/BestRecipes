@@ -13,7 +13,7 @@ struct SearchDishElement: View {
     @State var dish: RecipeDetails
     
     var body: some View {
-        ZStack{
+        ZStack {
             AsyncImage(url: URLManager.shared.createURLForImage(id: dish.id, size: .size480), transaction: .init(animation: .easeInOut(duration: 1))) { imageIn in
                 switch imageIn {
                 case .success(let imageIn):
@@ -31,9 +31,16 @@ struct SearchDishElement: View {
                     }
                 }
             }
+            .frame(width: 343, height: 200)
             .clipShape(RoundedRectangle(cornerRadius: 10))
-            RatingElement(bg: true, rating: rating)
-                .offset(CGSize(width: -130.0, height: -70.0))
+            VStack {
+                HStack {
+                    RatingElement(bg: true, rating: dish.spoonacularScore)
+                        .padding(15)
+                    Spacer()
+                }
+                Spacer()
+            }
             VStack(alignment: .leading, spacing: 4) {
                 Text(dish.title)
                     .font(.custom(Font.bold, size: 16))
@@ -49,10 +56,11 @@ struct SearchDishElement: View {
             .foregroundColor(.white)
             .offset(x: -5, y: 50)
         }
+        .frame(width: 343, height: 200)
     }
 }
 
 #Preview {
-    SearchDishElement(rating: 5.0, dish: (RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 0, healthScore: 2, creditsText: "Afrolems", sourceName: "", pricePerServing: 0.1, extendedIngredients: [], id: 21232, title: "Almond Bark – Renee Charles of Four Weddings Canada- Celebrity Chef of the week", readyInMinutes: 12, servings: 1, sourceURL: "", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 0.2)))
+    SearchDishElement(rating: 5.0, dish: (RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 0, healthScore: 2, creditsText: "Afrolems", sourceName: "", pricePerServing: 0.1, extendedIngredients: [], id: 21232, title: "Almond Bark – Renee Charles of Four Weddings Canada- Celebrity Chef of the week", readyInMinutes: 12, servings: 1, sourceURL: "", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 100.2)))
 }
 

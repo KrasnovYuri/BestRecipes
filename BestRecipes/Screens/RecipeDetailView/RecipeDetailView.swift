@@ -14,7 +14,7 @@ struct RecipeDetailView: View {
     //let analyzedInstructions = dish.analyzedInstructions
 
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack {
 
                 // title
@@ -80,10 +80,10 @@ struct RecipeDetailView: View {
                     ForEach(dish.extendedIngredients, id: \.id) { ingridient in
                         IngridientComponentView(ingridient: ingridient)
                     }
-                    .padding(.horizontal)
                 }
             }
-            .padding()
+            Spacer(minLength: 120)
+//            .padding(12)
         }
     }
 }
