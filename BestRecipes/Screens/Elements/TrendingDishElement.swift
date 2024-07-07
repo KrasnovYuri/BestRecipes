@@ -13,7 +13,8 @@ struct TrendingDishElement: View {
     var body: some View {
         VStack {
             ZStack{
-                AsyncImage(url: URLManager.shared.createURLForImage(id: dish.id, size: .size480), transaction: .init(animation: .easeInOut(duration: 1))) { imageIn in
+                //заменил асинк имедж на кэшд
+                CachedAsyncImage(url: URLManager.shared.createURLForImage(id: dish.id, size: .size480), transaction: .init(animation: .easeInOut(duration: 1))) { imageIn in
                     switch imageIn {
                     case .success(let imageIn):
                         imageIn.resizable()
@@ -61,7 +62,7 @@ struct TrendingDishElement: View {
                 Spacer()
             }
             HStack {
-                AsyncImage(url: URLManager.shared.createURLForImage(id: dish.id, size: .size90), transaction: .init(animation: .easeInOut)) { imageIn in
+                CachedAsyncImage(url: URLManager.shared.createURLForImage(id: dish.id, size: .size90), transaction: .init(animation: .easeInOut)) { imageIn in
                     switch imageIn {
                     case.success(let imageIn):
                         imageIn.resizable()

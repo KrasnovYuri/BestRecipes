@@ -32,11 +32,11 @@ struct StartView: View {
                             Text("Best")
                             Text("Recipe")
                         }
-                        .font(.system(size: 100))
+                        .font(.custom(Font.bold, size: 56))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                         Text("Find best recipes for cooking")
-                            .font(.title2)
+                            .font(.custom(Font.regular, size: 16))
                             .foregroundColor(.white)
                     }.frame(width: 300)
                    
