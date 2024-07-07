@@ -13,12 +13,12 @@ struct OnboardingView: View {
         TabView(selection: $selectedPage) {
 
             PageView(selectedPage: $selectedPage, imageName: "Onboarding1", title: "Recipes from all ", subtitle: "over the World", buttonTitle: "Continue").tag(0)
-                .gesture(DragGesture())
+//                 .gesture(DragGesture())
                
             PageView(selectedPage: $selectedPage, imageName: "Onboarding2", title: "Recipes with ", subtitle: "each and every detail", buttonTitle: "Continue").tag(1)
-                .gesture(DragGesture())
+//                .gesture(DragGesture())
             PageView(selectedPage: $selectedPage, imageName: "Onboarding3", title: "Cook it now or ", subtitle: "save it for later", buttonTitle: "Start Cooking").tag(2)
-                .gesture(DragGesture())
+//                .gesture(DragGesture())
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .ignoresSafeArea()
@@ -39,6 +39,11 @@ struct PageView: View {
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
+                    .overlay(content: {
+                        (Color.black.opacity(0.5))
+                            .ignoresSafeArea()
+                    })
+                   
                 VStack() {
                     Spacer()
                     VStack(alignment: .center) {
@@ -55,7 +60,6 @@ struct PageView: View {
                                 .fill(selectedPage == num ? Color.brGold : Color.white)
                                 .cornerRadius(10)
                                 .frame(width: 50, height: 10)
-                              
                         }
                     }
                     .padding()
@@ -81,8 +85,6 @@ struct PageView: View {
                     }
                 }
                 .padding(.bottom, 30)
-                .ignoresSafeArea()
-                .background(Color.black.opacity(0.5))
         }
      
     }
