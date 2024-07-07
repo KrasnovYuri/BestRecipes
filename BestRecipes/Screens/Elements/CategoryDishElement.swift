@@ -18,7 +18,7 @@ struct CategoryDishElement: View {
                     .frame(height: 176)
             }
             VStack {
-                AsyncImage(url: URLManager.shared.createURLForImage(id: dish.id, size: .size312), transaction: .init(animation: .easeInOut(duration: 1))) { imageIn in
+                CachedAsyncImage(url: URLManager.shared.createURLForImage(id: dish.id, size: .size312), transaction: .init(animation: .easeInOut(duration: 1))) { imageIn in
                     switch imageIn {
                     case .success(let imageIn):
                         imageIn.resizable()
