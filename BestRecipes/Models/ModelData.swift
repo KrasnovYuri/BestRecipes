@@ -27,11 +27,6 @@ class ModelData: ObservableObject {
     //saved array "Saved" UserDefaults key
     var savedDishesID: [Int] = []
     @Published var savedDishes: [RecipeDetails] = []
-
-    //v3
-    //    @Published var dishById = RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 0, healthScore: 2, creditsText: "", sourceName: "", pricePerServing: 0.1, extendedIngredients: [], id: 2, title: "", readyInMinutes: 2, servings: 1, sourceURL: "", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 0.2)
-    //
-    
     // MARK: - it works
     @Published var recipeByCourse = RecipeByCourseResponse(results: [], offset: 0, number: 0, totalResults: 0)
     @Published var recipeByCuisine: [RecipeByCuisine] = []
@@ -128,16 +123,24 @@ class ModelData: ObservableObject {
     }
 
     func fetchDishByCourse(_ course: String) async throws {
+        var dishes: [RecipeByCourse] = []
+        var recipes: [RecipeDetails] = []
+        //step 1
         do {
-            let dishes = try await fetchDishByCources(course: course, numberLimit: 10)
-            var recipes: [RecipeDetails] = []
-            for dish in dishes {
-                recipes.append(try await fetchDishById(id: dish.id))
-            }
-            popularDishes = recipes
+            dishes = try await fetchDishByCources(course: course, numberLimit: 10)
         } catch {
-            print("problem with get dish by course")
+            print("get dishes by cource first step")
         }
+        //step 2
+        do {
+            for dish in dishes {
+                async let dishID = try await fetchDishById(id: dish.id)
+                recipes.append(try await dishID)
+            }
+        } catch {
+            print("get dishes by cource second step")
+        }
+        popularDishes = recipes
     }
     func fetchSearch() async throws {
         print("i am in fetch search")

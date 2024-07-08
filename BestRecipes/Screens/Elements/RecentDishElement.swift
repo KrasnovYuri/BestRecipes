@@ -12,7 +12,7 @@ struct RecentDishElement: View {
     var body: some View {
         VStack {
             VStack {
-                AsyncImage(url: URLManager.shared.createURLForImage(id: dish.id, size: .size480), transaction: .init(animation: .easeInOut(duration: 1))) { imageIn in
+                CachedAsyncImage(url: URLManager.shared.createURLForImage(id: dish.id, size: .size480), transaction: .init(animation: .easeInOut(duration: 1))) { imageIn in
                     switch imageIn {
                     case .success(let imageIn):
                         imageIn.resizable()

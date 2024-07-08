@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44CD996A2C3A78D1009C4C4B /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD99692C3A78D1009C4C4B /* CachedAsyncImage.swift */; };
 		44E00E4F2C357D39003DA7EB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E00E4E2C357D39003DA7EB /* MainView.swift */; };
 		44E00E5B2C368B57003DA7EB /* FavoriteElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E00E5A2C368B57003DA7EB /* FavoriteElement.swift */; };
 		44E00E5D2C368B66003DA7EB /* RatingElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E00E5C2C368B66003DA7EB /* RatingElement.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		44CD99692C3A78D1009C4C4B /* CachedAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
 		44E00E4E2C357D39003DA7EB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		44E00E5A2C368B57003DA7EB /* FavoriteElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteElement.swift; sourceTree = "<group>"; };
 		44E00E5C2C368B66003DA7EB /* RatingElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingElement.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				92117AB92C32D8680010C7B3 /* URLManager.swift */,
 				92117ABB2C32ECE10010C7B3 /* TestView.swift */,
 				44E00E622C368BDD003DA7EB /* UserDefaultsService.swift */,
+				44CD99692C3A78D1009C4C4B /* CachedAsyncImage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				92117AAA2C32D6500010C7B3 /* SavedRecipesView.swift in Sources */,
 				44E00E5B2C368B57003DA7EB /* FavoriteElement.swift in Sources */,
 				44E00E4F2C357D39003DA7EB /* MainView.swift in Sources */,
+				44CD996A2C3A78D1009C4C4B /* CachedAsyncImage.swift in Sources */,
 				92117AB42C32D8140010C7B3 /* DishSmallModel.swift in Sources */,
 				44E00E632C368BDD003DA7EB /* UserDefaultsService.swift in Sources */,
 				44E00E652C36F34A003DA7EB /* RecentDishElement.swift in Sources */,

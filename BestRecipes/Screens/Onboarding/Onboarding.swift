@@ -48,7 +48,7 @@ struct PageView: View {
                             .foregroundColor(.brGold)
                     }
                     .frame(maxWidth: UIScreen.main.bounds.width)
-                    .font(.system(size: 50))
+                    .font(.custom(Font.bold, size: 40))
                     HStack{
                         ForEach(0..<3) { num in
                             Rectangle()
@@ -63,7 +63,7 @@ struct PageView: View {
                         nextView()
                     }) {
                         Text(buttonTitle)
-                            .fontWeight(.heavy)
+                            .font(.custom(Font.bold, size: 20))
                             .foregroundColor(.white)
                             .padding()
                             .padding(.horizontal, 30)
