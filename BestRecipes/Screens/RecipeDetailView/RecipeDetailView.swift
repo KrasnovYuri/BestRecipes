@@ -9,18 +9,16 @@ import SwiftUI
 
 struct RecipeDetailView: View {
 
+    @StateObject var modelData: ModelData = ModelData()
     @State var dish: RecipeDetails
-
-    //let analyzedInstructions = dish.analyzedInstructions
+    @State var isSet: Bool = true
 
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-
                 // title
                 Text("How to make \(dish.title)")
                     .font(.custom(Font.semiBold, size: 24))
-                //.lineSpacing(2)
                     .padding(.horizontal, 6)
 
                 // dish image
@@ -35,40 +33,53 @@ struct RecipeDetailView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding(.horizontal, 6)
 
-                // raiting
+                // rating
                 HStack {
-                    RatingElement(bg: false, rating: dish.spoonacularScore)
-                    Text("(\(dish.weightWatcherSmartPoints * 10) Reviews)")
-                        .font(.custom(Font.light, size: 14))
-                        .foregroundStyle(.gray)
+                    HStack {
+                        RatingElement(bg: false, rating: dish.spoonacularScore)
+                        Text("(\(dish.weightWatcherSmartPoints * 10) Reviews)")
+                            .font(.custom(Font.light, size: 14))
+                            .foregroundStyle(.gray)
+                    }
+
                     Spacer()
+
+                    // save recipe
+                    HStack {
+                        FavoriteButton(isSaved: $isSet)
+                    }
+                    .padding(.trailing, 30)
                 }
-                .padding(.leading, 6)
+                .padding(.leading, 15)
 
                 // instructions
-                // сделать, если нет инструкций
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Instructions")
-                        .font(.custom(Font.semiBold, size: 20))
-                        .padding(.vertical, 6)
+                    if let instructions = dish.analyzedInstructions, !instructions.isEmpty {
+                        let nonEmptyInstructions = instructions.filter { !$0.steps.isEmpty }
+                        if !nonEmptyInstructions.isEmpty {
+                            Text("Instructions")
+                                .font(.custom(Font.semiBold, size: 20))
+                                .padding(.vertical, 6)
 
-                    ForEach(dish.analyzedInstructions ?? [], id: \.name) { instruction in
-                        ForEach(instruction.steps, id: \.number) { step in
-                            HStack(alignment: .top) {
-                                Text("\(step.number).")
-                                    .frame(width: 13)
-                                Text(step.step)
-                                Spacer()
+                            ForEach(instructions, id: \.name) { instruction in
+                                ForEach(instruction.steps, id: \.number) { step in
+                                    HStack(alignment: .top) {
+                                        Text("\(step.number).")
+                                            .frame(width: 13)
+                                        Text(step.step)
+                                        Spacer()
+                                    }
+                                    .font(.custom(Font.light, size: 16))
+                                    .frame(width: 328)
+                                }
                             }
-                            .font(.custom(Font.light, size: 16))
-                            .frame(width: 328)
+                            .padding(.horizontal, 6)
                         }
                     }
-                    .padding(.horizontal, 6)
                 }
 
                 HStack {
-                    Text("Ingridients")
+                    Text("Ingredients")
                         .font(.custom(Font.semiBold, size: 20))
                         .padding(.top, 15)
                         .padding(.bottom, 6)
@@ -77,13 +88,12 @@ struct RecipeDetailView: View {
                 .padding(.horizontal)
 
                 VStack {
-                    ForEach(dish.extendedIngredients, id: \.id) { ingridient in
-                        IngridientComponentView(ingridient: ingridient)
+                    ForEach(dish.extendedIngredients, id: \.id) { ingredient in
+                        IngridientComponentView(ingridient: ingredient)
                     }
                 }
             }
             Spacer(minLength: 120)
-//            .padding(12)
         }
     }
 }
@@ -100,7 +110,8 @@ struct RecipeDetailView: View {
                                             AnalyzedInstruction(name: "Main", steps: [
                                                 Step(number: 1, step: "Slice bread into 1cm thick slices: you can toast them or use them as they are. I prefer a soft bread to exalt butter softness.", ingredients: [], equipment: [], length: nil),
                                                 Step(number: 2, step: "Spread butter with generosity over the bread.If you want to use salted anchovies, rinse them under running water to remove extra salt and divide them into fillets, removing all the bones. If you use anchovies in oil, just make two fillets out of them and lay them over buttered bread.And now, the final touch: a pickled baby caper in the centre, and - in less than 3 minutes - you have an unusual afternoon break or a fun anti-crisis and anti-panic appetizer for Christmas.", ingredients: [], equipment: [], length: nil),
-                                                Step(number: 3, step: "Bake for 20 minutes.", ingredients: [], equipment: [], length: Length(number: 20, unit: "minutes"))])
+                                                Step(number: 3, step: "Bake for 20 minutes.", ingredients: [], equipment: [], length: Length(number: 20, unit: "minutes"))
+                                            ])
                                           ],
                                           originalID: nil, spoonacularScore: 65)))
 }
