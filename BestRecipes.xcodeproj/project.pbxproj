@@ -16,6 +16,7 @@
 		44E00E632C368BDD003DA7EB /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E00E622C368BDD003DA7EB /* UserDefaultsService.swift */; };
 		44E00E652C36F34A003DA7EB /* RecentDishElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E00E642C36F34A003DA7EB /* RecentDishElement.swift */; };
 		64B5466A2C39595B00F959C3 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B546692C39595B00F959C3 /* StartView.swift */; };
+		7A5923AC2C3BD7ED00DA0CEF /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5923AB2C3BD7ED00DA0CEF /* FavoriteButton.swift */; };
 		7AB0857C2C343AE800FEF512 /* RecipeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB0857B2C343AE800FEF512 /* RecipeDetails.swift */; };
 		7AE5DF4E2C37BFF60085D36A /* IngridientComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5DF4D2C37BFF60085D36A /* IngridientComponentView.swift */; };
 		920A251A2C319602004CAA1A /* BestRecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A25192C319602004CAA1A /* BestRecipesApp.swift */; };
@@ -59,6 +60,7 @@
 		44E00E622C368BDD003DA7EB /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		44E00E642C36F34A003DA7EB /* RecentDishElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentDishElement.swift; sourceTree = "<group>"; };
 		64B546692C39595B00F959C3 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		7A5923AB2C3BD7ED00DA0CEF /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		7AB0857B2C343AE800FEF512 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
 		7AE5DF4D2C37BFF60085D36A /* IngridientComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngridientComponentView.swift; sourceTree = "<group>"; };
 		920A25162C319602004CAA1A /* BestRecipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BestRecipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +117,7 @@
 				44E00E642C36F34A003DA7EB /* RecentDishElement.swift */,
 				922258AF2C3709A50009A768 /* SearchBar.swift */,
 				922258B12C370A650009A768 /* SearchDishElement.swift */,
+				7A5923AB2C3BD7ED00DA0CEF /* FavoriteButton.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				92117AA62C32D59C0010C7B3 /* TabBarView.swift in Sources */,
 				44E00E612C368B96003DA7EB /* CategoryDishElement.swift in Sources */,
 				92117AB82C32D8460010C7B3 /* NetworkServiceAA.swift in Sources */,
+				7A5923AC2C3BD7ED00DA0CEF /* FavoriteButton.swift in Sources */,
 				44E00E5F2C368B7D003DA7EB /* TrendingDishElement.swift in Sources */,
 				92117AAC2C32D6E70010C7B3 /* RecipeDetailView.swift in Sources */,
 			);

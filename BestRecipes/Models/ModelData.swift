@@ -9,7 +9,7 @@ import Foundation
 
 @MainActor
 class ModelData: ObservableObject {
-    
+
     // trending 5 dishes
     @Published var trendingDishes: [RecipeDetails] = []
     //popular categories
@@ -30,35 +30,35 @@ class ModelData: ObservableObject {
     // MARK: - it works
     @Published var recipeByCourse = RecipeByCourseResponse(results: [], offset: 0, number: 0, totalResults: 0)
     @Published var recipeByCuisine: [RecipeByCuisine] = []
-    
+
     let service = NetworkServiceAA()
-    
+
     // get dishes by name with autocomplition
     func fetchSmallDishesAuto(name: String, numberLimit: Int) async throws -> [DishSmallModel] {
         try await service.getDishesByName(name: name, numberLimit: numberLimit)
     }
-    
+
     // get dishes by ID
     func fetchDishById(id: Int) async throws -> RecipeDetails {
         try await service.getDishById3(id: id)
-        
+
     }
-    
+
     // get dishes by courses
     func fetchDishByCources(course: Course.RawValue, numberLimit: Int) async throws -> [RecipeByCourse] {
         try await service.getDishByCources(cource: course, numberLimit: numberLimit)
     }
-    
+
     //get dishes by cuisine
     func fetchDishByCuisine(cuisine: Cuisine.RawValue, numberLimit: Int) async throws -> [RecipeByCuisine] {
         try await service.getDishByCuisine(cuisine: cuisine, numberLimit: numberLimit)
     }
-    
+
     //get random dishes
     func fetchRandomDishes(numberLimit: Int) async throws -> [DishBigModel] {
         try await service.getRandomDishes(numberLimit: numberLimit)
     }
-    
+
     func fetchAllData() async throws {
         // get trending from random
         do {
@@ -101,14 +101,14 @@ class ModelData: ObservableObject {
             for dish in cuisineDishesIn {
                 cuisineDishes.append(try await fetchDishById(id: dish.id))
             }
-            
+
         }
         catch {
             print("Fetch cuisine dishes")
         }
-        
+
     }
-    
+
     func fetchDishByCuisine(_ cuisine: String) async throws {
         do {
             let dishes = try await fetchDishByCuisine(cuisine: cuisine, numberLimit: 10)
@@ -121,7 +121,7 @@ class ModelData: ObservableObject {
             print("problem with get dish by course")
         }
     }
-    
+
     func fetchDishByCourse(_ course: String) async throws {
         var dishes: [RecipeByCourse] = []
         var recipes: [RecipeDetails] = []
@@ -155,14 +155,14 @@ class ModelData: ObservableObject {
             print("problem with search")
         }
     }
+    
 
-
-//init() {
-//    trendingDishes = [(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Edoman", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 214212, title: "Very cool dish with garlic", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Edoman", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 214212, title: "Very cool dish with garlic", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Edoman", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 214612, title: "Very cool dish with garlic", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Edoman", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 214212, title: "Very cool dish with garlic", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Edoman", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 224212, title: "Very cool dish with garlic", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2))]
-//    popularDishes = [(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Kitchen paris norn", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 284213, title: "Meat with cheese and another", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),]
-//    recentDishes = [(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Kitchen moscow norn", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 219213, title: "Pork and another", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),]
-//    savedDishes = [(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Kitchen moscow norn", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 217113, title: "Pork and another", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),]
-//    recipeByCourse = recipeByCourse
-//    recipeByCuisine = recipeByCuisine
-//}
+    //init() {
+    //    trendingDishes = [(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Edoman", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 214212, title: "Very cool dish with garlic", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Edoman", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 214212, title: "Very cool dish with garlic", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Edoman", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 214612, title: "Very cool dish with garlic", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Edoman", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 214212, title: "Very cool dish with garlic", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Edoman", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 224212, title: "Very cool dish with garlic", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2))]
+    //    popularDishes = [(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Kitchen paris norn", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 284213, title: "Meat with cheese and another", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),]
+    //    recentDishes = [(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Kitchen moscow norn", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 219213, title: "Pork and another", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),]
+    //    savedDishes = [(RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 6, healthScore: 2, creditsText: "Kitchen moscow norn", sourceName: "12esd", pricePerServing: 0.1, extendedIngredients: [], id: 217113, title: "Pork and another", readyInMinutes: 6, servings: 1, sourceURL: "23", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 92.2)),]
+    //    recipeByCourse = recipeByCourse
+    //    recipeByCuisine = recipeByCuisine
+    //}
 }
