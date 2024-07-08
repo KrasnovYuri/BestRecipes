@@ -39,6 +39,7 @@
 		922258B22C370A650009A768 /* SearchDishElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922258B12C370A650009A768 /* SearchDishElement.swift */; };
 		922258B52C370ACC0009A768 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922258B42C370ACC0009A768 /* SearchView.swift */; };
 		926E9BDB2C37E2E80060DEB7 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E9BDA2C37E2E80060DEB7 /* UIApplication.swift */; };
+		92BDAEC72C3C0C9D00220902 /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BDAEC62C3C0C9D00220902 /* BackButtonView.swift */; };
 		92EA88A12C31CDB300FD3423 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92EA889A2C31CDB300FD3423 /* Poppins-Light.ttf */; };
 		92EA88A22C31CDB300FD3423 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92EA889B2C31CDB300FD3423 /* Poppins-Medium.ttf */; };
 		92EA88A32C31CDB300FD3423 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92EA889C2C31CDB300FD3423 /* Poppins-ExtraBold.ttf */; };
@@ -85,6 +86,7 @@
 		922258B12C370A650009A768 /* SearchDishElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDishElement.swift; sourceTree = "<group>"; };
 		922258B42C370ACC0009A768 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		926E9BDA2C37E2E80060DEB7 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		92BDAEC62C3C0C9D00220902 /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
 		92EA889A2C31CDB300FD3423 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
 		92EA889B2C31CDB300FD3423 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		92EA889C2C31CDB300FD3423 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				922258AF2C3709A50009A768 /* SearchBar.swift */,
 				922258B12C370A650009A768 /* SearchDishElement.swift */,
 				7A5923AB2C3BD7ED00DA0CEF /* FavoriteButton.swift */,
+				92BDAEC62C3C0C9D00220902 /* BackButtonView.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				44E00E632C368BDD003DA7EB /* UserDefaultsService.swift in Sources */,
 				44E00E652C36F34A003DA7EB /* RecentDishElement.swift in Sources */,
 				7AE5DF4E2C37BFF60085D36A /* IngridientComponentView.swift in Sources */,
+				92BDAEC72C3C0C9D00220902 /* BackButtonView.swift in Sources */,
 				920A251C2C319602004CAA1A /* Onboarding.swift in Sources */,
 				922258B02C3709A50009A768 /* SearchBar.swift in Sources */,
 				926E9BDB2C37E2E80060DEB7 /* UIApplication.swift in Sources */,

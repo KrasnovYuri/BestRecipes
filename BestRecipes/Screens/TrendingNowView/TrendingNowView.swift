@@ -45,7 +45,7 @@ struct TrendingNowView: View {
                             .foregroundColor(.black)
                     }
                     ToolbarItem(placement: .topBarLeading) {
-                        BackButton()
+                        BackButtonView()
                     }
                 }
             }
