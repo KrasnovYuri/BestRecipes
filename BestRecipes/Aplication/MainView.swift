@@ -32,7 +32,8 @@ struct MainView: View {
                     
             }
             .ignoresSafeArea()
-            .onAppear{
+   
+            .onAppear {
                 Task {
                     do {
                         try await modelData.fetchAllData()

@@ -149,6 +149,10 @@ struct RecipeDetailView: View {
             Task {
                 do {
                     dish = try await service.getDishById(id: id)
+                    if var elements: [Int] = UserDefaultsService.shared.get(forKey: "Recent") {
+                        elements.append(id)
+                        UserDefaultsService.shared.save(structs: elements, forKey: "Recent")
+                    }
                 } catch {
                     
                 }

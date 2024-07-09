@@ -25,7 +25,7 @@ class ModelData: ObservableObject {
     
     
 //    UserDefaults "Recent"
-    var Recent: [Int] = []
+    var recentDishesID: [Int] = []
     @Published var recentDishes: [DishLightModel] = []
     
 //    saved array "Saved" UserDefaults key
@@ -52,7 +52,14 @@ class ModelData: ObservableObject {
         }
 
         //TODO: -get recent from userDef and ID
-        
+        recentDishesID = getUserDef("Recent")
+        savedDishesID = getUserDef("Saved")
+        do {
+            if !recentDishesID.isEmpty { recentDishes = try await service.getRecipe(intArray: recentDishesID) }
+            if !savedDishesID.isEmpty { savedDishes = try await service.getRecipe(intArray: savedDishesID) }
+        } catch {
+            print("recent get error")
+        }
 
     }
 // Fetch dish by cuisine
@@ -86,4 +93,11 @@ class ModelData: ObservableObject {
         }
     }
     
+    func getUserDef(_ key: String) -> [Int] {
+        if let recent: [Int] = UserDefaultsService.shared.get(forKey: key) {
+            return recent
+        }
+        return []
+    }
+     
 }
