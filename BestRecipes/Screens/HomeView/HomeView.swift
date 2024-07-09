@@ -11,22 +11,11 @@ struct HomeView: View {
     @State var index = 1
     @State var userSearch = ""
     @State var userChoiseCourse = "mainCourse"
-    @State var searchEnable = false
+    @Binding var searchEnable: Bool
     @StateObject var modelData: ModelData
     var body: some View {
         NavigationView {
-            //            VStack {
-            //                HStack {
-            //                    Text("Get amazing recipes for cooking")
-            //                        .lineLimit(2)
-            //                        .font(.custom(Font.bold, size: 24))
-            //                    Spacer()
-            //                }
-            //                .frame(height: 100)
-            //                .padding(.horizontal, 16)
-            //                SearchView(modelData: modelData, active: $searchEnable)
-            //                Spacer()
-            //
+     
             ScrollView(.vertical) {
                 //                header
                 HStack {
@@ -65,7 +54,7 @@ struct HomeView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 ForEach( modelData.trendingDishes, id: \.id) { dish in
-                                    NavigationLink(destination: RecipeDetailView(dish: dish)) {
+                                    NavigationLink(destination: RecipeDetailView(id: dish.id )) {
                                         ZStack {
                                             TrendingDishElement(bigSize: false, dish: dish)
                                             //                                        .frame(width: 280)
@@ -104,15 +93,11 @@ struct HomeView: View {
                         .padding(.horizontal, 16)
                         //Course list
                         ScrollView(.horizontal, showsIndicators: false) {
-                            HStack{
-                                ForEach(modelData.courceArray, id: \.self) { course in
+                            HStack {
+                                ForEach(modelData.foodCategoryArray, id: \.self) { course in
                                     Button {
                                         userChoiseCourse = course
-                                        Task {
-                                            do {
-                                                try await modelData.fetchDishByCourse(course)
-                                            }
-                                        }
+                                        modelData.fetchDishByFoodCategory(course)
                                     } label : {
                                         ZStack {
                                             RoundedRectangle(cornerRadius: 10)
@@ -131,24 +116,20 @@ struct HomeView: View {
                         }
                         // dish list
                         ScrollView(.horizontal) {
-                            LazyHStack {
-                                ForEach(modelData.popularDishes, id: \.id) { dish in
-                                    NavigationLink(destination: RecipeDetailView(dish: dish)) {
+                            HStack {
+                                ForEach(modelData.foodCategoryPopularDishes, id: \.id) { dish in
+//                                    NavigationLink(destination: Text(dish.id) ) {
                                         ZStack {
                                             CategoryDishElement(dish: dish)
                                             HStack {
                                                 Spacer()
                                                 VStack{
                                                     Spacer()
-                                                    Button {
-                                                        // TODO: check and add to
-                                                    } label: {
-                                                        FavoriteElement(checkFavorite: true)
-                                                    }
+                                                    FavoriteElement(checkFavorite: true)
                                                     .padding(10)
                                                     
                                                 }
-                                            }
+//                                            }
                                         }
                                         .padding(.leading, 16)
                                         .padding(.top, 5)
@@ -190,7 +171,7 @@ struct HomeView: View {
                         ScrollView(.horizontal) {
                             LazyHStack {
                                 ForEach(modelData.recentDishes, id: \.id) { dish in
-                                    NavigationLink(destination: RecipeDetailView(dish: dish)) {
+                                    NavigationLink(destination: RecipeDetailView(id: dish.id)) {
                                         RecentDishElement(dish: dish)
                                     }
                                 }
@@ -224,7 +205,7 @@ struct HomeView: View {
                         .padding(.vertical, 10)
                         ScrollView(.horizontal) {
                             LazyHStack {
-                                ForEach(modelData.cuisineArray, id: \.self) { cuisine in
+                                ForEach(modelData.foodCategoryArray, id: \.self) { cuisine in
                                     VStack{
                                         Circle()
                                             .frame(width: 110, height: 110)
@@ -238,14 +219,17 @@ struct HomeView: View {
                         }
                     }
                     Spacer(minLength: 150)
-                    
                 }
+                    
+                    
+                    
             }
         }
         
     }
+    
 }
 
 #Preview {
-    HomeView(modelData: ModelData())
+    HomeView(searchEnable: .constant(false), modelData: ModelData())
 }

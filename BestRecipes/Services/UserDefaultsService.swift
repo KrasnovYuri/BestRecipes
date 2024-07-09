@@ -9,9 +9,7 @@ import Foundation
 
 final class UserDefaultsService {
     
-    static let shared = UserDefaultsService()
-    
-    private init() {}
+    static let shared = UserDefaultsService() ; private init() { }
     
     private let defaults = UserDefaults.standard
     
