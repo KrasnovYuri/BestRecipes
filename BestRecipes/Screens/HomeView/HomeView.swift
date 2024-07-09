@@ -37,7 +37,7 @@ struct HomeView: View {
                             Spacer()
                             HStack {
                                 NavigationLink {
-                                    TrendingNowView(modelData: modelData)
+                                    DishesListView(dishesList: modelData.trendingDishes, textHeader: "Trending now")
                                 } label: {
                                     Text("See all")
                                         .font(.custom(Font.medium, size: 14))
@@ -57,18 +57,11 @@ struct HomeView: View {
                                     NavigationLink(destination: RecipeDetailView(id: dish.id )) {
                                         ZStack {
                                             TrendingDishElement(bigSize: false, dish: dish)
-                                            //                                        .frame(width: 280)
-                                            
                                             VStack {
                                                 HStack {
                                                     RatingElement(bg: true, rating: dish.spoonacularScore)
                                                     Spacer()
-                                                    Button {
-                                                        //TODO:  add to favorite
-                                                    } label : {
-                                                        //need add check to fav and logic
-                                                        FavoriteElement(checkFavorite: true)
-                                                    }
+                                                    FavoriteElement(checkFavorite: true)
                                                 }
                                                 .padding(12)
                                                 Spacer()
@@ -91,7 +84,7 @@ struct HomeView: View {
                             Spacer()
                         }
                         .padding(.horizontal, 16)
-                        //Course list
+                        //Food category
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 ForEach(modelData.foodCategoryArray, id: \.self) { course in
@@ -114,11 +107,13 @@ struct HomeView: View {
                                 }
                             }
                         }
-                        // dish list
+                        // Popular dish list
                         ScrollView(.horizontal) {
                             HStack {
                                 ForEach(modelData.foodCategoryPopularDishes, id: \.id) { dish in
-//                                    NavigationLink(destination: Text(dish.id) ) {
+                                    NavigationLink{
+                                        RecipeDetailView(id: dish.id)
+                                    } label: {
                                         ZStack {
                                             CategoryDishElement(dish: dish)
                                             HStack {
@@ -126,23 +121,20 @@ struct HomeView: View {
                                                 VStack{
                                                     Spacer()
                                                     FavoriteElement(checkFavorite: true)
-                                                    .padding(10)
+                                                        .padding(10)
                                                     
                                                 }
-//                                            }
+                                            }
+                                            .padding(.leading, 16)
+                                            .padding(.top, 5)
                                         }
-                                        .padding(.leading, 16)
-                                        .padding(.top, 5)
                                     }
                                 }
                             }
                             
                         }
                         .ignoresSafeArea()
-                        
-                        
-                        
-                        
+
                     }
                     //Recent View
                     VStack {
@@ -155,7 +147,7 @@ struct HomeView: View {
                             Spacer()
                             HStack {
                                 NavigationLink {
-                                    Text("see all")
+                                    DishesListView(dishesList: modelData.recentDishes, textHeader: "Recent dishes")
                                 } label: {
                                     Text("See all")
                                         .font(.custom(Font.medium, size: 14))
@@ -190,7 +182,7 @@ struct HomeView: View {
                             Spacer()
                             HStack {
                                 NavigationLink {
-                                    Text("see all")
+                                    CuisineAllListView()
                                 } label: {
                                     Text("See all")
                                         .font(.custom(Font.medium, size: 14))
@@ -205,15 +197,20 @@ struct HomeView: View {
                         .padding(.vertical, 10)
                         ScrollView(.horizontal) {
                             LazyHStack {
-                                ForEach(modelData.foodCategoryArray, id: \.self) { cuisine in
-                                    VStack{
-                                        Circle()
-                                            .frame(width: 110, height: 110)
-                                            .foregroundStyle(.thinMaterial)
-                                        Text(cuisine)
-                                            .font(.custom(Font.medium, size: 14))
+                                ForEach(modelData.cuisineArray, id: \.self) { cuisine in
+                                    NavigationLink {
+                                        CuisineListView(cuisine: cuisine)
+                                    } label: {
+                                        VStack{
+                                            Circle()
+                                                .frame(width: 110, height: 110)
+                                                .foregroundStyle(.thinMaterial)
+                                            Text(cuisine)
+                                                .font(.custom(Font.medium, size: 14))
+                                                .foregroundStyle(.black)
+                                        }
+                                        .padding(.vertical, 10)
                                     }
-                                    .padding(.vertical, 10)
                                 }
                             }
                         }

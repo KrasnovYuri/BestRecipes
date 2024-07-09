@@ -10,6 +10,8 @@
 		44CD996A2C3A78D1009C4C4B /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD99692C3A78D1009C4C4B /* CachedAsyncImage.swift */; };
 		44CD996C2C3CF4AE009C4C4B /* DishLightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD996B2C3CF4AE009C4C4B /* DishLightModel.swift */; };
 		44CD996F2C3D000C009C4C4B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 44CD996E2C3D000C009C4C4B /* SwiftyJSON */; };
+		44CD99712C3D5E56009C4C4B /* CuisineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD99702C3D5E56009C4C4B /* CuisineListView.swift */; };
+		44CD99732C3D66CE009C4C4B /* CuisineAllListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD99722C3D66CE009C4C4B /* CuisineAllListView.swift */; };
 		44E00E4F2C357D39003DA7EB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E00E4E2C357D39003DA7EB /* MainView.swift */; };
 		44E00E5B2C368B57003DA7EB /* FavoriteElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E00E5A2C368B57003DA7EB /* FavoriteElement.swift */; };
 		44E00E5D2C368B66003DA7EB /* RatingElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E00E5C2C368B66003DA7EB /* RatingElement.swift */; };
@@ -29,7 +31,7 @@
 		92117AA82C32D5D30010C7B3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AA72C32D5D30010C7B3 /* HomeView.swift */; };
 		92117AAA2C32D6500010C7B3 /* SavedRecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AA92C32D6500010C7B3 /* SavedRecipesView.swift */; };
 		92117AAC2C32D6E70010C7B3 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AAB2C32D6E70010C7B3 /* RecipeDetailView.swift */; };
-		92117AAE2C32D6FC0010C7B3 /* TrendingNowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AAD2C32D6FC0010C7B3 /* TrendingNowView.swift */; };
+		92117AAE2C32D6FC0010C7B3 /* DishesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AAD2C32D6FC0010C7B3 /* DishesListView.swift */; };
 		92117AB02C32D7D90010C7B3 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AAF2C32D7D90010C7B3 /* ModelData.swift */; };
 		92117AB22C32D7F80010C7B3 /* DishBigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AB12C32D7F80010C7B3 /* DishBigModel.swift */; };
 		92117AB42C32D8140010C7B3 /* DishSmallModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AB32C32D8140010C7B3 /* DishSmallModel.swift */; };
@@ -55,6 +57,8 @@
 /* Begin PBXFileReference section */
 		44CD99692C3A78D1009C4C4B /* CachedAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
 		44CD996B2C3CF4AE009C4C4B /* DishLightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishLightModel.swift; sourceTree = "<group>"; };
+		44CD99702C3D5E56009C4C4B /* CuisineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuisineListView.swift; sourceTree = "<group>"; };
+		44CD99722C3D66CE009C4C4B /* CuisineAllListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuisineAllListView.swift; sourceTree = "<group>"; };
 		44E00E4E2C357D39003DA7EB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		44E00E5A2C368B57003DA7EB /* FavoriteElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteElement.swift; sourceTree = "<group>"; };
 		44E00E5C2C368B66003DA7EB /* RatingElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingElement.swift; sourceTree = "<group>"; };
@@ -75,7 +79,7 @@
 		92117AA72C32D5D30010C7B3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		92117AA92C32D6500010C7B3 /* SavedRecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipesView.swift; sourceTree = "<group>"; };
 		92117AAB2C32D6E70010C7B3 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
-		92117AAD2C32D6FC0010C7B3 /* TrendingNowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingNowView.swift; sourceTree = "<group>"; };
+		92117AAD2C32D6FC0010C7B3 /* DishesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishesListView.swift; sourceTree = "<group>"; };
 		92117AAF2C32D7D90010C7B3 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		92117AB12C32D7F80010C7B3 /* DishBigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishBigModel.swift; sourceTree = "<group>"; };
 		92117AB32C32D8140010C7B3 /* DishSmallModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishSmallModel.swift; sourceTree = "<group>"; };
@@ -242,7 +246,9 @@
 		92AF5A272C31E3180012CAC8 /* TrendingNowView */ = {
 			isa = PBXGroup;
 			children = (
-				92117AAD2C32D6FC0010C7B3 /* TrendingNowView.swift */,
+				92117AAD2C32D6FC0010C7B3 /* DishesListView.swift */,
+				44CD99702C3D5E56009C4C4B /* CuisineListView.swift */,
+				44CD99722C3D66CE009C4C4B /* CuisineAllListView.swift */,
 			);
 			path = TrendingNowView;
 			sourceTree = "<group>";
@@ -400,13 +406,15 @@
 				920A251C2C319602004CAA1A /* Onboarding.swift in Sources */,
 				926E9BDB2C37E2E80060DEB7 /* UIApplication.swift in Sources */,
 				44E00E5D2C368B66003DA7EB /* RatingElement.swift in Sources */,
+				44CD99732C3D66CE009C4C4B /* CuisineAllListView.swift in Sources */,
 				92EA88AD2C31D5F600FD3423 /* Color+Ext.swift in Sources */,
 				92117ABC2C32ECE10010C7B3 /* TestView.swift in Sources */,
 				7AB0857C2C343AE800FEF512 /* RecipeDetails.swift in Sources */,
 				92117AB22C32D7F80010C7B3 /* DishBigModel.swift in Sources */,
-				92117AAE2C32D6FC0010C7B3 /* TrendingNowView.swift in Sources */,
+				92117AAE2C32D6FC0010C7B3 /* DishesListView.swift in Sources */,
 				92117AB62C32D8260010C7B3 /* TextData.swift in Sources */,
 				92EA88AB2C31CE7D00FD3423 /* Fonts.swift in Sources */,
+				44CD99712C3D5E56009C4C4B /* CuisineListView.swift in Sources */,
 				922258B22C370A650009A768 /* SearchDishElement.swift in Sources */,
 				92117ABA2C32D8680010C7B3 /* URLManager.swift in Sources */,
 				44CD996C2C3CF4AE009C4C4B /* DishLightModel.swift in Sources */,

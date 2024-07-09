@@ -39,7 +39,7 @@ class ModelData: ObservableObject {
     func fetchAllData() async throws {
         // get trending
         do {
-            let trendingDishes = try await service.getTrendingDishes(numberLimit: 10)
+            trendingDishes = try await service.getTrendingDishes(numberLimit: 10)
         }
         catch {
             print("Fetch trending dishes problem")

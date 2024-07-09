@@ -18,7 +18,7 @@ struct TestView: View {
         NavigationView {
             HStack {
                 Button {
-                    print(URLManager.shared.createURL(numberOfPopularDishes: 10)!)
+                    print(URLManager.shared.createURL(cuisine: Cuisine.mexican.rawValue, numberLimit: 5)!)
                 } label: {
                     Text("dasdfas")
                 }
