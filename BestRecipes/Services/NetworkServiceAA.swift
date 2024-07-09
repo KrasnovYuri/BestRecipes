@@ -39,7 +39,7 @@ actor NetworkServiceAA {
         }
         return []
     }
-
+    
     // MARK: - get dish by ID
     func getDishById(id: Int) async throws -> RecipeDetails {
         
@@ -62,8 +62,8 @@ actor NetworkServiceAA {
     
     
     // MARK: - Popular category (Food category)
-
-// сразу получение легкой модели без всякого 
+    
+    // сразу получение легкой модели без всякого
     func getDishByFoodCategory(foodCategory: String, numberLimit: Int) async throws -> [DishLightModel] {
         guard let url = URLManager.shared.createURL(foodCategory: foodCategory, numberLimit: numberLimit) else {
             throw NetworkError.badURL
@@ -93,7 +93,7 @@ actor NetworkServiceAA {
         return []
     }
     // MARK: - dishes by cuisine
-
+    
     func getDishByCuisine(cuisine: Cuisine.RawValue, numberLimit: Int) async throws -> [DishLightModel] {
         guard let url = URLManager.shared.createURL(cuisine: cuisine, numberLimit: numberLimit) else {
             throw NetworkError.badURL
@@ -121,9 +121,9 @@ actor NetworkServiceAA {
         }
         return []
     }
-
+    
     // MARK: - get random dishes
-
+    
     func getRandomDishes(numberLimit: Int) async throws -> [DishBigModel] {
         guard let url = URLManager.shared.createURL(numberOfDishes: numberLimit) else {
             throw NetworkError.badURL
@@ -144,7 +144,7 @@ actor NetworkServiceAA {
         }
     }
     // MARK: - get popular dishes
-
+    
     func getTrendingDishes(numberLimit: Int) async throws -> [DishLightModel] {
         guard let url = URLManager.shared.createURL(numberOfPopularDishes: numberLimit) else {
             throw NetworkError.badURL
@@ -152,28 +152,18 @@ actor NetworkServiceAA {
         do {
             let responce = try await URLSession.shared.data(from: url)
             if let json = try? JSON(data: responce.0) {
-                let arrayNames =  json["results"].arrayValue.map { $0["id"].intValue }
-                print("Array names here")
-                print(arrayNames.count)
-                guard let url2 = URLManager.shared.createURLBulk(id: arrayNames) else { throw NetworkError.badURL }
-                do {
-                    let responce = try await URLSession.shared.data(from: url2)
-                    if let json2 = try? JSON(data: responce.0) {
-                        var dishReturn: [DishLightModel] = []
-                        for element in json2.arrayValue {
-                            dishReturn.append(DishLightModel(title: element["title"].stringValue, id: element["id"].intValue, spoonacularScore: element["spoonacularScore"].doubleValue, readyInMinutes: element["readyInMinutes"].intValue, creditsText: element["creditsText"].stringValue, ingredientsCount: element["extendedIngredients"].arrayValue.count))
-                        }
-                        return dishReturn
-                    }
-                } catch {
-                    throw NetworkError.badResponse
+                var dishReturn: [DishLightModel] = []
+                for element in json["recipes"].arrayValue {
+                    dishReturn.append(DishLightModel(title: element["title"].stringValue, id: element["id"].intValue, spoonacularScore: element["spoonacularScore"].doubleValue, readyInMinutes: element["readyInMinutes"].intValue, creditsText: element["creditsText"].stringValue, ingredientsCount: element["extendedIngredients"].arrayValue.count))
                 }
+                return dishReturn
             }
         } catch {
             throw NetworkError.badResponse
         }
         return []
     }
+    
 }
 
 enum NetworkError: Error {

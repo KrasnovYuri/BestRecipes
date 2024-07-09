@@ -36,7 +36,7 @@ class URLManager {
     
     // get popular dishes
     func createURL(numberOfPopularDishes: Int) -> URL? {
-        URL(string:"https://api.spoonacular.com/recipes/autocomplete?apiKey=" + apiKey + "&number=\(numberOfPopularDishes)" + "&sort=popularity")
+        URL(string:"https://api.spoonacular.com/recipes/random?apiKey=" + apiKey + "&number=\(numberOfPopularDishes)" + "&sort=popularity")
     }
     //get url for image by id
     func createURLForImage(id: Int, size: SizeImage) -> URL? {
