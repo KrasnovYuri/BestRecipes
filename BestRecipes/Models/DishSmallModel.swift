@@ -13,23 +13,6 @@ struct DishSmallModel: Identifiable, Codable {
     var imageType: String
 }
 
-// MARK: - Model DishByCourse
-//https://api.spoonacular.com/recipes/complexSearch?apiKey=856702108d404eedb8ebb7694ab6f67c&course=beverage&number=1
-
-struct RecipeByCourse: Identifiable, Codable {
-    let id: Int
-    let title: String
-    let image: String
-    let imageType: String
-}
-
-struct RecipeByCourseResponse: Codable {
-    let results: [RecipeByCourse]
-    let offset: Int
-    let number: Int
-    let totalResults: Int
-}
-
 // MARK: - Model DishByCuisine
 //https://api.spoonacular.com/recipes/complexSearch?apiKey=856702108d404eedb8ebb7694ab6f67c&cuisine=african&number=1
 

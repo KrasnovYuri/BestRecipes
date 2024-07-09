@@ -9,12 +9,11 @@ import SwiftUI
 
 struct MainView: View {
     @State var index = 0
-    @State var searchIn = true
     @StateObject var modelData = ModelData()
-    
+    @State var searchOn: Bool = false
     var body: some View {
-        var homeView = HomeView(modelData: modelData)
-        var savedRecipesView = SavedRecipesView(modelData: modelData)
+        let homeView = HomeView(searchEnable: $searchOn, modelData: modelData)
+        let savedRecipesView = SavedRecipesView(modelData: modelData)
         ZStack {
             if index == 0 {
                 homeView
@@ -22,9 +21,12 @@ struct MainView: View {
             if index == 1 {
                 savedRecipesView
             }
+            if index == 2 {
+                Text (homeView.searchEnable.description)
+            }
             VStack {
                 Spacer()
-                if searchIn {
+                if !searchOn {
                     TabBarView(index: $index)
                 }
                     

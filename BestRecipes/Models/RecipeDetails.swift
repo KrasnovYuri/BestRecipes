@@ -40,6 +40,44 @@ struct RecipeDetails: Codable {
         case originalID = "originalId"
         case spoonacularScore
     }
+    
+    init() {
+        vegetarian = true
+        vegan = true
+        glutenFree = true
+        dairyFree = true
+        veryHealthy = true
+        cheap = true
+        veryPopular = true
+        sustainable = true
+        lowFodmap = true
+        weightWatcherSmartPoints =  100
+        gaps = ""
+        preparationMinutes = 30
+        cookingMinutes = 30
+        aggregateLikes = 30
+        healthScore = 30
+        creditsText = "Povar"
+        sourceName = "Povar"
+        pricePerServing = 0.0
+        extendedIngredients = []
+        id = 122124
+        title = "Eda"
+        readyInMinutes = 15
+        servings = 15
+        sourceURL = ""
+        image = ""
+        imageType = ""
+        summary = ""
+        cuisines = []
+        dishTypes = []
+        diets = []
+        occasions = []
+        instructions = ""
+        analyzedInstructions = []
+        originalID = nil
+        spoonacularScore = 56.0
+    }
 }
 
 // MARK: - ExtendedIngredient
