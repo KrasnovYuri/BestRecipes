@@ -33,7 +33,6 @@ struct IngridientComponentView: View {
                             image
                                 .resizable()
                                 .scaledToFit()
-//                                .frame(width: 52, height: 40)
                                 
                         } placeholder: {
                             ProgressView()
@@ -49,7 +48,7 @@ struct IngridientComponentView: View {
                 Text(ingridient.name.capitalized)
                     .font(.custom(Font.medium, size: 16))
                 Spacer()
-                Text("\(String(format: "%0.1f",ingridient.measures.metric.amount))\(ingridient.measures.metric.unitShort)")
+                Text("\(String(format: "%0.1f",ingridient.measures.metric.amount)) \(ingridient.measures.metric.unitShort)")
                     .font(.custom(Font.light, size: 14))
                 Button {
                     checkBox.toggle()
@@ -64,21 +63,6 @@ struct IngridientComponentView: View {
             }
         }
         .padding(.horizontal, 16)
-        
-        
-//        VStack {
-
-//        HStack {
-//
-//            Text(ingridient.aisle)
-//                .font(.custom(Font.semiBold, size: 20))
-//
-//            Spacer()
-//        }
-//        .clipShape(RoundedRectangle(cornerRadius: 25))
-//
-//    }
-//        .background(.gray)
     }
 }
 

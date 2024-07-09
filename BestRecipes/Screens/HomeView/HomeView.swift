@@ -48,7 +48,7 @@ struct HomeView: View {
                             Spacer()
                             HStack {
                                 NavigationLink {
-                                    Text("see all")
+                                    TrendingNowView(modelData: modelData)
                                 } label: {
                                     Text("See all")
                                         .font(.custom(Font.medium, size: 14))
