@@ -1,31 +1,30 @@
 //
-//  TrendingNowView.swift
+//  CuisineListView.swift
 //  BestRecipes
 //
-//  Created by Юрий on 01.07.2024.
+//  Created by Руслан on 09.07.2024.
 //
 
 import SwiftUI
 
-struct TrendingNowView: View {
-    @StateObject var modelData: ModelData
-    
+struct CuisineListView: View {
+    @State var cuisine: String
+    @State var dishesList: [DishLightModel] = []
+    let service = NetworkServiceAA()
     var body: some View {
-        ScrollView {
-                ForEach(modelData.trendingDishes, id: \.id) { dish in
+        VStack {
+            ScrollView (.vertical ) {
+                
+                ForEach(dishesList, id: \.id) { dish in
                     NavigationLink(destination: RecipeDetailView(id: dish.id)) {
-                        HStack{
+                        HStack {
                             ZStack {
                                 TrendingDishElement(bigSize: true, dish: dish)
                                 VStack {
                                     HStack {
                                         RatingElement(bg: true, rating: dish.spoonacularScore)
                                         Spacer()
-                                        Button {
-                                            
-                                        } label: {
-                                            FavoriteElement(checkFavorite: true)
-                                        }
+                                        FavoriteElement(checkFavorite: true)
                                     }
                                     .padding(10)
                                     Spacer()
@@ -35,12 +34,16 @@ struct TrendingNowView: View {
                             
                         }
                     }
+                    
+                    
                 }
+                
+                
                 .navigationBarBackButtonHidden(true)
                 .navigationBarTitleDisplayMode(.automatic)
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        Text("Trending now")
+                        Text(cuisine.capitalized)
                             .font(.custom(Font.semiBold, size: 24))
                             .foregroundColor(.black)
                     }
@@ -49,10 +52,21 @@ struct TrendingNowView: View {
                     }
                 }
             }
+            Spacer(minLength: 130)
+                .onAppear {
+                    print("onAppear")
+                    Task {
+                        do {
+                            dishesList = try await service.getDishByCuisine(cuisine: cuisine, numberLimit: 10)
+                        } catch {
+                            print("CuisineListView error")
+                        }
+                    }
+                }
+        }
     }
 }
 
 #Preview {
-    TrendingNowView(modelData: ModelData())
+    CuisineListView(cuisine: "African")
 }
-

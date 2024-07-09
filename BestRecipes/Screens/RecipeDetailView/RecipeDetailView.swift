@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecipeDetailView: View {
 
-    @StateObject var modelData: ModelData = ModelData()
+    let service = NetworkServiceAA()
     @State var id: Int
     @State var dish: RecipeDetails = RecipeDetails()
     @State var isSet: Bool = true
@@ -146,7 +146,13 @@ struct RecipeDetailView: View {
             
         }
         .onAppear {
-            
+            Task {
+                do {
+                    dish = try await service.getDishById(id: id)
+                } catch {
+                    
+                }
+            }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.automatic)

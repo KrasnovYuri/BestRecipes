@@ -18,8 +18,9 @@ struct TrendingDishElement: View {
                     switch imageIn {
                     case .success(let imageIn):
                         imageIn.resizable()
-                            .scaledToFill()
+                            .ignoresSafeArea()
                             .frame(width: bigSize ? 343 : 280, height: 180)
+                            .scaledToFill()
                     default:
                         ZStack {
                             Color(.white)

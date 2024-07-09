@@ -15,7 +15,6 @@ struct SearchView: View {
     
     
     var body: some View {
-        //        SearchBar(searchText: $searchText)
         NavigationView {
             VStack {
                 ZStack {
@@ -62,10 +61,12 @@ struct SearchView: View {
                                     RecipeDetailView(id: dish.id)
                                 } label: {
                                     SearchDishElement(rating: 5.0, dish: dish)
+                                        .padding(.vertical, 5)
                                 }
 
                                
                             }
+                            Spacer(minLength: 100)
                         }
                         .frame(height: 700)
                     }

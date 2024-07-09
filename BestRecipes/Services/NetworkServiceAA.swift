@@ -10,6 +10,7 @@ import SwiftyJSON
 
 actor NetworkServiceAA {
     
+    
     // MARK: - Search, get dishes by name with autocomplition
     func getDishesByName(name: String, numberLimit: Int) async throws -> [DishLightModel] {
         guard let url = URLManager.shared.createURL(name, numberLimit: numberLimit) else {
@@ -101,20 +102,13 @@ actor NetworkServiceAA {
         do {
             let responce = try await URLSession.shared.data(from: url)
             if let json = try? JSON(data: responce.0) {
-                let arrayNames =  json["results"].arrayValue.map { $0["id"].intValue }
-                guard let url2 = URLManager.shared.createURLBulk(id: arrayNames) else { throw NetworkError.badURL }
-                do {
-                    let responce = try await URLSession.shared.data(from: url2)
-                    if let json2 = try? JSON(data: responce.0) {
-                        var dishReturn: [DishLightModel] = []
-                        for element in json2.arrayValue {
-                            dishReturn.append(DishLightModel(title: element["title"].stringValue, id: element["id"].intValue, spoonacularScore: element["spoonacularScore"].doubleValue, readyInMinutes: element["readyInMinutes"].intValue, creditsText: element["creditsText"].stringValue, ingredientsCount: element["extendedIngredients"].arrayValue.count))
-                        }
-                        return dishReturn
-                    }
-                } catch {
-                    throw NetworkError.badResponse
+                var dishReturn: [DishLightModel] = []
+                for element in json["recipes"].arrayValue {
+                    dishReturn.append(DishLightModel(title: element["title"].stringValue, id: element["id"].intValue, spoonacularScore: element["spoonacularScore"].doubleValue, readyInMinutes: element["readyInMinutes"].intValue, creditsText: element["creditsText"].stringValue, ingredientsCount: element["extendedIngredients"].arrayValue.count))
                 }
+                print("dishReturn cuisine")
+                print(dishReturn.count)
+                return dishReturn
             }
         } catch {
             throw NetworkError.badResponse
@@ -124,25 +118,8 @@ actor NetworkServiceAA {
     
     // MARK: - get random dishes
     
-    func getRandomDishes(numberLimit: Int) async throws -> [DishBigModel] {
-        guard let url = URLManager.shared.createURL(numberOfDishes: numberLimit) else {
-            throw NetworkError.badURL
-        }
-        do {
-            let responce = try await URLSession.shared.data(from: url)
-            let data = responce.0
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            do {
-                let result = try decoder.decode(RecipeData.self, from: data)
-                return result.recipes
-            } catch {
-                throw NetworkError.badData
-            }
-        } catch {
-            throw NetworkError.badResponse
-        }
-    }
+//    func getRandomDishes(numberLimit: Int) async throws -> [DishBigModel] { }
+        
     // MARK: - get popular dishes
     
     func getTrendingDishes(numberLimit: Int) async throws -> [DishLightModel] {
