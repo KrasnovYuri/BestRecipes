@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TabBarView: View {
     @Binding var index: Int
-    @State var animIndex: Int = 1
+    @State var animIndex: Int = 0
     let images = ["TabBarHome","TabBarBookmark","plus","TabBarBell","TabBarProfile"]
     var body: some View {
         ZStack() {
