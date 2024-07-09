@@ -18,8 +18,9 @@ struct TestView: View {
         NavigationView {
             HStack {
                 Button {
-                    print(URLManager.shared.createURL("chick", numberLimit: 3)!)
-                    
+//                    print(URLManager.shared.createURL("chick", numberLimit: 3)!)
+//                    print(URLManager.shared.createURL(id: 715415)!)
+                    print(URLManager.shared.createURL(numberOfPopularDishes: 10)!)
                 
                 } label: {
                     Text("dasdfas")

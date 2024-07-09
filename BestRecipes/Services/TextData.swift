@@ -52,4 +52,22 @@ enum Course: String, CaseIterable {
     case fingerfood
     case snack
     case drink
+    
+}
+
+enum FoodCategory: String, CaseIterable {
+    case mainCourse = "Main Course"
+    case sideDish = "Side Dish"
+    case dessert = "Dessert"
+    case appetizer = "Appetizer"
+    case salad = "Salad"
+    case bread = "Bread"
+    case breakfast = "Breakfast"
+    case soup = "Soup"
+    case beverage = "Beverage"
+    case sauce = "Sauce"
+    case marinade = "Marinade"
+    case fingerfood = "Finger Food"
+    case snack = "Snack"
+    case drink = "Drink"
 }

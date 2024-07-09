@@ -10,8 +10,10 @@ import SwiftUI
 struct RecipeDetailView: View {
 
     @StateObject var modelData: ModelData = ModelData()
-    @State var dish: RecipeDetails
+    @State var id: Int
+    @State var dish: RecipeDetails = RecipeDetails()
     @State var isSet: Bool = true
+    @State var saved: Bool = false
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -22,17 +24,44 @@ struct RecipeDetailView: View {
                     .padding(.horizontal, 6)
 
                 // dish image
-                AsyncImage(url: URL(string: dish.image)) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(maxWidth: 343, maxHeight: 200)
-                } placeholder: {
-                    ProgressView()
+                ZStack {
+                    
+                    AsyncImage(url: URL(string: dish.image)) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(maxWidth: 343, maxHeight: 200)
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .padding(.horizontal, 6)
+                    HStack {
+                        Spacer()
+                        VStack {
+                            
+                            ZStack {
+                                Circle()
+                                    .frame(width: 35)
+                                    .foregroundStyle(.white.opacity(0.6))
+                                    
+                                Circle()
+                                    .stroke()
+                                    .foregroundStyle(saved ? .brRed : .brGray)
+                                    .frame(width: 35)
+                                
+                                Image(saved ? "TabBarBookmarkActive" : "TabBarBookmarkInactive")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 22, height: 22)
+                                    .padding(17)
+                            }
+                            Spacer()
+                        }
+                        
+                    }
+                    .frame(maxWidth: 343, maxHeight: 200)
                 }
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .padding(.horizontal, 6)
-
                 // rating
                 HStack {
                     HStack {
@@ -45,9 +74,29 @@ struct RecipeDetailView: View {
                     Spacer()
 
                     // save recipe
-                    HStack {
-                        FavoriteButton(isSaved: $isSet)
+//                    HStack {
+                    Button {
+                        // TODO: - add logic to save element to fav
+                        saved.toggle()
+                    } label: {
+                        HStack {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundStyle(saved ? .brRed : .brNeutral )
+                                HStack {
+                                    
+                                    Text(saved ? "Saved" : "Save it?" )
+                                        .foregroundStyle(saved ? .white : .black )
+                                        .font(.custom(Font.regular, size: 14))
+                                        .lineLimit(1)
+                                }
+                            }
+                            .frame(width: 80)
+                           
+                        }
                     }
+                       
+                    
                     .padding(.trailing, 30)
                 }
                 .padding(.leading, 15)
@@ -94,24 +143,22 @@ struct RecipeDetailView: View {
                 }
             }
             Spacer(minLength: 120)
+            
+        }
+        .onAppear {
+            
+        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarTitleDisplayMode(.automatic)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                BackButtonView()
+            }
         }
     }
+    
 }
 
 #Preview {
-    RecipeDetailView(dish: (RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 28, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 0, healthScore: 2, creditsText: "", sourceName: "", pricePerServing: 0.1,
-                                          extendedIngredients: [
-                                            ExtendedIngredient(id: 93647, aisle: "Pasta and Rice", image: "pastina.jpg", consistency: "SOLID", name: "sale e pepe", nameClean: "pastina", original: "Sale e pepe", originalName: "Sale e pepe", amount: 1, unit: "serving", meta: [], measures: MeasuresBig(us: Metric(amount: 1, unitShort: "serving", unitLong: "serving"), metric: Metric(amount: 1, unitShort: "serving", unitLong: "serving"))),
-
-                                            ExtendedIngredient(id: 1034053, aisle: "Oil, Vinegar, Salad Dressing", image: "olive-oil.jpg", consistency: "LIQUID", name: "extra virgin olive oil", nameClean: "extra virgin olive oil", original: "Extra virgin olive oil", originalName: "Extra virgin olive oil", amount: 1, unit: "serving", meta: [], measures: MeasuresBig(us: Metric(amount: 1, unitShort: "serving", unitLong: "serving"), metric: Metric(amount: 1, unitShort: "serving", unitLong: "serving")))
-                                          ],
-                                          id: 2, title: "Carrots, Cauliflower And Anchovies", readyInMinutes: 2, servings: 1, sourceURL: "", image: "https://img.spoonacular.com/recipes/3-556x370.jpg", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: "Slice bread into 1cm thick slices: you can toast them or use them as they are. I prefer a soft bread to exalt butter softness. Spread butter with generosity over the bread.If you want to use salted anchovies, rinse them under running water to remove extra salt and divide them into fillets, removing all the bones.",
-                                          analyzedInstructions: [
-                                            AnalyzedInstruction(name: "Main", steps: [
-                                                Step(number: 1, step: "Slice bread into 1cm thick slices: you can toast them or use them as they are. I prefer a soft bread to exalt butter softness.", ingredients: [], equipment: [], length: nil),
-                                                Step(number: 2, step: "Spread butter with generosity over the bread.If you want to use salted anchovies, rinse them under running water to remove extra salt and divide them into fillets, removing all the bones. If you use anchovies in oil, just make two fillets out of them and lay them over buttered bread.And now, the final touch: a pickled baby caper in the centre, and - in less than 3 minutes - you have an unusual afternoon break or a fun anti-crisis and anti-panic appetizer for Christmas.", ingredients: [], equipment: [], length: nil),
-                                                Step(number: 3, step: "Bake for 20 minutes.", ingredients: [], equipment: [], length: Length(number: 20, unit: "minutes"))
-                                            ])
-                                          ],
-                                          originalID: nil, spoonacularScore: 65)))
+    RecipeDetailView(id: 773242)
 }

@@ -13,7 +13,7 @@ struct TrendingNowView: View {
     var body: some View {
         ScrollView {
                 ForEach(modelData.trendingDishes, id: \.id) { dish in
-                    NavigationLink(destination: RecipeDetailView(dish: dish)) {
+                    NavigationLink(destination: RecipeDetailView(id: dish.id)) {
                         HStack{
                             ZStack {
                                 TrendingDishElement(bigSize: true, dish: dish)

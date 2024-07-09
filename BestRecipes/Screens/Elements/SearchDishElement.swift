@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchDishElement: View {
     let rating: Double
     
-    @State var dish: RecipeDetails
+    @State var dish: DishLightModel
     
     var body: some View {
         ZStack {
@@ -48,7 +48,7 @@ struct SearchDishElement: View {
                     .multilineTextAlignment(.leading)
                     .frame(width: 320, alignment: .bottomLeading)
                 
-                Text("\(dish.extendedIngredients.count) Ingredients | \(dish.readyInMinutes) minutes")
+                Text("\(dish.ingredientsCount) Ingredients | \(dish.readyInMinutes) minutes")
                     .font(.custom(Font.medium, size: 14))
                     .shadow(radius: 10)
                 
@@ -61,6 +61,6 @@ struct SearchDishElement: View {
 }
 
 #Preview {
-    SearchDishElement(rating: 5.0, dish: (RecipeDetails(vegetarian: false, vegan: false, glutenFree: false, dairyFree: true, veryHealthy: true, cheap: false, veryPopular: false, sustainable: true, lowFodmap: true, weightWatcherSmartPoints: 1, gaps: "", preparationMinutes: nil, cookingMinutes: nil, aggregateLikes: 0, healthScore: 2, creditsText: "Afrolems", sourceName: "", pricePerServing: 0.1, extendedIngredients: [], id: 21232, title: "Almond Bark – Renee Charles of Four Weddings Canada- Celebrity Chef of the week", readyInMinutes: 12, servings: 1, sourceURL: "", image: "", imageType: "", summary: "", cuisines: [], dishTypes: [], diets: [], occasions: [], instructions: nil, analyzedInstructions: [], originalID: nil, spoonacularScore: 100.2)))
+    SearchDishElement(rating: 5.0, dish: DishLightModel())
 }
 

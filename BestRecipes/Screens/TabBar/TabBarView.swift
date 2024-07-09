@@ -60,7 +60,7 @@ struct TabBarView: View {
 }
 
 #Preview {
-    TabBarView(index: .constant(1))
+    TabBarView(index: .constant(0))
 }
 
 struct CustomShape: Shape {
