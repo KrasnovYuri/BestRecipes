@@ -22,9 +22,6 @@ struct MainView: View {
             if index == 1 {
                 savedRecipesView
             }
-            if index == 4 {
-                ProfileView()
-            }
             VStack {
                 Spacer()
                 if searchIn {
