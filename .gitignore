@@ -91,3 +91,4 @@ iOSInjectionProject/
 BestRecipes.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 BestRecipes.xcodeproj/project.xcworkspace/contents.xcworkspacedata
 .DS_Store
+BestRecipes.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
