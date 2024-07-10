@@ -140,7 +140,7 @@ actor NetworkServiceAA {
         }
         return []
     }
-    func getRecipe(intArray: [Int]) async throws -> [DishLightModel] {
+    func getRecipeBulk(intArray: [Int]) async throws -> [DishLightModel] {
         guard let url = URLManager.shared.createURLBulk(id: intArray) else { throw NetworkError.badURL }
         do {
             let responce = try await URLSession.shared.data(from: url)
@@ -149,8 +149,6 @@ actor NetworkServiceAA {
                 for element in json.arrayValue {
                     dishReturn.append(DishLightModel(title: element["title"].stringValue, id: element["id"].intValue, spoonacularScore: element["spoonacularScore"].doubleValue, readyInMinutes: element["readyInMinutes"].intValue, creditsText: element["creditsText"].stringValue, ingredientsCount: element["extendedIngredients"].arrayValue.count))
                 }
-                print("hello")
-                print(dishReturn)
                 return dishReturn
             }
         } catch {

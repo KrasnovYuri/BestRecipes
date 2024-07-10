@@ -9,14 +9,14 @@ import SwiftUI
 
 struct DishesListView: View {
     
-    @ObservedObject var modelData = ModelData()
+    @ObservedObject var modelData: ModelData
     @State var dishesList: [DishLightModel]
     @State var textHeader: String
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             ForEach(dishesList, id: \.id) { dish in
-                NavigationLink(destination: RecipeDetailView(id: dish.id)) {
+                NavigationLink(destination: RecipeDetailView(modelData: modelData, id: dish.id)) {
                     HStack{
                         ZStack {
                             TrendingDishElement(bigSize: true, dish: dish)
@@ -52,10 +52,16 @@ struct DishesListView: View {
                 BackButtonView()
             }
         }
+        .onAppear {
+            modelData.tabBarHide = true
+        }
+        .onDisappear{
+            modelData.tabBarHide = false
+        }
     }
 }
 
 #Preview {
-    DishesListView(dishesList: [], textHeader: "Trending")
+    DishesListView(modelData: ModelData(), dishesList: [], textHeader: "Trending")
 }
 

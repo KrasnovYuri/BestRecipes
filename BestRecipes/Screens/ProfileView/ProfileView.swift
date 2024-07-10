@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ProfileView: View {
-   
+    @StateObject var modelData: ModelData
     @State private var profileImage: UIImage? //= UIImage(named: "defaultProfileImage")
     @State private var showImagePicker: Bool = false
     @State private var myRecipes: [DishLightModel] = []
-    @AppStorage("nameUser") var name: String = ""
-    @AppStorage("surnameUser") var surname: String = ""
-    
+//    @AppStorage("nameUser") var name: String = ""
+//    @AppStorage("surnameUser") var surname: String = ""
+//    
     var body: some View {
         VStack {
             Text("My profile")
@@ -41,8 +41,8 @@ struct ProfileView: View {
                         }
                 }
                 VStack {
-                    TextField("Имя", text: $name)
-                    TextField("Фамилия", text: $surname)
+//                    TextField("Имя", text: $name)
+//                    TextField("Фамилия", text: $surname)
                 }.padding(.leading)
                 
             }
@@ -63,7 +63,7 @@ struct ProfileView: View {
             } else {
                 ScrollView {
                     ForEach(myRecipes, id: \.id) { dish in
-                        NavigationLink(destination: RecipeDetailView(id: dish.id)) {
+                        NavigationLink(destination: RecipeDetailView(modelData: modelData, id: dish.id)) {
                             HStack{
                                 ZStack {
                                     TrendingDishElement(bigSize: true, dish: dish)
@@ -146,5 +146,5 @@ extension ProfileView {
 }
 
 #Preview {
-    ProfileView()
+    ProfileView(modelData: ModelData())
 }

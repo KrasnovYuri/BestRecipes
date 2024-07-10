@@ -25,17 +25,18 @@ struct MainView: View {
                 Text (homeView.searchEnable.description)
             }
             if index == 4 {
-                    ProfileView()
+                    ProfileView(modelData: modelData)
             }
             VStack {
                 Spacer()
-                if !searchOn {
-                    TabBarView(index: $index)
-                }
+                
+                TabBarView(index: $index)
+                    .offset(y: modelData.tabBarHide ? 300 : 0)
+                
                     
             }
             .ignoresSafeArea()
-   
+            .animation(.easeInOut, value: modelData.tabBarHide)
             .onAppear {
                 Task {
                     do {
@@ -43,6 +44,7 @@ struct MainView: View {
                     }
                 }
             }
+            
             
             
         }
