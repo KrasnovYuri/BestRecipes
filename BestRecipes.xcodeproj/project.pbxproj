@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4462C33A2C3E87B400A31D77 /* AddDishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462C3392C3E87B400A31D77 /* AddDishView.swift */; };
 		44CD996A2C3A78D1009C4C4B /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD99692C3A78D1009C4C4B /* CachedAsyncImage.swift */; };
 		44CD996C2C3CF4AE009C4C4B /* DishLightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD996B2C3CF4AE009C4C4B /* DishLightModel.swift */; };
 		44CD996F2C3D000C009C4C4B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 44CD996E2C3D000C009C4C4B /* SwiftyJSON */; };
@@ -56,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4462C3392C3E87B400A31D77 /* AddDishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDishView.swift; sourceTree = "<group>"; };
 		44CD99692C3A78D1009C4C4B /* CachedAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
 		44CD996B2C3CF4AE009C4C4B /* DishLightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishLightModel.swift; sourceTree = "<group>"; };
 		44CD99702C3D5E56009C4C4B /* CuisineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuisineListView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4462C3382C3E87A000A31D77 /* AddDishView */ = {
+			isa = PBXGroup;
+			children = (
+				4462C3392C3E87B400A31D77 /* AddDishView.swift */,
+			);
+			path = AddDishView;
+			sourceTree = "<group>";
+		};
 		44E00E592C368B3E003DA7EB /* Elements */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +201,7 @@
 		92AF5A212C31E1C30012CAC8 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				4462C3382C3E87A000A31D77 /* AddDishView */,
 				44E00E592C368B3E003DA7EB /* Elements */,
 				92AF5A222C31E1DE0012CAC8 /* Onboarding */,
 				92AF5A232C31E2170012CAC8 /* TabBar */,
@@ -417,6 +428,7 @@
 				92117AAE2C32D6FC0010C7B3 /* DishesListView.swift in Sources */,
 				92117AB62C32D8260010C7B3 /* TextData.swift in Sources */,
 				7A612B8D2C3E7A5900AE1B74 /* RecentListView.swift in Sources */,
+				4462C33A2C3E87B400A31D77 /* AddDishView.swift in Sources */,
 				92EA88AB2C31CE7D00FD3423 /* Fonts.swift in Sources */,
 				44CD99712C3D5E56009C4C4B /* CuisineListView.swift in Sources */,
 				922258B22C370A650009A768 /* SearchDishElement.swift in Sources */,

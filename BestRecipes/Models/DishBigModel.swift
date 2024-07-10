@@ -65,6 +65,7 @@ struct Ingredient : Identifiable, Codable  {
     let unit: String
     let meta: [String]
     let measures: MeasuresUS
+    
 }
 
 struct MeasuresUS : Codable  {
@@ -81,3 +82,4 @@ struct MeasureDetails : Codable  {
 struct RecipeData: Decodable {
     let recipes: [DishBigModel]
 }
+
