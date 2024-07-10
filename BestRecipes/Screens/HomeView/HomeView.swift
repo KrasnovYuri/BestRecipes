@@ -203,9 +203,14 @@ struct HomeView: View {
                                         CuisineListView(cuisine: cuisine)
                                     } label: {
                                         VStack{
-                                            Circle()
+                                            Image(cuisine)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
                                                 .frame(width: 110, height: 110)
-                                                .foregroundStyle(.thinMaterial)
+                                                .clipShape(Circle())
+//                                            Circle()
+//                                                .frame(width: 110, height: 110)
+//                                                .foregroundStyle(.thinMaterial)
                                             Text(cuisine)
                                                 .font(.custom(Font.medium, size: 14))
                                                 .foregroundStyle(.black)
