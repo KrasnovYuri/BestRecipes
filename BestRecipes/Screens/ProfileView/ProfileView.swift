@@ -11,7 +11,7 @@ struct ProfileView: View {
    
     @State private var profileImage: UIImage? //= UIImage(named: "defaultProfileImage")
     @State private var showImagePicker: Bool = false
-    @State private var myRecipes: [RecipeDetails] = .init()
+    @State private var myRecipes: [DishLightModel] = []
     @AppStorage("nameUser") var name: String = ""
     @AppStorage("surnameUser") var surname: String = ""
     
@@ -63,7 +63,7 @@ struct ProfileView: View {
             } else {
                 ScrollView {
                     ForEach(myRecipes, id: \.id) { dish in
-                        NavigationLink(destination: RecipeDetailView(dish: dish)) {
+                        NavigationLink(destination: RecipeDetailView(id: dish.id)) {
                             HStack{
                                 ZStack {
                                     TrendingDishElement(bigSize: true, dish: dish)
@@ -104,7 +104,9 @@ extension ProfileView {
     
     private func loadRecipes() {
         if let savedRecepies: [RecipeDetails] = UserDefaultsService.shared.get(forKey: "Saved") {
-            myRecipes = savedRecepies
+            myRecipes = savedRecepies.map({ recipe in
+                DishLightModel(recipe)
+            })
         }
     }
     

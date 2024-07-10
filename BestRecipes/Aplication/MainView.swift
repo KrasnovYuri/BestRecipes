@@ -25,7 +25,7 @@ struct MainView: View {
                 Text (homeView.searchEnable.description)
             }
             if index == 4 {
-//                    ProfileView()
+                    ProfileView()
             }
             VStack {
                 Spacer()
