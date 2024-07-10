@@ -25,7 +25,7 @@ struct MainView: View {
                 Text (homeView.searchEnable.description)
             }
             if index == 4 {
-                    ProfileView()
+//                    ProfileView()
             }
             VStack {
                 Spacer()
@@ -35,7 +35,8 @@ struct MainView: View {
                     
             }
             .ignoresSafeArea()
-            .onAppear{
+   
+            .onAppear {
                 Task {
                     do {
                         try await modelData.fetchAllData()

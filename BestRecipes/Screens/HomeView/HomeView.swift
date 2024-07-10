@@ -148,6 +148,7 @@ struct HomeView: View {
                             HStack {
                                 NavigationLink {
                                     DishesListView(dishesList: modelData.recentDishes, textHeader: "Recent dishes")
+                                    //RecentListView(modelData: modelData.recentDishes, textHeader: "Recent dishes")
                                 } label: {
                                     Text("See all")
                                         .font(.custom(Font.medium, size: 14))
@@ -161,7 +162,7 @@ struct HomeView: View {
                         }
                         .padding(.vertical, 10)
                         ScrollView(.horizontal) {
-                            LazyHStack {
+                            HStack {
                                 ForEach(modelData.recentDishes, id: \.id) { dish in
                                     NavigationLink(destination: RecipeDetailView(id: dish.id)) {
                                         RecentDishElement(dish: dish)

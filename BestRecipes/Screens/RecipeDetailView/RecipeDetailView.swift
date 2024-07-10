@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RecipeDetailView: View {
 
+    @StateObject var modelData = ModelData()
     let service = NetworkServiceAA()
     @State var id: Int
     @State var dish: RecipeDetails = RecipeDetails()
@@ -78,6 +79,7 @@ struct RecipeDetailView: View {
                     Button {
                         // TODO: - add logic to save element to fav
                         saved.toggle()
+
                     } label: {
                         HStack {
                             ZStack {
@@ -149,8 +151,16 @@ struct RecipeDetailView: View {
             Task {
                 do {
                     dish = try await service.getDishById(id: id)
+//                    if var elements: [Int] = UserDefaultsService.shared.get(forKey: "Recent") {
+//                        elements.append(id)
+//                        print(elements)
+//                        UserDefaultsService.shared.save(structs: elements, forKey: "Recent")
+//                    }
+
+                    modelData.saveRecent(id: id)
+
                 } catch {
-                    
+
                 }
             }
         }
