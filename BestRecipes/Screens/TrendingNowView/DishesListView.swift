@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct DishesListView: View {
+    
+    @ObservedObject var modelData = ModelData()
     @State var dishesList: [DishLightModel]
     @State var textHeader: String
     

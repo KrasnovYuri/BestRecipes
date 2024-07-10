@@ -146,9 +146,11 @@ actor NetworkServiceAA {
             let responce = try await URLSession.shared.data(from: url)
             if let json = try? JSON(data: responce.0) {
                 var dishReturn: [DishLightModel] = []
-                for element in json["recipes"].arrayValue {
+                for element in json.arrayValue {
                     dishReturn.append(DishLightModel(title: element["title"].stringValue, id: element["id"].intValue, spoonacularScore: element["spoonacularScore"].doubleValue, readyInMinutes: element["readyInMinutes"].intValue, creditsText: element["creditsText"].stringValue, ingredientsCount: element["extendedIngredients"].arrayValue.count))
                 }
+                print("hello")
+                print(dishReturn)
                 return dishReturn
             }
         } catch {

@@ -27,7 +27,13 @@ class ModelData: ObservableObject {
 //    UserDefaults "Recent"
     var recentDishesID: [Int] = []
     @Published var recentDishes: [DishLightModel] = []
-    
+    init() {
+            // Initialize with saved data
+            recentDishesID = getUserDef("Recent")
+            loadRecentDishes()
+        }
+
+
 //    saved array "Saved" UserDefaults key
     var savedDishesID: [Int] = []
     @Published var savedDishes: [DishLightModel] = []
@@ -52,14 +58,14 @@ class ModelData: ObservableObject {
         }
 
         //TODO: -get recent from userDef and ID
-        recentDishesID = getUserDef("Recent")
-        savedDishesID = getUserDef("Saved")
-        do {
-            if !recentDishesID.isEmpty { recentDishes = try await service.getRecipe(intArray: recentDishesID) }
-            if !savedDishesID.isEmpty { savedDishes = try await service.getRecipe(intArray: savedDishesID) }
-        } catch {
-            print("recent get error")
-        }
+//        recentDishesID = getUserDef("Recent")
+//        savedDishesID = getUserDef("Saved")
+//        do {
+//            if !recentDishesID.isEmpty { recentDishes = try await service.getRecipe(intArray: recentDishesID) }
+//            if !savedDishesID.isEmpty { savedDishes = try await service.getRecipe(intArray: savedDishesID) }
+//        } catch {
+//            print("recent get error")
+//        }
 
     }
 // Fetch dish by cuisine
@@ -95,25 +101,51 @@ class ModelData: ObservableObject {
     
     func getUserDef(_ key: String) -> [Int] {
         if let recent: [Int] = UserDefaultsService.shared.get(forKey: key) {
+            print(recent)
             return recent
         }
         return []
     }
     
-    func saveRecent (id: Int) {
-        var idsIn: [Int] = []
-        if var ids: [Int] = UserDefaultsService.shared.get(forKey: "Recent") {
-            ids.append(id)
-            UserDefaultsService.shared.save(structs: ids, forKey: "Recent")
-            idsIn = ids
-        }
-        Task {
-            do {
-                recentDishes = try await service.getRecipe(intArray: idsIn)
-            } catch {
-                print("fetch recent dishes by array Ids error")
-            }
+//    func saveRecent (id: Int) {
+//        var idsIn: [Int] = []
+//        if var ids: [Int] = UserDefaultsService.shared.get(forKey: "Recent") {
+//            ids.append(id)
+//            UserDefaultsService.shared.save(structs: ids, forKey: "Recent")
+//            idsIn = ids
+//            print(idsIn)
+//        }
+//        Task {
+//            do {
+//                recentDishes = try await service.getRecipe(intArray: idsIn)
+//            } catch {
+//                print("fetch recent dishes by array Ids error")
+//            }
+//        }
+//    }
+
+    func saveRecent(id: Int) {
+        var idsIn: [Int] = recentDishesID
+        if !idsIn.contains(id) {
+            idsIn.append(id)
+            UserDefaultsService.shared.save(structs: idsIn, forKey: "Recent")
+            recentDishesID = idsIn
+            print("recentDishesID")
+            print(recentDishesID)
+            loadRecentDishes()
         }
     }
-     
+
+    func loadRecentDishes() {
+            Task {
+                do {
+                    recentDishes = try await service.getRecipe(intArray: recentDishesID)
+                    print("hi")
+                    print(recentDishes)
+                } catch {
+                    print("fetch recent dishes by array Ids error")
+                }
+            }
+        }
+
 }
