@@ -99,5 +99,21 @@ class ModelData: ObservableObject {
         }
         return []
     }
+    
+    func saveRecent (id: Int) {
+        var idsIn: [Int] = []
+        if var ids: [Int] = UserDefaultsService.shared.get(forKey: "Recent") {
+            ids.append(id)
+            UserDefaultsService.shared.save(structs: ids, forKey: "Recent")
+            idsIn = ids
+        }
+        Task {
+            do {
+                recentDishes = try await service.getRecipe(intArray: idsIn)
+            } catch {
+                print("fetch recent dishes by array Ids error")
+            }
+        }
+    }
      
 }
