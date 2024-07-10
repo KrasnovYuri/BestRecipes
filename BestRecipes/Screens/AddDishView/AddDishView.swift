@@ -18,8 +18,23 @@ struct AddDishView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
             }
-            TextField(title, text: $title)
+            .frame(height: 200)
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(lineWidth: 1)
+                    .foregroundStyle(.black)
+                TextField(title, text: $title)
+                    .font(.custom(Font.regular, size: 14))
+                    .padding(.horizontal, 10)
+            }.frame(height: 44)
+            VStack {
+                AddDishElement(serves: true, value: $serves)
+                AddDishElement(serves: false, value: $cookTime)
+            }
+            
+            
         }
+        .padding()
     }
 }
 
