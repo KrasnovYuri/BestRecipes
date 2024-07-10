@@ -42,3 +42,19 @@ struct DishLightModel: Identifiable, Codable {
         self.ingredientsCount = ingredientsCount
     }
 }
+
+
+struct UserIngredient: Identifiable, Codable {
+    var id: String
+    var title: String
+    var amount: String
+    var unit: String
+    
+    init() {
+        id = UUID().uuidString
+        title = ""
+        amount = ""
+        unit = Unit.gr.rawValue
+    }
+}
+
