@@ -8,23 +8,24 @@
 import SwiftUI
 
 struct RecipeDetailView: View {
-
-    @StateObject var modelData = ModelData()
+    
+    @StateObject var modelData: ModelData
     let service = NetworkServiceAA()
     @State var id: Int
     @State var dish: RecipeDetails = RecipeDetails()
     @State var isSet: Bool = true
     @State var saved: Bool = false
-
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
                 // title
-                Text("How to make \(dish.title)")
-                    .font(.custom(Font.semiBold, size: 24))
-                    .padding(.horizontal, 6)
-
+//                Text("How to make \(dish.title)")
+//                    .font(.custom(Font.semiBold, size: 24))
+//                    .padding(.horizontal, 6)
+//                
                 // dish image
+                Spacer(minLength: 20)
                 ZStack {
                     
                     AsyncImage(url: URL(string: dish.image)) { image in
@@ -45,7 +46,7 @@ struct RecipeDetailView: View {
                                 Circle()
                                     .frame(width: 35)
                                     .foregroundStyle(.white.opacity(0.6))
-                                    
+                                
                                 Circle()
                                     .stroke()
                                     .foregroundStyle(saved ? .brRed : .brGray)
@@ -71,15 +72,14 @@ struct RecipeDetailView: View {
                             .font(.custom(Font.light, size: 14))
                             .foregroundStyle(.gray)
                     }
-
+                    
                     Spacer()
-
+                    
                     // save recipe
-//                    HStack {
+                    //                    HStack {
                     Button {
-                        // TODO: - add logic to save element to fav
-                        saved.toggle()
-
+                        modelData.saveToFavorite(id: id)
+                        saved = true
                     } label: {
                         HStack {
                             ZStack {
@@ -94,15 +94,12 @@ struct RecipeDetailView: View {
                                 }
                             }
                             .frame(width: 80)
-                           
                         }
                     }
-                       
-                    
                     .padding(.trailing, 30)
                 }
                 .padding(.leading, 15)
-
+                
                 // instructions
                 VStack(alignment: .leading, spacing: 2) {
                     if let instructions = dish.analyzedInstructions, !instructions.isEmpty {
@@ -111,7 +108,7 @@ struct RecipeDetailView: View {
                             Text("Instructions")
                                 .font(.custom(Font.semiBold, size: 20))
                                 .padding(.vertical, 6)
-
+                            
                             ForEach(instructions, id: \.name) { instruction in
                                 ForEach(instruction.steps, id: \.number) { step in
                                     HStack(alignment: .top) {
@@ -128,7 +125,7 @@ struct RecipeDetailView: View {
                         }
                     }
                 }
-
+                
                 HStack {
                     Text("Ingredients")
                         .font(.custom(Font.semiBold, size: 20))
@@ -137,44 +134,52 @@ struct RecipeDetailView: View {
                     Spacer()
                 }
                 .padding(.horizontal)
-
+                
                 VStack {
                     ForEach(dish.extendedIngredients, id: \.id) { ingredient in
                         IngridientComponentView(ingridient: ingredient)
                     }
                 }
             }
-            Spacer(minLength: 120)
+            Spacer(minLength: 30)
             
         }
         .onAppear {
+            modelData.saveRecent(id: id)
+            modelData.loadRecentDishes()
+            
+            saved = modelData.checkFavorite(id: id)
             Task {
                 do {
                     dish = try await service.getDishById(id: id)
-//                    if var elements: [Int] = UserDefaultsService.shared.get(forKey: "Recent") {
-//                        elements.append(id)
-//                        print(elements)
-//                        UserDefaultsService.shared.save(structs: elements, forKey: "Recent")
-//                    }
-
-                    modelData.saveRecent(id: id)
-
                 } catch {
-
+                    
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.automatic)
         .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(dish.title)
+                    .font(.custom(Font.semiBold, size: dish.title.count > 10 ? 18 : 24))
+                    .foregroundColor(.black)
+                    .lineLimit(2)
+            }
             ToolbarItem(placement: .topBarLeading) {
                 BackButtonView()
             }
+        }
+        .onAppear{
+            modelData.tabBarHide = true
+        }
+        .onDisappear{
+            modelData.tabBarHide = false
         }
     }
     
 }
 
 #Preview {
-    RecipeDetailView(id: 773242)
+    RecipeDetailView(modelData: ModelData(), id: 773242)
 }

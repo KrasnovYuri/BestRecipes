@@ -10,7 +10,7 @@ import SwiftUI
 
 @MainActor
 class ModelData: ObservableObject {
-
+    
     // trending dishes
     @Published var trendingDishes: [DishLightModel] = []
     //popular categories (FoodCategory)
@@ -22,26 +22,23 @@ class ModelData: ObservableObject {
     //Cuisine recipes
     @Published var cuisineArray = Cuisine.allCases.map {$0.rawValue}
     @Published var cuisineDishes: [DishLightModel] = []
+    @Published var tabBarHide: Bool = false
     
-    
-//    UserDefaults "Recent"
-    var recentDishesID: [Int] = []
+    //    UserDefaults "Recent"
+//    @State var recentDishesID: [Int] = []
+//    @Published var recentDishes: [DishLightModel] = []
+
+    @Published var recentDishesID: [Int] = []
     @Published var recentDishes: [DishLightModel] = []
-    init() {
-            // Initialize with saved data
-            recentDishesID = getUserDef("Recent")
-            loadRecentDishes()
-        }
-
-
-//    saved array "Saved" UserDefaults key
-    var savedDishesID: [Int] = []
-    @Published var savedDishes: [DishLightModel] = []
     
-
+    
+    //    saved array "Favorite" UserDefaults key
+    @Published var favoriteDishesID: [Int] = []
+    @Published var favoriteDishes: [DishLightModel] = []
+    
     //service
     let service = NetworkServiceAA()
-
+    
     func fetchAllData() async throws {
         // get trending
         do {
@@ -56,19 +53,14 @@ class ModelData: ObservableObject {
         } catch {
             print("fetch dish by food category problem")
         }
-
+        
         //TODO: -get recent from userDef and ID
-//        recentDishesID = getUserDef("Recent")
-//        savedDishesID = getUserDef("Saved")
-//        do {
-//            if !recentDishesID.isEmpty { recentDishes = try await service.getRecipe(intArray: recentDishesID) }
-//            if !savedDishesID.isEmpty { savedDishes = try await service.getRecipe(intArray: savedDishesID) }
-//        } catch {
-//            print("recent get error")
-//        }
-
+        recentDishesID = getUserDef("Recent")
+        loadRecentDishes()
+        favoriteDishesID = getUserDef("Favorite")
+        loadFavoriteDishes()
     }
-// Fetch dish by cuisine
+    // Fetch dish by cuisine
     func fetchDishByCuisine(_ cuisine: String) async throws {
         do {
             cuisineDishes = try await service.getDishByCuisine(cuisine: cuisine, numberLimit: 10)
@@ -76,13 +68,12 @@ class ModelData: ObservableObject {
             print("problem with get dish by cuisine")
         }
     }
-// fetchDishByFoodCategory
+    // fetchDishByFoodCategory
     func fetchDishByFoodCategory(_ foodCategory: String) async throws {
         foodCategoryPopularDishes = try await service.getDishByFoodCategory(foodCategory: foodCategory, numberLimit: 10)
     }
-    
+    // fetch dish by food category
     func fetchDishByFoodCategory (_ course: String) {
-        print("in function")
         Task {
             do {
                 try await fetchDishByFoodCategory(course)
@@ -91,6 +82,7 @@ class ModelData: ObservableObject {
             }
         }
     }
+    // fetch search
     func fetchSearch() async throws {
         do {
             searchDishes = try await service.getDishesByName(name: searchText, numberLimit: 10)
@@ -98,54 +90,60 @@ class ModelData: ObservableObject {
             print("problem with search")
         }
     }
-    
+    // TODO: - check
     func getUserDef(_ key: String) -> [Int] {
         if let recent: [Int] = UserDefaultsService.shared.get(forKey: key) {
-            print(recent)
             return recent
         }
         return []
     }
     
-//    func saveRecent (id: Int) {
-//        var idsIn: [Int] = []
-//        if var ids: [Int] = UserDefaultsService.shared.get(forKey: "Recent") {
-//            ids.append(id)
-//            UserDefaultsService.shared.save(structs: ids, forKey: "Recent")
-//            idsIn = ids
-//            print(idsIn)
-//        }
-//        Task {
-//            do {
-//                recentDishes = try await service.getRecipe(intArray: idsIn)
-//            } catch {
-//                print("fetch recent dishes by array Ids error")
-//            }
-//        }
-//    }
-
     func saveRecent(id: Int) {
-        var idsIn: [Int] = recentDishesID
-        if !idsIn.contains(id) {
-            idsIn.append(id)
-            UserDefaultsService.shared.save(structs: idsIn, forKey: "Recent")
-            recentDishesID = idsIn
-            print("recentDishesID")
-            print(recentDishesID)
+        if !recentDishesID.contains(id) {
+            recentDishesID.insert(id, at: 0)
+            UserDefaultsService.shared.save(structs: recentDishesID, forKey: "Recent")
             loadRecentDishes()
         }
     }
-
+    
     func loadRecentDishes() {
-            Task {
-                do {
-                    recentDishes = try await service.getRecipe(intArray: recentDishesID)
-                    print("hi")
-                    print(recentDishes)
-                } catch {
-                    print("fetch recent dishes by array Ids error")
-                }
+        Task {
+            do {
+                recentDishes = try await service.getRecipeBulk(intArray: recentDishesID)
+            } catch {
+                print("fetch recent dishes by array Ids error")
             }
         }
+    }
+    
+    func loadFavoriteDishes () {
+        Task {
+            do {
+                favoriteDishes = try await service.getRecipeBulk(intArray: favoriteDishesID)
+            } catch {
+                print("fetch recent dishes by array Ids error")
+            }
+        }
+    }
+    
+    func checkFavorite (id: Int) -> Bool {
+        favoriteDishesID.contains(id)
+    }
+    
+    func saveToFavorite (id: Int) {
+        if !favoriteDishesID.contains(id) {
+            favoriteDishesID.append(id)
 
+            UserDefaultsService.shared.save(structs: favoriteDishesID, forKey: "Favorite")
+            loadFavoriteDishes()
+        }
+        
+    }
+    func deleteFromFavorite (id: Int) {
+        if favoriteDishesID.contains(id) {
+            let arrayIn = favoriteDishesID.filter { a in id != a }
+            favoriteDishesID = arrayIn
+            loadFavoriteDishes()
+        }
+    }
 }

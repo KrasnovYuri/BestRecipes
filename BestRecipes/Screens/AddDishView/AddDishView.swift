@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddDishView: View {
+    @StateObject var modelData: ModelData
     @State var title: String = ""
     @State var serves: Int = 0
     @State var cookTime: Int = 0
@@ -103,5 +104,5 @@ struct AddDishView: View {
 }
 
 #Preview {
-    AddDishView()
+    AddDishView(modelData: ModelData())
 }

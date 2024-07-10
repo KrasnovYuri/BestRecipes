@@ -54,7 +54,7 @@ struct TabBarView: View {
             
         }
         .animation(.easeInOut, value: animIndex)
-        .frame(height: 120)
+        .frame(height: 110)
         .shadow(color: .black.opacity(0.1), radius: 15, y: -3 )
     }
 }
