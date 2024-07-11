@@ -15,15 +15,17 @@ struct MainView: View {
 
     @State var isHomeRootScreen = false
     @State var scaleAmount: CGFloat = 1
+    @State var opacityAmount: CGFloat = 1
 
     var body: some View {
         let homeView = HomeView(searchEnable: $searchOn, modelData: modelData)
         let savedRecipesView = SavedRecipesView(modelData: modelData)
+        let addDishView = AddDishView(modelData: modelData, tabBarIndex: $index)
 
         ZStack {
             //Color("BRGold")
 
-            if isHomeRootScreen {
+            
                 ZStack {
                     if index == 0 {
                         homeView
@@ -32,7 +34,7 @@ struct MainView: View {
                         savedRecipesView
                     }
                     if index == 2 {
-                        Text (homeView.searchEnable.description)
+                        addDishView
                     }
                     if index == 4 {
                         ProfileView(modelData: modelData)
@@ -45,17 +47,23 @@ struct MainView: View {
                     }
                     .ignoresSafeArea()
                     .animation(.easeInOut, value: modelData.tabBarHide)
-
+                    if !isHomeRootScreen {
+                        ZStack {
+                            Rectangle()
+                                .foregroundStyle(.white)
+                            Image("launchScreen")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .scaleEffect(scaleAmount)
+                                .frame(width: 80)
+                                
+                        }
+                        .opacity(opacityAmount)
+                    }
                 }
 
-            } else {
-                Image("launchScreen")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .scaleEffect(scaleAmount)
-                    .frame(width: 80)
-            }
         }
+        .animation(.easeInOut(duration: 0.1), value: index)
         .ignoresSafeArea()
         .onAppear {
             Task {
@@ -69,13 +77,14 @@ struct MainView: View {
             }
             // увеличиваем картинку
             withAnimation(.easeInOut(duration: 2)) {
-                scaleAmount = 20
+                scaleAmount = 2.5
             }
             // картинка улетает
             withAnimation(.easeInOut(duration: 0.4).delay(1.7)) {
                 scaleAmount = 0
+                opacityAmount = 0
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 isHomeRootScreen = true
             }
         }
