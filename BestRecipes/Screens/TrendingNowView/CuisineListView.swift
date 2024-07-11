@@ -11,11 +11,11 @@ struct CuisineListView: View {
     @StateObject var modelData: ModelData
     @State var cuisine: String
     @State var dishesList: [DishLightModel] = []
+    @State var tabBarToggle: Bool = true
     let service = NetworkServiceAA()
     var body: some View {
         VStack {
             ScrollView (.vertical ) {
-                
                 ForEach(dishesList, id: \.id) { dish in
                     NavigationLink(destination: RecipeDetailView(modelData: modelData, id: dish.id)) {
                         HStack {
