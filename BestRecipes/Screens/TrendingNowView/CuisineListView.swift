@@ -40,17 +40,17 @@ struct CuisineListView: View {
                 }
                 
                 
-                .navigationBarBackButtonHidden(true)
-                .navigationBarTitleDisplayMode(.automatic)
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Text(cuisine.capitalized)
-                            .font(.custom(Font.semiBold, size: 24))
-                            .foregroundColor(.black)
-                    }
-                    ToolbarItem(placement: .topBarLeading) {
-                        BackButtonView()
-                    }
+            }
+            .navigationBarBackButtonHidden(true)
+            .navigationBarTitleDisplayMode(.automatic)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text(cuisine.capitalized)
+                        .font(.custom(Font.semiBold, size: 24))
+                        .foregroundColor(.black)
+                }
+                ToolbarItem(placement: .topBarLeading) {
+                    BackButtonView()
                 }
             }
             Spacer(minLength: 130)
