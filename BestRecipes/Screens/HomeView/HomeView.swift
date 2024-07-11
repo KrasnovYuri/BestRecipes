@@ -183,7 +183,7 @@ struct HomeView: View {
                             Spacer()
                             HStack {
                                 NavigationLink {
-                                    CuisineAllListView(modelData: modelData)
+                                    CuisineAllListView(modelData: modelData, textHeader: "Cuisines")
                                 } label: {
                                     Text("See all")
                                         .font(.custom(Font.medium, size: 14))
