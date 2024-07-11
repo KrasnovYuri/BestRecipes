@@ -14,6 +14,7 @@ struct MainView: View {
     var body: some View {
         let homeView = HomeView(searchEnable: $searchOn, modelData: modelData)
         let savedRecipesView = SavedRecipesView(modelData: modelData)
+        let addDishView = AddDishView(modelData: modelData, tabBarIndex: $index)
         ZStack {
             if index == 0 {
                 homeView
@@ -22,7 +23,7 @@ struct MainView: View {
                 savedRecipesView
             }
             if index == 2 {
-                Text (homeView.searchEnable.description)
+                addDishView
             }
             if index == 4 {
                     ProfileView(modelData: modelData)
@@ -49,7 +50,7 @@ struct MainView: View {
             
         }
         
-        
+        .animation(.easeInOut, value: index)
     }
 }
 
