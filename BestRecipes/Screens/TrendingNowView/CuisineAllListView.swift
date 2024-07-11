@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CuisineAllListView: View {
+    @StateObject var modelData: ModelData
     var cuisineArray = Cuisine.allCases.map {$0.rawValue}
     var body: some View {
         NavigationView {
@@ -22,27 +23,30 @@ struct CuisineAllListView: View {
                 ScrollView(showsIndicators: false) {
                     ForEach(cuisineArray, id: \.self ) { cuisine in
                         NavigationLink {
-                            CuisineListView(cuisine: cuisine)
+                            CuisineListView(modelData: modelData, cuisine: cuisine)
                         } label: {
                             ZStack {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .foregroundStyle(.linearGradient(colors: [.brGray, .white], startPoint: UnitPoint(x: 0, y: 30), endPoint: UnitPoint(x: 1, y: 30)))
+                                RoundedRectangle(cornerRadius: 1)
+                                    .foregroundStyle(.white)
                                 HStack {
-                                    //                                Image(systemName: "arrowshape.right.fill")
-                                    //                                    .resizable()
-                                    //                                    .scaledToFit()
-                                    //                                    .clipShape(Circle())
-                                    //                                    .overlay {
-                                    //                                        Circle().stroke(.white, lineWidth: 2)
-                                    //                                    }
-                                    //                                    .shadow(radius: 3)
-                                    Spacer()
-                                    Text(cuisine)
+                                    Image("\(cuisine)")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .clipShape(Circle())
+                                        .overlay {
+                                            Circle().stroke(.white, lineWidth: 2)
+                                        }
+                                        .shadow(radius: 3)
+                                        .padding(.horizontal, 5)
+                                        .frame(width: 100)
+                                    Text(cuisine.capitalized)
                                         .font(.custom(Font.medium, size: 25))
                                         .foregroundStyle(.black)
                                     Spacer()
-                                    
+                                    Image("Arrow")
+                                        .padding()
                                 }
+                               
                             }
                             
                             .frame(width: 370, height: 60)
@@ -58,5 +62,5 @@ struct CuisineAllListView: View {
 }
 
 #Preview {
-    CuisineAllListView()
+    CuisineAllListView(modelData: ModelData())
 }

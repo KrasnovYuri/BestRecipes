@@ -38,11 +38,12 @@ struct StartView: View {
                         Text("Find best recipes for cooking")
                             .font(.custom(Font.regular, size: 16))
                             .foregroundColor(.white)
-                    }.frame(width: 300)
+                    }
+                    .frame(width: 300)
                    
-                    Button(action: {
+                    Button {
                         onboadingOn = true
-                    }) {
+                    } label: {
                         Text("Get started")
                             .fontWeight(.bold)
                             .foregroundColor(.white)

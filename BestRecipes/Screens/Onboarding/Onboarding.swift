@@ -13,15 +13,17 @@ struct OnboardingView: View {
         TabView(selection: $selectedPage) {
 
             PageView(selectedPage: $selectedPage, imageName: "Onboarding1", title: "Recipes from all ", subtitle: "over the World", buttonTitle: "Continue").tag(0)
-//                .gesture(DragGesture())
+                .gesture(DragGesture())
                
             PageView(selectedPage: $selectedPage, imageName: "Onboarding2", title: "Recipes with ", subtitle: "each and every detail", buttonTitle: "Continue").tag(1)
-//                .gesture(DragGesture())
+                .gesture(DragGesture())
+            
             PageView(selectedPage: $selectedPage, imageName: "Onboarding3", title: "Cook it now or ", subtitle: "save it for later", buttonTitle: "Start Cooking").tag(2)
-//                .gesture(DragGesture())
+                .gesture(DragGesture())
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .ignoresSafeArea()
+        .frame(width: 400)
     }
 }
 
@@ -35,10 +37,13 @@ struct PageView: View {
     
     var body: some View {
         ZStack {
+            HStack {
                 Image(imageName)
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
+            }
+            .frame(width: 400)
                 VStack() {
                     Spacer()
                     VStack(alignment: .center) {
@@ -81,9 +86,9 @@ struct PageView: View {
                     }
                 }
                 .padding(.bottom, 30)
-                .ignoresSafeArea()
                 .background(Color.black.opacity(0.5))
         }
+        .frame(width: 400)
      
     }
 }

@@ -37,6 +37,7 @@ struct RecentDishElement: View {
             VStack {
                 HStack {
                     Text(dish.title)
+                        .foregroundStyle(.black)
                         .lineLimit(2)
                         .font(.custom(Font.medium, size: 12))
                         .padding(.horizontal, 3)
@@ -44,6 +45,7 @@ struct RecentDishElement: View {
                 }
                 HStack {
                     Text(dish.creditsText)
+                        .foregroundStyle(.black)
                         .lineLimit(1)
                         .font(.custom(Font.light, size: 8))
                         .padding(.horizontal, 3)

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CuisineListView: View {
+    @StateObject var modelData: ModelData
     @State var cuisine: String
     @State var dishesList: [DishLightModel] = []
     let service = NetworkServiceAA()
@@ -16,7 +17,7 @@ struct CuisineListView: View {
             ScrollView (.vertical ) {
                 
                 ForEach(dishesList, id: \.id) { dish in
-                    NavigationLink(destination: RecipeDetailView(id: dish.id)) {
+                    NavigationLink(destination: RecipeDetailView(modelData: modelData, id: dish.id)) {
                         HStack {
                             ZStack {
                                 TrendingDishElement(bigSize: true, dish: dish)
@@ -68,5 +69,5 @@ struct CuisineListView: View {
 }
 
 #Preview {
-    CuisineListView(cuisine: "African")
+    CuisineListView(modelData: ModelData(), cuisine: "African")
 }

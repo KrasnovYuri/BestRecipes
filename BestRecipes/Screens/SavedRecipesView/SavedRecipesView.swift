@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SavedRecipesView: View {
-    @StateObject var modelData: ModelData = ModelData()
+    @StateObject var modelData: ModelData
     var body: some View {
         NavigationView{
             VStack {
@@ -19,9 +19,9 @@ struct SavedRecipesView: View {
                     Spacer()
                 }
                 ScrollView(.vertical) {
-                    ForEach(modelData.savedDishes, id: \.id ) { dish in
+                    ForEach(modelData.favoriteDishes, id: \.id ) { dish in
                         NavigationLink {
-                            Text("")
+                            RecipeDetailView(modelData: modelData, id: dish.id)
                         } label: {
                             ZStack {
                                 TrendingDishElement(bigSize: true, dish: dish)
@@ -48,5 +48,5 @@ struct SavedRecipesView: View {
 }
 
 #Preview {
-    SavedRecipesView()
+    SavedRecipesView(modelData: ModelData())
 }

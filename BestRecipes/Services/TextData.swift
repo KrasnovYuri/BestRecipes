@@ -71,3 +71,9 @@ enum FoodCategory: String, CaseIterable {
     case snack = "Snack"
     case drink = "Drink"
 }
+
+enum Unit: String, CaseIterable {
+    case gr
+    case ml
+    case sp
+}

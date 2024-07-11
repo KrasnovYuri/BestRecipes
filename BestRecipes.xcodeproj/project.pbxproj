@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4462C33A2C3E87B400A31D77 /* AddDishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462C3392C3E87B400A31D77 /* AddDishView.swift */; };
+		4462C34E2C3E937100A31D77 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462C34B2C3E920100A31D77 /* ProfileView.swift */; };
+		4462C34F2C3E937500A31D77 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462C34C2C3E920100A31D77 /* ImagePicker.swift */; };
+		4462C3512C3E987800A31D77 /* AddDishElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462C3502C3E987800A31D77 /* AddDishElement.swift */; };
 		44CD996A2C3A78D1009C4C4B /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD99692C3A78D1009C4C4B /* CachedAsyncImage.swift */; };
 		44CD996C2C3CF4AE009C4C4B /* DishLightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CD996B2C3CF4AE009C4C4B /* DishLightModel.swift */; };
 		44CD996F2C3D000C009C4C4B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 44CD996E2C3D000C009C4C4B /* SwiftyJSON */; };
@@ -19,11 +23,8 @@
 		44E00E612C368B96003DA7EB /* CategoryDishElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E00E602C368B96003DA7EB /* CategoryDishElement.swift */; };
 		44E00E632C368BDD003DA7EB /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E00E622C368BDD003DA7EB /* UserDefaultsService.swift */; };
 		44E00E652C36F34A003DA7EB /* RecentDishElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E00E642C36F34A003DA7EB /* RecentDishElement.swift */; };
-		648552462C3D7CAD009DE107 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648552452C3D7CAD009DE107 /* ImagePicker.swift */; };
-		648552482C3D7CC5009DE107 /*  ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648552472C3D7CC5009DE107 /*  ProfileView.swift */; };
 		64B5466A2C39595B00F959C3 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B546692C39595B00F959C3 /* StartView.swift */; };
 		7A5923AC2C3BD7ED00DA0CEF /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5923AB2C3BD7ED00DA0CEF /* FavoriteButton.swift */; };
-		7A612B8D2C3E7A5900AE1B74 /* RecentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A612B8C2C3E7A5900AE1B74 /* RecentListView.swift */; };
 		7AB0857C2C343AE800FEF512 /* RecipeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB0857B2C343AE800FEF512 /* RecipeDetails.swift */; };
 		7AE5DF4E2C37BFF60085D36A /* IngridientComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5DF4D2C37BFF60085D36A /* IngridientComponentView.swift */; };
 		920A251A2C319602004CAA1A /* BestRecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A25192C319602004CAA1A /* BestRecipesApp.swift */; };
@@ -58,6 +59,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4462C3392C3E87B400A31D77 /* AddDishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDishView.swift; sourceTree = "<group>"; };
+		4462C34B2C3E920100A31D77 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		4462C34C2C3E920100A31D77 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		4462C3502C3E987800A31D77 /* AddDishElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDishElement.swift; sourceTree = "<group>"; };
 		44CD99692C3A78D1009C4C4B /* CachedAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
 		44CD996B2C3CF4AE009C4C4B /* DishLightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishLightModel.swift; sourceTree = "<group>"; };
 		44CD99702C3D5E56009C4C4B /* CuisineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuisineListView.swift; sourceTree = "<group>"; };
@@ -69,11 +74,8 @@
 		44E00E602C368B96003DA7EB /* CategoryDishElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDishElement.swift; sourceTree = "<group>"; };
 		44E00E622C368BDD003DA7EB /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		44E00E642C36F34A003DA7EB /* RecentDishElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentDishElement.swift; sourceTree = "<group>"; };
-		648552452C3D7CAD009DE107 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		648552472C3D7CC5009DE107 /*  ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " ProfileView.swift"; sourceTree = "<group>"; };
 		64B546692C39595B00F959C3 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		7A5923AB2C3BD7ED00DA0CEF /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
-		7A612B8C2C3E7A5900AE1B74 /* RecentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentListView.swift; sourceTree = "<group>"; };
 		7AB0857B2C343AE800FEF512 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
 		7AE5DF4D2C37BFF60085D36A /* IngridientComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngridientComponentView.swift; sourceTree = "<group>"; };
 		920A25162C319602004CAA1A /* BestRecipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BestRecipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +123,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4462C3382C3E87A000A31D77 /* AddDishView */ = {
+			isa = PBXGroup;
+			children = (
+				4462C3392C3E87B400A31D77 /* AddDishView.swift */,
+				4462C3502C3E987800A31D77 /* AddDishElement.swift */,
+			);
+			path = AddDishView;
+			sourceTree = "<group>";
+		};
+		4462C34A2C3E920100A31D77 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				4462C34B2C3E920100A31D77 /* ProfileView.swift */,
+				4462C34C2C3E920100A31D77 /* ImagePicker.swift */,
+			);
+			path = ProfileView;
+			sourceTree = "<group>";
+		};
 		44E00E592C368B3E003DA7EB /* Elements */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,15 +154,6 @@
 				92BDAEC62C3C0C9D00220902 /* BackButtonView.swift */,
 			);
 			path = Elements;
-			sourceTree = "<group>";
-		};
-		648552442C3D7C7B009DE107 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				648552452C3D7CAD009DE107 /* ImagePicker.swift */,
-				648552472C3D7CC5009DE107 /*  ProfileView.swift */,
-			);
-			path = Profile;
 			sourceTree = "<group>";
 		};
 		920A250D2C319602004CAA1A = {
@@ -204,7 +215,8 @@
 		92AF5A212C31E1C30012CAC8 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				648552442C3D7C7B009DE107 /* Profile */,
+				4462C34A2C3E920100A31D77 /* ProfileView */,
+				4462C3382C3E87A000A31D77 /* AddDishView */,
 				44E00E592C368B3E003DA7EB /* Elements */,
 				92AF5A222C31E1DE0012CAC8 /* Onboarding */,
 				92AF5A232C31E2170012CAC8 /* TabBar */,
@@ -265,7 +277,6 @@
 				92117AAD2C32D6FC0010C7B3 /* DishesListView.swift */,
 				44CD99702C3D5E56009C4C4B /* CuisineListView.swift */,
 				44CD99722C3D66CE009C4C4B /* CuisineAllListView.swift */,
-				7A612B8C2C3E7A5900AE1B74 /* RecentListView.swift */,
 			);
 			path = TrendingNowView;
 			sourceTree = "<group>";
@@ -411,6 +422,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4462C34F2C3E937500A31D77 /* ImagePicker.swift in Sources */,
+				4462C34E2C3E937100A31D77 /* ProfileView.swift in Sources */,
+				4462C3512C3E987800A31D77 /* AddDishElement.swift in Sources */,
 				92117AAA2C32D6500010C7B3 /* SavedRecipesView.swift in Sources */,
 				44E00E5B2C368B57003DA7EB /* FavoriteElement.swift in Sources */,
 				44E00E4F2C357D39003DA7EB /* MainView.swift in Sources */,
@@ -430,16 +444,14 @@
 				92117AB22C32D7F80010C7B3 /* DishBigModel.swift in Sources */,
 				92117AAE2C32D6FC0010C7B3 /* DishesListView.swift in Sources */,
 				92117AB62C32D8260010C7B3 /* TextData.swift in Sources */,
-				7A612B8D2C3E7A5900AE1B74 /* RecentListView.swift in Sources */,
+				4462C33A2C3E87B400A31D77 /* AddDishView.swift in Sources */,
 				92EA88AB2C31CE7D00FD3423 /* Fonts.swift in Sources */,
 				44CD99712C3D5E56009C4C4B /* CuisineListView.swift in Sources */,
-				648552462C3D7CAD009DE107 /* ImagePicker.swift in Sources */,
 				922258B22C370A650009A768 /* SearchDishElement.swift in Sources */,
 				92117ABA2C32D8680010C7B3 /* URLManager.swift in Sources */,
 				44CD996C2C3CF4AE009C4C4B /* DishLightModel.swift in Sources */,
 				92117AA82C32D5D30010C7B3 /* HomeView.swift in Sources */,
 				64B5466A2C39595B00F959C3 /* StartView.swift in Sources */,
-				648552482C3D7CC5009DE107 /*  ProfileView.swift in Sources */,
 				922258B52C370ACC0009A768 /* SearchView.swift in Sources */,
 				920A251A2C319602004CAA1A /* BestRecipesApp.swift in Sources */,
 				92117AB02C32D7D90010C7B3 /* ModelData.swift in Sources */,
@@ -507,7 +519,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -564,7 +576,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
