@@ -118,8 +118,25 @@ actor NetworkServiceAA {
     
     // MARK: - get random dishes
     
-//    func getRandomDishes(numberLimit: Int) async throws -> [DishBigModel] { }
-        
+    func getRandomDishes(numberLimit: Int) async throws -> [DishLightModel] {
+        guard let url = URLManager.shared.createURL(numberOfDishes: 3) else {
+            throw NetworkError.badURL
+        }
+        do {
+            let responce = try await URLSession.shared.data(from: url)
+            if let json = try? JSON(data: responce.0) {
+                var dishReturn: [DishLightModel] = []
+                for element in json["recipes"].arrayValue {
+                    dishReturn.append(DishLightModel(title: element["title"].stringValue, id: element["id"].intValue, spoonacularScore: element["spoonacularScore"].doubleValue, readyInMinutes: element["readyInMinutes"].intValue, creditsText: element["creditsText"].stringValue, ingredientsCount: element["extendedIngredients"].arrayValue.count))
+                }
+                return dishReturn
+            }
+        } catch {
+            throw NetworkError.badResponse
+        }
+        return []
+    }
+
     // MARK: - get popular dishes
     
     func getTrendingDishes(numberLimit: Int) async throws -> [DishLightModel] {
@@ -140,6 +157,8 @@ actor NetworkServiceAA {
         }
         return []
     }
+
+    //MARK: - get dish by Int(id) array
     func getRecipeBulk(intArray: [Int]) async throws -> [DishLightModel] {
         guard let url = URLManager.shared.createURLBulk(id: intArray) else { throw NetworkError.badURL }
         do {
