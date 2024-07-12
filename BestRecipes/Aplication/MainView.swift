@@ -19,7 +19,7 @@ struct MainView: View {
 
     var body: some View {
         let homeView = HomeView(searchEnable: $searchOn, modelData: modelData)
-        let savedRecipesView = SavedRecipesView(modelData: modelData)
+        let favoriteRecipesView = FavoriteRecipesView(modelData: modelData)
         let addDishView = AddDishView(modelData: modelData, tabBarIndex: $index)
 
         ZStack {
@@ -31,7 +31,7 @@ struct MainView: View {
                         homeView
                     }
                     if index == 1 {
-                        savedRecipesView
+                        favoriteRecipesView
                     }
                     if index == 2 {
                         addDishView

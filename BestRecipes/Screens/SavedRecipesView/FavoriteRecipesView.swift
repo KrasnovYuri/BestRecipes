@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct SavedRecipesView: View {
+struct FavoriteRecipesView: View {
     @StateObject var modelData: ModelData
     var body: some View {
         NavigationView{
             VStack {
                 HStack {
-                    Text("Saved recipes")
+                    Text("Favorite recipes")
                         .lineLimit(2)
                         .font(.custom(Font.bold, size: 24))
                     Spacer()
@@ -48,5 +48,5 @@ struct SavedRecipesView: View {
 }
 
 #Preview {
-    SavedRecipesView(modelData: ModelData())
+    FavoriteRecipesView(modelData: ModelData())
 }
