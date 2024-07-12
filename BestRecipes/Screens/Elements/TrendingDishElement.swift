@@ -18,7 +18,7 @@ struct TrendingDishElement: View {
                 CachedAsyncImage(url: URLManager.shared.createURLForImage(id: dish.id, size: .size480), transaction: .init(animation: .easeInOut(duration: 1))) { imageIn in
                     switch imageIn {
                     case .success(let imageIn):
-                        imageIn.resizable()
+                            imageIn.resizable()
                             .ignoresSafeArea()
                             .frame(width: bigSize ? 343 : 280, height: 180)
                             .scaledToFill()

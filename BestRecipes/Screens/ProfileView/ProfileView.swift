@@ -11,14 +11,13 @@ struct ProfileView: View {
     @StateObject var modelData: ModelData
     @State private var profileImage: UIImage? //= UIImage(named: "defaultProfileImage")
     @State private var showImagePicker: Bool = false
-    @State private var myRecipes: [DishLightModel] = []
-//    @AppStorage("nameUser") var name: String = ""
-//    @AppStorage("surnameUser") var surname: String = ""
-//    
+    @AppStorage("nameUser") var name: String = "Gordon"
+    @AppStorage("surnameUser") var surname: String = "Ramsay"
+//
     var body: some View {
         VStack {
             Text("My profile")
-                .font(.title)
+                .font(.custom(Font.semiBold, size: 30))
                 .padding(.top, 16)
             HStack {
                 if let profileImage = profileImage {
@@ -41,32 +40,75 @@ struct ProfileView: View {
                         }
                 }
                 VStack {
-//                    TextField("Имя", text: $name)
-//                    TextField("Фамилия", text: $surname)
+                    VStack {
+                        HStack {
+                            Text("Name: ")
+                                .font(.custom(Font.light, size: 10))
+                                .foregroundStyle(.brGray)
+                                .frame(height: 2)
+                            Spacer()
+                        }
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(lineWidth: 0.5)
+                                .frame(height:30)
+                            TextField("Name", text: $name)
+                                .font(.custom(Font.regular, size: 20))
+                                .foregroundStyle(.brBlack)
+                                .padding()
+                        }
+                        .frame(height:30)
+                        
+                    }
+                    VStack {
+                        HStack {
+                            Text("Surname: ")
+                                .font(.custom(Font.light, size: 10))
+                                .foregroundStyle(.brGray)
+                                .frame(height: 2)
+                            Spacer()
+                        }
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(lineWidth: 0.5)
+                                .frame(height:30)
+                            TextField("Surname", text: $surname)
+                                .font(.custom(Font.regular, size: 20))
+                                .foregroundStyle(.brBlack)
+                                .padding()
+                        }
+                        .frame(height:30)
+                        
+                    }
+                    .padding(.top, 10)
+                    
                 }.padding(.leading)
                 
             }
             HStack {
                 Text("My recipes")
-                    .font(.title)
-                .padding(.top, 23)
+                    .font(.custom(Font.semiBold, size: 30))
+                .padding(.top, 30)
                 Spacer()
             }
             
             // Список рецептов
-            if myRecipes.isEmpty {
+            if modelData.savedDishies.isEmpty {
                 VStack {
                     Spacer()
                     Text("no saved recipes")
+                        .font(.custom(Font.regular, size: 20))
                     Spacer()
                 }
             } else {
-                ScrollView {
-                    ForEach(myRecipes, id: \.id) { dish in
-                        NavigationLink(destination: Text("123")/*RecipeDetailView(modelData: modelData, id: dish.id)*/) {
+                ScrollView(showsIndicators: false) {
+                    ForEach(modelData.savedDishies, id: \.id) { dish in
+                        NavigationLink{
+                            RecipeDetailView(modelData: modelData, id: dish.id)
+                        } label: {
                             HStack{
                                 ZStack {
-//                                    TrendingDishElement(bigSize: true, dish: dish)
+                                    TrendingDishElement(bigSize: true, dish: DishLightModel(userModel: dish))
                                     VStack {
                                         HStack {
                                             RatingElement(bg: true, rating: dish.spoonacularScore)
@@ -94,7 +136,6 @@ struct ProfileView: View {
         }
         .onAppear {
             loadProfileImage()
-            loadRecipes()
         }
     }
     
@@ -102,13 +143,6 @@ struct ProfileView: View {
 
 extension ProfileView {
     
-    private func loadRecipes() {
-        if let savedRecepies: [RecipeDetails] = UserDefaultsService.shared.get(forKey: "Saved") {
-            myRecipes = savedRecepies.map({ recipe in
-                DishLightModel(recipe)
-            })
-        }
-    }
     
    private func loadProfileImage() {
        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!

@@ -25,9 +25,6 @@ class ModelData: ObservableObject {
     @Published var tabBarHide: Bool = false
     
     //    UserDefaults "Recent"
-//    @State var recentDishesID: [Int] = []
-//    @Published var recentDishes: [DishLightModel] = []
-
     @Published var recentDishesID: [Int] = []
     @Published var recentDishes: [DishLightModel] = []
     
@@ -36,6 +33,8 @@ class ModelData: ObservableObject {
     @Published var favoriteDishesID: [Int] = []
     @Published var favoriteDishes: [DishLightModel] = []
     
+    // saced array "Saved" UserDefaults ket
+    @Published var savedDishies: [DishUserModel] = []
     //service
     let service = NetworkServiceAA()
     
@@ -54,11 +53,12 @@ class ModelData: ObservableObject {
             print("fetch dish by food category problem")
         }
         
-        //TODO: -get recent from userDef and ID
+        //get dishes from UserDef
         recentDishesID = getUserDef("Recent")
         loadRecentDishes()
         favoriteDishesID = getUserDef("Favorite")
         loadFavoriteDishes()
+        loadSavedRecipes()
     }
     // Fetch dish by cuisine
     func fetchDishByCuisine(_ cuisine: String) async throws {
@@ -146,7 +146,30 @@ class ModelData: ObservableObject {
             loadFavoriteDishes()
         }
     }
+    func loadSavedRecipes() {
+        if let savedRecepies: [DishUserModel] = UserDefaultsService.shared.get(forKey: "Saved") {
+            savedDishies = savedRecepies
+        }
+    }
+    func saveSavedRecipe (recipe: DishUserModel) {
+        if var savedRecepies: [DishUserModel] = UserDefaultsService.shared.get(forKey: "Saved") {
+            savedRecepies.append(recipe)
+            UserDefaultsService.shared.save(structs: savedRecepies, forKey: "Saved")
+            savedDishies = savedRecepies
+        }
+    }
+    func deleteSavedRecipe(recipe: DishUserModel) {
+        if var savedRecepies: [DishUserModel] = UserDefaultsService.shared.get(forKey: "Saved") {
+            let result = savedRecepies.filter { dish in
+                dish.id != recipe.id
+            }
+            UserDefaultsService.shared.save(structs: result, forKey: "Saved")
+            savedDishies = result
+        }
+    }
+    
     init() {
+        
         Task {
             do {
                 try await fetchAllData()

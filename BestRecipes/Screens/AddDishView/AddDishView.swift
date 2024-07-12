@@ -9,34 +9,56 @@ import SwiftUI
 
 struct AddDishView: View {
     @StateObject var modelData: ModelData
-    @State var title: String = ""
-    @State var serves: Int = 0
-    @State var cookTime: Int = 0
+    @StateObject var viewModel = AddDishViewModel()
     @State var ingredients: [UserIngredient] = [UserIngredient()]
+    @State var userDish = DishUserModel()
     @State var units = Unit.allCases.map {$0.rawValue}
     @State var textPrint = false
+    @State var saved = false
     @Binding var tabBarIndex: Int
+    @State private var profileImage: UIImage?
+    @State private var showImagePicker: Bool = false
     var body: some View {
         NavigationView {
             VStack {
                 ScrollView (.vertical, showsIndicators: false){
                     VStack {
-                        //ImagePicker
-                        ZStack {
-                            Image("testImage")
-                                .resizable()
-                                .frame(height: 200)
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                                .scaledToFill()
-                            
+                        HStack {
+                            if let profileImage = profileImage {
+                                Image(uiImage: profileImage)
+                                    .resizable()
+                                    .frame(height: 200)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .scaledToFit()
+                                    .onTapGesture {
+                                        self.showImagePicker = true
+                                    }
+                            } else {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .frame(height: 200)
+                                        .scaledToFill()
+                                    VStack {
+                                        Image(systemName: "plus.circle")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 100)
+                                            .foregroundStyle(.brWhite)
+                                        Text("Add photo")
+                                            .foregroundStyle(.brWhite)
+                                    }
+                                        
+                                }.onTapGesture {
+                                    self.showImagePicker = true
+                                }
+                            }
                         }
-//                        .frame(height: 200)
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(lineWidth: 1)
-                                .foregroundStyle(title.count > 0 ? .brRed : .black)
+                                .foregroundStyle(userDish.title.count > 0 ? .brRed : .black)
                             
-                            TextField("Enter dish name", text: $title)
+                            TextField("Enter dish name", text: $userDish.title)
                                 .font(.custom(Font.regular, size: 14))
                                 .padding(.horizontal, 10)
                             
@@ -44,8 +66,8 @@ struct AddDishView: View {
                         }.frame(height: 44)
                             .padding(.vertical, 10)
                         VStack {
-                            AddDishElement(serves: true, value: $serves)
-                            AddDishElement(serves: false, value: $cookTime)
+                            AddDishElement(serves: true, value: $userDish.serves)
+                            AddDishElement(serves: false, value: $userDish.readyInMinutes)
                                 .padding(.vertical, 5)
                         }
                         VStack {
@@ -144,7 +166,8 @@ struct AddDishView: View {
                 Spacer()
                 HStack {
                     Button {
-                        //
+                        saved = true
+                        modelData.saveSavedRecipe(recipe: DishUserModel())
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
@@ -173,11 +196,50 @@ struct AddDishView: View {
                         }
                     }
                 }
+            }
+            .sheet(isPresented: $showImagePicker, onDismiss: {
+                if profileImage != nil {
+                    saveProfileImage(id: userDish.id )
                 }
-                .padding(.horizontal, 16)
-                
+            }) {
+                ImagePicker(sourceType: .photoLibrary, selectedImage: self.$profileImage)
+            }
+            .padding(.horizontal, 16)
+            
         }
     }
+}
+
+
+extension AddDishView {
+    
+    private func saveProfileImage(id: Int) {
+        guard  let image = profileImage else { return }
+        
+        // Получаем URL папки для сохранения
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let folderURL = documentsURL.appendingPathComponent("BestRecipes")
+        
+        do {
+            // Создаем папку, если она не существует
+            try FileManager.default.createDirectory(at: folderURL, withIntermediateDirectories: true, attributes: nil)
+            
+            // Формируем URL файла для сохранения
+            let fileURL = folderURL.appendingPathComponent("userDish\(id).jpg")
+            
+            // Сохраняем изображение в файл
+            if let data = image.jpegData(compressionQuality: 1.0) {
+                try data.write(to: fileURL)
+                print("Изображение сохранено по пути: \(fileURL.path)")
+            }
+        } catch {
+            print("Ошибка при сохранении/чтении изображения: \(error)")
+        }
+    }
+    
+    
+    
+    
 }
 
 #Preview {
