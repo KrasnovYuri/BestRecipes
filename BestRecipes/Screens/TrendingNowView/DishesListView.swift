@@ -37,8 +37,7 @@ struct DishesListView: View {
                     }
                 }
             }
-            
-            Spacer(minLength: 130)
+            Spacer(minLength: 80)
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.automatic)

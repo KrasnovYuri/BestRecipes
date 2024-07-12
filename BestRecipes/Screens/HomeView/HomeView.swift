@@ -177,7 +177,7 @@ struct HomeView: View {
                     VStack{
                         HStack {
                             HStack {
-                                Text("Popular kitchens")
+                                Text("Popular cuisines")
                                     .font(.custom(Font.medium, size: 20))
                             }
                             Spacer()
@@ -207,7 +207,7 @@ struct HomeView: View {
                                                 .aspectRatio(contentMode: .fill)
                                                 .frame(width: 110, height: 110)
                                                 .clipShape(Circle())
-                                            Text(cuisine)
+                                            Text(cuisine.capitalized)
                                                 .font(.custom(Font.medium, size: 14))
                                                 .foregroundStyle(.black)
                                         }
@@ -218,7 +218,7 @@ struct HomeView: View {
                             }
                         }
                     }
-                    Spacer(minLength: 150)
+                    Spacer(minLength: 80)
                 }
                     
                     
