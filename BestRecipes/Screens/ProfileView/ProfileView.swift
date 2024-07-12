@@ -63,10 +63,10 @@ struct ProfileView: View {
             } else {
                 ScrollView {
                     ForEach(myRecipes, id: \.id) { dish in
-                        NavigationLink(destination: RecipeDetailView(modelData: modelData, id: dish.id)) {
+                        NavigationLink(destination: Text("123")/*RecipeDetailView(modelData: modelData, id: dish.id)*/) {
                             HStack{
                                 ZStack {
-                                    TrendingDishElement(bigSize: true, dish: dish)
+//                                    TrendingDishElement(bigSize: true, dish: dish)
                                     VStack {
                                         HStack {
                                             RatingElement(bg: true, rating: dish.spoonacularScore)

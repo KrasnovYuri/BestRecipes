@@ -10,6 +10,7 @@ import SwiftUI
 struct TrendingDishElement: View {
     @State var bigSize: Bool
     @State var dish: DishLightModel
+//    @State var image: Image
     var body: some View {
         VStack {
             ZStack{
@@ -91,6 +92,7 @@ struct TrendingDishElement: View {
             }
             .frame(width: bigSize ? 343 : 280, height: 254)
         }
+    
     }
     
 

@@ -146,4 +146,15 @@ class ModelData: ObservableObject {
             loadFavoriteDishes()
         }
     }
+    init() {
+        Task {
+            do {
+                try await fetchAllData()
+            } catch {
+                print("fetchh all data from init dataModel")
+            }
+            
+        }
+        
+    }
 }
