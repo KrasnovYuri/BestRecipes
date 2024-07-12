@@ -28,14 +28,11 @@ struct CuisineListView: View {
                                         FavoriteElement(checkFavorite: true)
                                     }
                                     .padding(.horizontal, 7)
-//                                    .padding(10)
                                     Spacer()
                                 }
                                 .frame(width: 343)
                             }
                             .padding(.vertical, 20)
-//                            .padding(.leading, 20)
-                            
                         }
                     }
                 }

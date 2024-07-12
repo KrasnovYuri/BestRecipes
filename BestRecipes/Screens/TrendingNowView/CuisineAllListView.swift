@@ -12,44 +12,42 @@ struct CuisineAllListView: View {
     @State var textHeader: String
     var cuisineArray = Cuisine.allCases.map {$0.rawValue}
     var body: some View {
-//        NavigationView {
-            ScrollView(showsIndicators: false) {
-                ForEach(cuisineArray, id: \.self ) { cuisine in
-                    NavigationLink {
-                        CuisineListView(modelData: modelData, cuisine: cuisine)
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 1)
-                                .foregroundStyle(.white)
-                            HStack {
-                                Image("\(cuisine)")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .clipShape(Circle())
-                                    .overlay {
-                                        Circle().stroke(.white, lineWidth: 2)
-                                    }
-                                    .shadow(radius: 3)
-                                    .padding(.horizontal, 5)
-                                    .frame(width: 100)
-                                Text(cuisine.capitalized)
-                                    .font(.custom(Font.medium, size: 25))
-                                    .foregroundStyle(.black)
-                                Spacer()
-                                Image("Arrow")
-                                    .padding()
-                            }
-                            
+        ScrollView(showsIndicators: false) {
+            ForEach(cuisineArray, id: \.self ) { cuisine in
+                NavigationLink {
+                    CuisineListView(modelData: modelData, cuisine: cuisine)
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 1)
+                            .foregroundStyle(.white)
+                        HStack {
+                            Image("\(cuisine)")
+                                .resizable()
+                                .scaledToFit()
+                                .clipShape(Circle())
+                                .overlay {
+                                    Circle().stroke(.white, lineWidth: 2)
+                                }
+                                .shadow(radius: 3)
+                                .padding(.horizontal, 5)
+                                .frame(width: 100)
+                            Text(cuisine.capitalized)
+                                .font(.custom(Font.medium, size: 25))
+                                .foregroundStyle(.black)
+                            Spacer()
+                            Image("Arrow")
+                                .padding()
                         }
                         
-                        .frame(width: 370, height: 60)
-                        .padding(2)
                     }
                     
-                    
+                    .frame(width: 370, height: 60)
+                    .padding(2)
                 }
+                
+                
             }
-//        }
+        }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.automatic)
         .toolbar {
