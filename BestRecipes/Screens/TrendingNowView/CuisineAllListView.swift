@@ -10,12 +10,20 @@ import SwiftUI
 struct CuisineAllListView: View {
     @StateObject var modelData: ModelData
     @State var textHeader: String
+    @State var isCuisineListViewPushed = false
+    var hideToolbar = true
     var cuisineArray = Cuisine.allCases.map {$0.rawValue}
     var body: some View {
         ScrollView(showsIndicators: false) {
             ForEach(cuisineArray, id: \.self ) { cuisine in
                 NavigationLink {
                     CuisineListView(modelData: modelData, cuisine: cuisine)
+                        .onAppear {
+                            isCuisineListViewPushed = false
+                        }
+                        .onDisappear {
+                            isCuisineListViewPushed = true
+                        }
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 1)
@@ -63,8 +71,10 @@ struct CuisineAllListView: View {
         .onAppear {
             modelData.tabBarHide = true
         }
-        .onDisappear{
-            modelData.tabBarHide = false
+        .onDisappear {
+            if isCuisineListViewPushed {
+                modelData.tabBarHide = false
+            }
         }
     }
 }

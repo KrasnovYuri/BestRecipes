@@ -49,7 +49,6 @@ struct CuisineListView: View {
                     BackButtonView()
                 }
             }
-            Spacer(minLength: 80)
                 .onAppear {
                     print("onAppear")
                     Task {
