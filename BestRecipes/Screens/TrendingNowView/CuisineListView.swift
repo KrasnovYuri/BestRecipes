@@ -17,7 +17,7 @@ struct CuisineListView: View {
         VStack {
             ScrollView (.vertical ) {
                 ForEach(dishesList, id: \.id) { dish in
-                    NavigationLink(destination: RecipeDetailView(modelData: modelData, id: dish.id)) {
+                    NavigationLink(destination: RecipeDetailView(modelData: modelData, disappearIsOn: false, id: dish.id)) {
                         HStack {
                             ZStack {
                                 TrendingDishElement(bigSize: true, dish: dish)
