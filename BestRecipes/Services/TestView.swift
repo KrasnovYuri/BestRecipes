@@ -18,10 +18,16 @@ struct TestView: View {
         NavigationView {
             HStack {
                 Button {
+                  
+//                    UserDefaultsService.shared.save(structs: [DishUserModel(), DishUserModel()], forKey: "Saved")
+                    if let saved: [DishUserModel] = UserDefaultsService.shared.get(forKey: "Saved") {
+                        print(saved.count)
+                        print(saved[0].creditsText)
+                        print(saved[1].imagePath)
+                    }
                     
-                    print(URLManager.shared.apiKeyArray.count)
                 } label: {
-                    Text("dasdfas")
+                    Text("Button")
                 }
 
             }

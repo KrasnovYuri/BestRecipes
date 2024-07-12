@@ -10,7 +10,7 @@ import Foundation
 
 struct DishUserModel: Identifiable, Codable {
     var title: String
-    let id: Int
+    var id: Int
     var spoonacularScore: Double
     var readyInMinutes: Int
     var creditsText: String
@@ -21,7 +21,7 @@ struct DishUserModel: Identifiable, Codable {
     
     init() {
         title = ""
-        id = Int.random(in: 1...30000)
+        id = 0
         spoonacularScore = 80.0
         readyInMinutes = 0
         creditsText = "0"

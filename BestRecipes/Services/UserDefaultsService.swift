@@ -27,11 +27,6 @@ final class UserDefaultsService {
         }
         return nil
     }
-//    func update <T: Codable> (struct: T, forKey: String) {
-//        if let elements: T = get(forKey: forKey) {
-//            elements as? (any Collection) ? 
-//        }
-//    }
     func removeData(forKey key: String) {
         defaults.removeObject(forKey: key)
     }

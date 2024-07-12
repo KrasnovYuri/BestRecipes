@@ -88,9 +88,18 @@ struct ProfileView: View {
             HStack {
                 Text("My recipes")
                     .font(.custom(Font.semiBold, size: 30))
-                .padding(.top, 30)
+                
                 Spacer()
+                Button {
+                    UserDefaultsService.shared.removeData(forKey: "Saved")
+                    modelData.loadSavedRecipes()
+                } label: {
+                    Text("Clear all")
+                        .foregroundStyle(.brRed)
+                    
+                }
             }
+            .padding(.top, 30)
             
             // Список рецептов
             if modelData.savedDishies.isEmpty {
@@ -104,11 +113,11 @@ struct ProfileView: View {
                 ScrollView(showsIndicators: false) {
                     ForEach(modelData.savedDishies, id: \.id) { dish in
                         NavigationLink{
-                            RecipeDetailView(modelData: modelData, id: dish.id)
+//                            RecipeDetailView(modelData: modelData, id: dish.id)
                         } label: {
-                            HStack{
+                            HStack {
                                 ZStack {
-                                    TrendingDishElement(bigSize: true, dish: DishLightModel(userModel: dish))
+                                    TrendingDishElement(bigSize: true, dishUser: dish)
                                     VStack {
                                         HStack {
                                             RatingElement(bg: true, rating: dish.spoonacularScore)
@@ -119,10 +128,11 @@ struct ProfileView: View {
                                         Spacer()
                                     }
                                 }
-                                .padding(.leading, 20)
+                                .padding(.vertical, 25)
                             }
                         }
                     }
+                    Spacer(minLength: 80)
                 }
             }
         }
@@ -135,6 +145,7 @@ struct ProfileView: View {
             ImagePicker(sourceType: .photoLibrary, selectedImage: self.$profileImage)
         }
         .onAppear {
+            modelData.loadSavedRecipes()
             loadProfileImage()
         }
     }

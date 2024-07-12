@@ -6,34 +6,43 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct TrendingDishElement: View {
     @State var bigSize: Bool
     @State var dish: DishLightModel
-//    @State var image: Image
     var body: some View {
         VStack {
             ZStack{
-                //заменил асинк имедж на кэшд
-                CachedAsyncImage(url: URLManager.shared.createURLForImage(id: dish.id, size: .size480), transaction: .init(animation: .easeInOut(duration: 1))) { imageIn in
-                    switch imageIn {
-                    case .success(let imageIn):
+                //чтобы можно было показывать картинку с галереи
+                if !dish.imagePath.isEmpty {
+                    loadProfileImage(path: dish.imagePath)
+                        .ignoresSafeArea()
+                        .frame(width: bigSize ? 343 : 280, height: 180)
+                        .scaledToFill()
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                } else {
+                    //заменил асинк имедж на кэшд
+                    CachedAsyncImage(url: URLManager.shared.createURLForImage(id: dish.id, size: .size480), transaction: .init(animation: .easeInOut(duration: 1))) { imageIn in
+                        switch imageIn {
+                        case .success(let imageIn):
                             imageIn.resizable()
-                            .ignoresSafeArea()
-                            .frame(width: bigSize ? 343 : 280, height: 180)
-                            .scaledToFill()
-                    default:
-                        ZStack {
-                            Color(.white)
-                            Image(systemName: "timer")
-                                .resizable()
-                                .scaledToFit()
-                                .foregroundStyle(.gray)
-                                .frame(width: 50)
+                                .ignoresSafeArea()
+                                .frame(width: bigSize ? 343 : 280, height: 180)
+                                .scaledToFill()
+                        default:
+                            ZStack {
+                                Color(.white)
+                                Image(systemName: "timer")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .foregroundStyle(.gray)
+                                    .frame(width: 50)
+                            }
                         }
                     }
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
-                .clipShape(RoundedRectangle(cornerRadius: 10))
                 if bigSize {
                     VStack{
                         Spacer()
@@ -78,23 +87,43 @@ struct TrendingDishElement: View {
                     }
                 }
                 .frame(width: 32, height: 32)
-                    .clipShape(Circle())
-                    
-                    
-                    Text("By \(dish.creditsText)")
-                        .font(.custom(Font.light, size: 17))
-                        .foregroundStyle(.brGray)
-                        .lineLimit(1)
-                    Spacer()
-                }
-                .offset(y: -13)
+                .clipShape(Circle())
                 
+                
+                Text("By \(dish.creditsText)")
+                    .font(.custom(Font.light, size: 17))
+                    .foregroundStyle(.brGray)
+                    .lineLimit(1)
+                Spacer()
             }
-            .frame(width: bigSize ? 343 : 280, height: 254)
+            .offset(y: -13)
+            
         }
-    
+        .frame(width: bigSize ? 343 : 280, height: 254)
     }
     
+    init(bigSize: Bool, dish: DishLightModel) {
+        self.bigSize = bigSize
+        self.dish = dish
+    }
+    
+    init(bigSize: Bool,dishUser: DishUserModel) {
+        self.bigSize = bigSize
+        self.dish = DishLightModel(userModel: dishUser)
+    }
+    func loadProfileImage(path: String) -> Image {
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let folderURL = documentsURL.appendingPathComponent("BestRecipes")
+        let fileURL = folderURL.appendingPathComponent(path)
+        print(fileURL)
+        if FileManager.default.fileExists(atPath: folderURL.path),
+           let loadImage = UIImage(contentsOfFile: fileURL.path) {
+            return Image(uiImage: loadImage)
+        }
+        return Image(systemName: "xmark")
+    }
+}
+
 
 #Preview {
     TrendingDishElement(bigSize: false, dish: DishLightModel())

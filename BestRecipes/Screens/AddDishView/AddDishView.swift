@@ -12,6 +12,10 @@ struct AddDishView: View {
     @StateObject var viewModel = AddDishViewModel()
     @State var ingredients: [UserIngredient] = [UserIngredient()]
     @State var userDish = DishUserModel()
+    @State var id: Int = 0
+    @State var title = ""
+    @State var serves = 0
+    @State var cookTime = 0
     @State var units = Unit.allCases.map {$0.rawValue}
     @State var textPrint = false
     @State var saved = false
@@ -20,192 +24,236 @@ struct AddDishView: View {
     @State private var showImagePicker: Bool = false
     var body: some View {
         NavigationView {
-            VStack {
-                ScrollView (.vertical, showsIndicators: false){
-                    VStack {
-                        HStack {
-                            if let profileImage = profileImage {
-                                Image(uiImage: profileImage)
-                                    .resizable()
-                                    .frame(height: 200)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                                    .scaledToFit()
-                                    .onTapGesture {
-                                        self.showImagePicker = true
-                                    }
-                            } else {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .frame(height: 200)
-                                        .scaledToFill()
-                                    VStack {
-                                        Image(systemName: "plus.circle")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 100)
-                                            .foregroundStyle(.brWhite)
-                                        Text("Add photo")
-                                            .foregroundStyle(.brWhite)
-                                    }
-                                        
-                                }.onTapGesture {
-                                    self.showImagePicker = true
-                                }
-                            }
-                        }
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(lineWidth: 1)
-                                .foregroundStyle(userDish.title.count > 0 ? .brRed : .black)
-                            
-                            TextField("Enter dish name", text: $userDish.title)
-                                .font(.custom(Font.regular, size: 14))
-                                .padding(.horizontal, 10)
-                            
-                            
-                        }.frame(height: 44)
-                            .padding(.vertical, 10)
-                        VStack {
-                            AddDishElement(serves: true, value: $userDish.serves)
-                            AddDishElement(serves: false, value: $userDish.readyInMinutes)
-                                .padding(.vertical, 5)
-                        }
+            ZStack {
+                VStack {
+                    ScrollView (.vertical, showsIndicators: false){
                         VStack {
                             HStack {
-                                Text("Ingredients")
-                                    .font(.custom(Font.semiBold, size: 20))
-                                Spacer()
+                                if let profileImage = profileImage {
+                                    Image(uiImage: profileImage)
+                                        .resizable()
+                                        .frame(height: 200)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .scaledToFit()
+                                        .onTapGesture {
+                                            self.showImagePicker = true
+                                        }
+                                } else {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .frame(height: 200)
+                                            .scaledToFill()
+                                        VStack {
+                                            Image(systemName: "plus.circle")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 100)
+                                                .foregroundStyle(.brWhite)
+                                            Text("Add photo")
+                                                .foregroundStyle(.brWhite)
+                                        }
+                                        
+                                    }.onTapGesture {
+                                        self.showImagePicker = true
+                                    }
+                                }
                             }
-                            .padding(.vertical, 10)
-                            //                ScrollView(.vertical, showsIndicators: false) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(lineWidth: 1)
+                                    .foregroundStyle(userDish.title.count > 0 ? .brRed : .black)
+                                
+                                TextField("Enter dish name", text: $title)
+                                    .font(.custom(Font.regular, size: 14))
+                                    .padding(.horizontal, 10)
+                                
+                                
+                            }.frame(height: 44)
+                                .padding(.vertical, 10)
                             VStack {
-                                if ingredients.count != 0 {
-                                    ForEach($ingredients, id: \.id) { ingredient in
-                                        HStack {
-                                            ZStack {
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(lineWidth: 1)
-                                                    .foregroundStyle(.brGray)
-                                                TextField("Item name", text: ingredient.title)
-                                                    .font(.custom(Font.regular, size: 14))
-                                                    .padding(.horizontal, 10)
-                                            }
-                                            .frame(width: 200)
-                                            //                                        Spacer()
-                                            ZStack {
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(lineWidth: 1)
-                                                    .foregroundStyle(.brGray)
-                                                TextField("amount", text: ingredient.amount)
-                                                    .font(.custom(Font.regular, size: 14))
-                                                    .padding(.horizontal, 10)
-                                                    .textContentType(.telephoneNumber)
-                                            }
-                                            .frame(width: 70)
-                                            
-                                            Button {
-                                                switch ingredient.wrappedValue.unit {
-                                                case "gr" : ingredient.wrappedValue.unit = "ml"
-                                                case "ml": ingredient.wrappedValue.unit = "sp"
-                                                case "sp": ingredient.wrappedValue.unit = "gr"
-                                                default : ingredient.wrappedValue.unit = "gr"
-                                                }
-                                                
-                                            } label: {
+                                AddDishElement(serves: true, value: $serves)
+                                AddDishElement(serves: false, value: $cookTime)
+                                    .padding(.vertical, 5)
+                            }
+                            VStack {
+                                HStack {
+                                    Text("Ingredients")
+                                        .font(.custom(Font.semiBold, size: 20))
+                                    Spacer()
+                                }
+                                .padding(.vertical, 10)
+                                //                ScrollView(.vertical, showsIndicators: false) {
+                                VStack {
+                                    if ingredients.count != 0 {
+                                        ForEach($ingredients, id: \.id) { ingredient in
+                                            HStack {
                                                 ZStack {
                                                     RoundedRectangle(cornerRadius: 10)
                                                         .stroke(lineWidth: 1)
                                                         .foregroundStyle(.brGray)
-                                                    Text(ingredient.wrappedValue.unit)
-                                                        .foregroundStyle(.black)
+                                                    TextField("Item name", text: ingredient.title)
                                                         .font(.custom(Font.regular, size: 14))
                                                         .padding(.horizontal, 10)
                                                 }
-                                                .frame(width: 50)
+                                                .frame(width: 200)
+                                                //                                        Spacer()
+                                                ZStack {
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .stroke(lineWidth: 1)
+                                                        .foregroundStyle(.brGray)
+                                                    TextField("amount", text: ingredient.amount)
+                                                        .font(.custom(Font.regular, size: 14))
+                                                        .padding(.horizontal, 10)
+                                                        .textContentType(.telephoneNumber)
+                                                }
+                                                .frame(width: 70)
+                                                
+                                                Button {
+                                                    switch ingredient.wrappedValue.unit {
+                                                    case "gr" : ingredient.wrappedValue.unit = "ml"
+                                                    case "ml": ingredient.wrappedValue.unit = "sp"
+                                                    case "sp": ingredient.wrappedValue.unit = "gr"
+                                                    default : ingredient.wrappedValue.unit = "gr"
+                                                    }
+                                                    
+                                                } label: {
+                                                    ZStack {
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .stroke(lineWidth: 1)
+                                                            .foregroundStyle(.brGray)
+                                                        Text(ingredient.wrappedValue.unit)
+                                                            .foregroundStyle(.black)
+                                                            .font(.custom(Font.regular, size: 14))
+                                                            .padding(.horizontal, 10)
+                                                    }
+                                                    .frame(width: 50)
+                                                    
+                                                }
+                                                Button {
+                                                    ingredients = ingredients.filter({ UserIngredient in
+                                                        UserIngredient.id != ingredient.id
+                                                    })
+                                                } label: {
+                                                    Image("minusButton")
+                                                }
                                                 
                                             }
-                                            Button {
-                                                ingredients = ingredients.filter({ UserIngredient in
-                                                    UserIngredient.id != ingredient.id
-                                                })
-                                            } label: {
-                                                Image("minusButton")
-                                            }
-                                            
+                                            .frame(height: 45)
                                         }
-                                        .frame(height: 45)
                                     }
-                                }
-                                Button {
-                                    ingredients.append(UserIngredient())
-                                } label: {
-                                    HStack {
-                                        Image("Plus")
-                                        Text("Add new Ingredient")
-                                            .font(.custom(Font.regular, size: 16))
-                                            .foregroundStyle(.black)
-                                        Spacer()
+                                    Button {
+                                        ingredients.append(UserIngredient())
+                                    } label: {
+                                        HStack {
+                                            Image("Plus")
+                                            Text("Add new Ingredient")
+                                                .font(.custom(Font.regular, size: 16))
+                                                .foregroundStyle(.black)
+                                            Spacer()
+                                        }
+                                        .padding()
                                     }
-                                    .padding()
                                 }
                             }
+                            
+                            
                         }
+                        .frame(width: 370)
+                        //Animation
+                        .animation(.easeInOut, value: ingredients.count)
                         
-                        
-                    }
-                    .frame(width: 370)
-                    .animation(.easeInOut, value: ingredients.count)
-                    
-                    .onAppear {
-                        modelData.tabBarHide = true
-                    }
-                    .onDisappear{
-                        modelData.tabBarHide = false
-                    }
-                }
-                Spacer()
-                HStack {
-                    Button {
-                        saved = true
-                        modelData.saveSavedRecipe(recipe: DishUserModel())
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundStyle(.brRed)
-                            Text("Create recipe")
-                                .font(.custom(Font.medium, size: 16))
-                                .foregroundStyle(.white)
+                        //On Appear
+                        .onAppear {
+                            id = Int.random(in: 1...30000)
+                            modelData.tabBarHide = true
                         }
-                        .frame(height: 56)
-                    }
-                    .toolbar {
-                        ToolbarItem(placement: .principal) {
-                            Text("Create recipe")
-                                .font(.custom(Font.semiBold, size: 24))
-                                .foregroundColor(.black)
-                                .lineLimit(2)
+                        .onDisappear{
+                            modelData.tabBarHide = false
                         }
-                        ToolbarItem(placement: .topBarLeading) {
-                            Button {
-                                tabBarIndex = 0
-                            } label: {
-                                Image(.backButton)
-                                    .font(.title)
+                    }
+                    Spacer()
+                    HStack {
+                        Button {
+                            saved = true
+                            userDish.id = id
+                            userDish.ingredients = ingredients
+                            userDish.ingredientsCount = ingredients.count
+                            userDish.creditsText = "\(modelData.userName) \(modelData.userSurname)"
+                            userDish.imagePath = "userDish\(id).jpg"
+                            modelData.saveSavedRecipe(recipe: userDish)
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundStyle(.brRed)
+                                Text("Create recipe")
+                                    .font(.custom(Font.medium, size: 16))
+                                    .foregroundStyle(.white)
+                            }
+                            .frame(height: 56)
+                        }
+                        .toolbar {
+                            ToolbarItem(placement: .principal) {
+                                Text("Create recipe")
+                                    .font(.custom(Font.semiBold, size: 24))
                                     .foregroundColor(.black)
+                                    .lineLimit(2)
+                            }
+                            ToolbarItem(placement: .topBarLeading) {
+                                Button {
+                                    tabBarIndex = 0
+                                } label: {
+                                    Image(.backButton)
+                                        .font(.title)
+                                        .foregroundColor(.black)
+                                }
                             }
                         }
                     }
                 }
-            }
-            .sheet(isPresented: $showImagePicker, onDismiss: {
-                if profileImage != nil {
-                    saveProfileImage(id: userDish.id )
+                .blur(radius: saved ? 10 : 0 )
+                .sheet(isPresented: $showImagePicker, onDismiss: {
+                    if profileImage != nil {
+                        saveProfileImage(id: id )
+                    }
+                }) {
+                    ImagePicker(sourceType: .photoLibrary, selectedImage: self.$profileImage)
                 }
-            }) {
-                ImagePicker(sourceType: .photoLibrary, selectedImage: self.$profileImage)
+                .padding(.horizontal, 16)
+                if saved {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundStyle(.white)
+                            .shadow(radius: 5)
+                        VStack{
+                            Text("Recipe successfully saved")
+                                .font(.custom(Font.semiBold, size: 20))
+                                .foregroundStyle(.black)
+                                .padding(20)
+                            HStack{
+                                Button {
+                                    tabBarIndex = 0
+                                    userDish = DishUserModel()
+                                    ingredients = [UserIngredient()]
+                                    saved = false
+                                } label: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(lineWidth: 0.7)
+                                            .frame(width: 160, height: 70)
+                                            .foregroundStyle(.brGray)
+                                        Text("Back to main")
+                                            .font(.custom(Font.semiBold, size: 16))
+                                            .foregroundStyle(.black)
+                                    }
+                                }
+                                .padding()
+                            }
+                        }
+                    }
+                    
+                    .frame(width: 350, height: 200)
+                }
             }
-            .padding(.horizontal, 16)
-            
         }
     }
 }
@@ -213,8 +261,8 @@ struct AddDishView: View {
 
 extension AddDishView {
     
-    private func saveProfileImage(id: Int) {
-        guard  let image = profileImage else { return }
+    private func saveProfileImage(id: Int) -> String {
+        guard let image = profileImage else { return "" }
         
         // Получаем URL папки для сохранения
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -232,9 +280,11 @@ extension AddDishView {
                 try data.write(to: fileURL)
                 print("Изображение сохранено по пути: \(fileURL.path)")
             }
+            return String(id)
         } catch {
             print("Ошибка при сохранении/чтении изображения: \(error)")
         }
+        return ""
     }
     
     

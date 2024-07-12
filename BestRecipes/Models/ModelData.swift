@@ -10,6 +10,9 @@ import SwiftUI
 
 @MainActor
 class ModelData: ObservableObject {
+    //user name
+    @Published var userName: String = ""
+    @Published var userSurname: String = ""
     
     // trending dishes
     @Published var trendingDishes: [DishLightModel] = []
@@ -59,6 +62,7 @@ class ModelData: ObservableObject {
         favoriteDishesID = getUserDef("Favorite")
         loadFavoriteDishes()
         loadSavedRecipes()
+        loadUserName()
     }
     // Fetch dish by cuisine
     func fetchDishByCuisine(_ cuisine: String) async throws {
@@ -152,20 +156,52 @@ class ModelData: ObservableObject {
         }
     }
     func saveSavedRecipe (recipe: DishUserModel) {
-        if var savedRecepies: [DishUserModel] = UserDefaultsService.shared.get(forKey: "Saved") {
-            savedRecepies.append(recipe)
-            UserDefaultsService.shared.save(structs: savedRecepies, forKey: "Saved")
-            savedDishies = savedRecepies
+        if savedDishies.isEmpty {
+            UserDefaultsService.shared.save(structs: [recipe], forKey: "Saved")
+            savedDishies = [recipe]
+        } else {
+            if var savedRecepies: [DishUserModel] = UserDefaultsService.shared.get(forKey: "Saved") {
+                savedRecepies.append(recipe)
+                UserDefaultsService.shared.save(structs: savedRecepies, forKey: "Saved")
+                savedDishies = savedRecepies
+            }
         }
     }
     func deleteSavedRecipe(recipe: DishUserModel) {
-        if var savedRecepies: [DishUserModel] = UserDefaultsService.shared.get(forKey: "Saved") {
+        if let savedRecepies: [DishUserModel] = UserDefaultsService.shared.get(forKey: "Saved") {
             let result = savedRecepies.filter { dish in
                 dish.id != recipe.id
             }
             UserDefaultsService.shared.save(structs: result, forKey: "Saved")
             savedDishies = result
         }
+    }
+    func loadProfileImage(path: String) -> Image {
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let folderURL = documentsURL.appendingPathComponent("BestRecipes")
+        let fileURL = folderURL.appendingPathComponent(path)
+        if FileManager.default.fileExists(atPath: folderURL.path),
+           let loadImage = UIImage(contentsOfFile: fileURL.path) {
+            return Image(uiImage: loadImage)
+        }
+        return Image(systemName: "person")
+     }
+    func loadUserName () {
+        if let username: String = UserDefaultsService.shared.get(forKey: "nameUser") {
+            if username.isEmpty {
+                UserDefaultsService.shared.save(structs: "Gordon", forKey: "nameUser")
+                userName = "Gordon"
+            }
+            userName = username
+        }
+        if let surname : String = UserDefaultsService.shared.get(forKey: "surnameUser") {
+            if surname.isEmpty {
+                UserDefaultsService.shared.save(structs: "Ramsey", forKey: "nameUser")
+                userName = "Ramsey"
+            }
+            userSurname = surname
+        }
+        
     }
     
     init() {

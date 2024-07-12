@@ -231,7 +231,7 @@ struct RecipeDetailView: View {
                 }
             }
         }
-        .onDisappear{
+        .onDisappear {
             modelData.tabBarHide = false
         }
         //navigation settings and toolbar
