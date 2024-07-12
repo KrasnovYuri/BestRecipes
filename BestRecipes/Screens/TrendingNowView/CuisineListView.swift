@@ -27,19 +27,18 @@ struct CuisineListView: View {
                                         Spacer()
                                         FavoriteElement(checkFavorite: true)
                                     }
-                                    .padding(10)
+                                    .padding(.horizontal, 7)
+//                                    .padding(10)
                                     Spacer()
                                 }
+                                .frame(width: 343)
                             }
-                            .padding(.leading, 20)
+                            .padding(.vertical, 20)
+//                            .padding(.leading, 20)
                             
                         }
                     }
-                    
-                    
                 }
-                
-                
             }
             .navigationBarBackButtonHidden(true)
             .navigationBarTitleDisplayMode(.automatic)
@@ -53,7 +52,7 @@ struct CuisineListView: View {
                     BackButtonView()
                 }
             }
-            Spacer(minLength: 130)
+            Spacer(minLength: 80)
                 .onAppear {
                     print("onAppear")
                     Task {
