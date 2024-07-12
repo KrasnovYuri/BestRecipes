@@ -19,19 +19,17 @@ struct MainView: View {
 
     var body: some View {
         let homeView = HomeView(searchEnable: $searchOn, modelData: modelData)
-        let savedRecipesView = SavedRecipesView(modelData: modelData)
+        let favoriteRecipesView = FavoriteRecipesView(modelData: modelData)
         let addDishView = AddDishView(modelData: modelData, tabBarIndex: $index)
 
         ZStack {
-            //Color("BRGold")
-
             
                 ZStack {
                     if index == 0 {
                         homeView
                     }
                     if index == 1 {
-                        savedRecipesView
+                        favoriteRecipesView
                     }
                     if index == 2 {
                         addDishView
@@ -66,11 +64,6 @@ struct MainView: View {
         .animation(.easeInOut(duration: 0.1), value: index)
         .ignoresSafeArea()
         .onAppear {
-            Task {
-                do {
-                    try await modelData.fetchAllData()
-                }
-            }
             // уменьшаем картинку
             withAnimation(.easeInOut(duration: 1).delay(2)) {
                 scaleAmount = 0.6
