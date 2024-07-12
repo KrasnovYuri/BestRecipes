@@ -11,6 +11,7 @@ struct RecipeDetailView: View {
     
     @StateObject var modelData: ModelData
     let service = NetworkServiceAA()
+    let disappearIsOn: Bool
     @State var id: Int
     @State var dish: RecipeDetails = RecipeDetails()
     @State var isSet: Bool = true
@@ -232,7 +233,9 @@ struct RecipeDetailView: View {
             }
         }
         .onDisappear{
-            modelData.tabBarHide = false
+            if disappearIsOn {
+                modelData.tabBarHide = false
+            }
         }
         //navigation settings and toolbar
         .navigationBarBackButtonHidden(true)
@@ -253,5 +256,5 @@ struct RecipeDetailView: View {
 }
 
 #Preview {
-    RecipeDetailView(modelData: ModelData(), id: 773242)
+    RecipeDetailView(modelData: ModelData(), disappearIsOn: true, id: 773242)
 }

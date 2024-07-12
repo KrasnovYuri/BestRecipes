@@ -24,7 +24,7 @@ struct FavoriteRecipesView: View {
                     ScrollView(.vertical, showsIndicators: false) {
                         ForEach(modelData.favoriteDishes, id: \.id ) { dish in
                             NavigationLink {
-                                RecipeDetailView(modelData: modelData, id: dish.id)
+                                RecipeDetailView(modelData: modelData, disappearIsOn: true, id: dish.id)
                             } label: {
                                 ZStack {
                                     TrendingDishElement(bigSize: true, dish: dish)

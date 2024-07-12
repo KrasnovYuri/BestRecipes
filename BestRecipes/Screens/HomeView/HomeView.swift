@@ -54,7 +54,7 @@ struct HomeView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 ForEach( modelData.trendingDishes, id: \.id) { dish in
-                                    NavigationLink(destination: RecipeDetailView(modelData: modelData, id: dish.id )) {
+                                    NavigationLink(destination: RecipeDetailView(modelData: modelData, disappearIsOn: true, id: dish.id )) {
                                         ZStack {
                                             TrendingDishElement(bigSize: false, dish: dish)
                                             VStack {
@@ -113,7 +113,7 @@ struct HomeView: View {
                             HStack {
                                 ForEach(modelData.foodCategoryPopularDishes, id: \.id) { dish in
                                     NavigationLink{
-                                        RecipeDetailView(modelData: modelData, id: dish.id)
+                                        RecipeDetailView(modelData: modelData, disappearIsOn: true, id: dish.id)
                                     } label: {
                                         ZStack {
                                             CategoryDishElement(dish: dish)
@@ -164,7 +164,7 @@ struct HomeView: View {
                         ScrollView(.horizontal, showsIndicators: false ) {
                             LazyHStack {
                                 ForEach(modelData.recentDishes, id: \.id) { dish in
-                                    NavigationLink(destination: RecipeDetailView(modelData: modelData, id: dish.id)) {
+                                    NavigationLink(destination: RecipeDetailView(modelData: modelData, disappearIsOn: true, id: dish.id)) {
                                         RecentDishElement(dish: dish)
                                             .padding(.leading, modelData.recentDishes[0].id == dish.id ? 16 : 0)
                                     }
