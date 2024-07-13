@@ -142,7 +142,7 @@ struct ProfileView: View {
                                                     }
                                                     .frame(width: 32, height: 32)
                                                 }
-                                                .padding(.trailing, 16)
+                                                .padding(.trailing, 32)
                                             }
                                             Spacer()
                                         }

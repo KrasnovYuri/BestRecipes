@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AddDishView: View {
     @StateObject var modelData: ModelData
-    @StateObject var viewModel = AddDishViewModel()
     @State var ingredients: [UserIngredient] = [UserIngredient()]
     @State var id: Int = 0
     @State var title = ""
@@ -102,7 +101,7 @@ struct AddDishView: View {
                                                     TextField("amount", text: ingredient.amount)
                                                         .font(.custom(Font.regular, size: 14))
                                                         .padding(.horizontal, 10)
-                                                        .textContentType(.telephoneNumber)
+                                                        .keyboardType(.decimalPad)
                                                 }
                                                 .frame(width: 70)
                                                 

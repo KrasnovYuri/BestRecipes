@@ -24,7 +24,7 @@ struct DishesListView: View {
                                 HStack {
                                     RatingElement(bg: true, rating: dish.spoonacularScore)
                                     Spacer()
-                                    FavoriteElement(checkFavorite: true)
+                                    FavoriteElement(checkFavorite: modelData.checkFavorite(id: dish.id))
                                 }
                                 
                                 .padding(.horizontal, 7)
