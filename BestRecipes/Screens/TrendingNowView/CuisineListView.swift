@@ -15,7 +15,7 @@ struct CuisineListView: View {
     let service = NetworkServiceAA()
     var body: some View {
         VStack {
-            ScrollView (.vertical ) {
+            ScrollView (.vertical, showsIndicators: false ) {
                 ForEach(dishesList, id: \.id) { dish in
                     NavigationLink(destination: RecipeDetailView(modelData: modelData, disappearIsOn: false, id: dish.id)) {
                         HStack {
