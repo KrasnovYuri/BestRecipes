@@ -11,7 +11,6 @@ struct AddDishView: View {
     @StateObject var modelData: ModelData
     @StateObject var viewModel = AddDishViewModel()
     @State var ingredients: [UserIngredient] = [UserIngredient()]
-    @State var userDish = DishUserModel()
     @State var id: Int = 0
     @State var title = ""
     @State var serves = 0
@@ -61,7 +60,7 @@ struct AddDishView: View {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(lineWidth: 1)
-                                    .foregroundStyle(userDish.title.count > 0 ? .brRed : .black)
+                                    .foregroundStyle(title.count > 0 ? .brRed : .black)
                                 
                                 TextField("Enter dish name", text: $title)
                                     .font(.custom(Font.regular, size: 14))
@@ -159,27 +158,13 @@ struct AddDishView: View {
                             
                         }
                         .frame(width: 370)
-                        //Animation
-                        .animation(.easeInOut, value: ingredients.count)
                         
-                        //On Appear
-                        .onAppear {
-                            id = Int.random(in: 1...30000)
-                            modelData.tabBarHide = true
-                        }
-                        .onDisappear{
-                            modelData.tabBarHide = false
-                        }
                     }
                     Spacer()
                     HStack {
                         Button {
                             saved = true
-                            userDish.id = id
-                            userDish.ingredients = ingredients
-                            userDish.ingredientsCount = ingredients.count
-                            userDish.creditsText = "\(modelData.userName) \(modelData.userSurname)"
-                            userDish.imagePath = "userDish\(id).jpg"
+                            let userDish = DishUserModel(title: title, id: id, score: 60.0, time: cookTime, credits: "\(modelData.userName) \(modelData.userSurname)", imagePath: "userDish\(id).jpg", ingredients: ingredients, serves: serves)
                             modelData.saveSavedRecipe(recipe: userDish)
                         } label: {
                             ZStack {
@@ -232,7 +217,6 @@ struct AddDishView: View {
                             HStack{
                                 Button {
                                     tabBarIndex = 0
-                                    userDish = DishUserModel()
                                     ingredients = [UserIngredient()]
                                     saved = false
                                 } label: {
@@ -254,6 +238,17 @@ struct AddDishView: View {
                     .frame(width: 350, height: 200)
                 }
             }
+            //Animation
+            .animation(.easeInOut, value: ingredients.count)
+            
+            //On Appear
+            .onAppear {
+                id = Int.random(in: 1...30000)
+                modelData.tabBarHide = true
+            }
+            .onDisappear{
+                modelData.tabBarHide = false
+            }
         }
     }
 }
@@ -261,8 +256,8 @@ struct AddDishView: View {
 
 extension AddDishView {
     
-    private func saveProfileImage(id: Int) -> String {
-        guard let image = profileImage else { return "" }
+    private func saveProfileImage(id: Int) {
+        guard let image = profileImage else { return }
         
         // Получаем URL папки для сохранения
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -280,11 +275,10 @@ extension AddDishView {
                 try data.write(to: fileURL)
                 print("Изображение сохранено по пути: \(fileURL.path)")
             }
-            return String(id)
+            return
         } catch {
             print("Ошибка при сохранении/чтении изображения: \(error)")
         }
-        return ""
     }
     
     

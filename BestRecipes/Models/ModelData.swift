@@ -63,6 +63,10 @@ class ModelData: ObservableObject {
         loadFavoriteDishes()
         loadSavedRecipes()
         loadUserName()
+        
+        print("Names")
+        print(userName)
+        print(userSurname)
     }
     // Fetch dish by cuisine
     func fetchDishByCuisine(_ cuisine: String) async throws {
@@ -167,10 +171,10 @@ class ModelData: ObservableObject {
             }
         }
     }
-    func deleteSavedRecipe(recipe: DishUserModel) {
+    func deleteFromSaved(recipeId: Int) {
         if let savedRecepies: [DishUserModel] = UserDefaultsService.shared.get(forKey: "Saved") {
             let result = savedRecepies.filter { dish in
-                dish.id != recipe.id
+                dish.id != recipeId
             }
             UserDefaultsService.shared.save(structs: result, forKey: "Saved")
             savedDishies = result
@@ -188,18 +192,20 @@ class ModelData: ObservableObject {
      }
     func loadUserName () {
         if let username: String = UserDefaultsService.shared.get(forKey: "nameUser") {
-            if username.isEmpty {
+            if username.count < 1 {
                 UserDefaultsService.shared.save(structs: "Gordon", forKey: "nameUser")
-                userName = "Gordon"
+                self.userName = "Gordon"
+            } else {
+                userName = username
             }
-            userName = username
         }
         if let surname : String = UserDefaultsService.shared.get(forKey: "surnameUser") {
-            if surname.isEmpty {
+            if surname.count < 1 {
                 UserDefaultsService.shared.save(structs: "Ramsey", forKey: "nameUser")
-                userName = "Ramsey"
+                self.userSurname = "Ramsey"
+            } else {
+                userSurname = surname
             }
-            userSurname = surname
         }
         
     }
