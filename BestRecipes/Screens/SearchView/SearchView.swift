@@ -58,7 +58,7 @@ struct SearchView: View {
                         ScrollView {
                             ForEach(modelData.searchDishes, id: \.id) { dish in
                                 NavigationLink {
-                                    RecipeDetailView(modelData: modelData, id: dish.id)
+                                    RecipeDetailView(modelData: modelData, disappearIsOn: true, id: dish.id)
                                 } label: {
                                     SearchDishElement(rating: 5.0, dish: dish)
                                         .padding(.vertical, 5)
