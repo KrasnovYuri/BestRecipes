@@ -5,7 +5,7 @@
 ### Development Team: 
 
 
-# BestRecipes — an app for iOS where you will find thousands of recipes for various dishes with exact cooking instructions. Save your favorite dishes to favorites. Also, create your own recipes at [Swift Marathon](https://t.me/swiftmarathon)
+# BestRecipes — an app for iOS where you will find thousands of recipes for various dishes with exact cooking instructions. Save your favorite dishes. Also, create your own recipes. Project created at [Swift Marathon](https://t.me/swiftmarathon)
 
 ## Technologies
 - Swift, SwiftUI
