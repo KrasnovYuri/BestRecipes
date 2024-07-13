@@ -31,7 +31,6 @@ class ModelData: ObservableObject {
     @Published var recentDishesID: [Int] = []
     @Published var recentDishes: [DishLightModel] = []
     
-    
     //    saved array "Favorite" UserDefaults key
     @Published var favoriteDishesID: [Int] = []
     @Published var favoriteDishes: [DishLightModel] = []
@@ -63,10 +62,6 @@ class ModelData: ObservableObject {
         loadFavoriteDishes()
         loadSavedRecipes()
         loadUserName()
-        
-        print("Names")
-        print(userName)
-        print(userSurname)
     }
     // Fetch dish by cuisine
     func fetchDishByCuisine(_ cuisine: String) async throws {
@@ -141,12 +136,11 @@ class ModelData: ObservableObject {
     func saveToFavorite (id: Int) {
         if !favoriteDishesID.contains(id) {
             favoriteDishesID.append(id)
-
             UserDefaultsService.shared.save(structs: favoriteDishesID, forKey: "Favorite")
             loadFavoriteDishes()
         }
-        
     }
+    
     func deleteFromFavorite (id: Int) {
         if favoriteDishesID.contains(id) {
             let arrayIn = favoriteDishesID.filter { a in id != a }
@@ -154,11 +148,13 @@ class ModelData: ObservableObject {
             loadFavoriteDishes()
         }
     }
+    
     func loadSavedRecipes() {
         if let savedRecepies: [DishUserModel] = UserDefaultsService.shared.get(forKey: "Saved") {
             savedDishies = savedRecepies
         }
     }
+    
     func saveSavedRecipe (recipe: DishUserModel) {
         if savedDishies.isEmpty {
             UserDefaultsService.shared.save(structs: [recipe], forKey: "Saved")
@@ -171,6 +167,7 @@ class ModelData: ObservableObject {
             }
         }
     }
+    
     func deleteFromSaved(recipeId: Int) {
         if let savedRecepies: [DishUserModel] = UserDefaultsService.shared.get(forKey: "Saved") {
             let result = savedRecepies.filter { dish in
@@ -180,6 +177,7 @@ class ModelData: ObservableObject {
             savedDishies = result
         }
     }
+    
     func loadProfileImage(path: String) -> Image {
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let folderURL = documentsURL.appendingPathComponent("BestRecipes")
@@ -189,7 +187,8 @@ class ModelData: ObservableObject {
             return Image(uiImage: loadImage)
         }
         return Image(systemName: "xmark")
-     }
+    }
+    
     func loadUserName () {
         if let username: String = UserDefaultsService.shared.get(forKey: "nameUser") {
             if username.count < 1 {
@@ -207,19 +206,15 @@ class ModelData: ObservableObject {
                 userSurname = surname
             }
         }
-        
     }
     
     init() {
-        
         Task {
             do {
                 try await fetchAllData()
             } catch {
                 print("fetchh all data from init dataModel")
             }
-            
         }
-        
     }
 }

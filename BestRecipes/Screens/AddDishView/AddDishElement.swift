@@ -47,7 +47,7 @@ struct AddDishElement: View {
                         .font(.custom(Font.medium, size: 14))
                         .frame(width: 50)
                     Button {
-                            value -= serves ? 1 : 5
+                        value -= serves ? 1 : 5
                     } label : {
                         ZStack{
                             Circle()

@@ -26,14 +26,12 @@ struct DishesListView: View {
                                     Spacer()
                                     FavoriteElement(checkFavorite: modelData.checkFavorite(id: dish.id))
                                 }
-                                
                                 .padding(.horizontal, 7)
                                 Spacer()
                             }
                             .frame(width: 343)
                         }
                         .padding(.vertical, 20)
-                        
                     }
                 }
             }

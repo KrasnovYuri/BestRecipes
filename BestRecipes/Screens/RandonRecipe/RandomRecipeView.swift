@@ -8,16 +8,14 @@
 import SwiftUI
 
 struct RandomRecipeView: View {
-
+    
     @ObservedObject var modelData: ModelData
     @State var dishesList: [DishLightModel] = []
     let service = NetworkServiceAA()
-
+    
     var body: some View {
         NavigationView {
-
             VStack() {
-
                 HStack {
                     Text("Random recipes")
                         .font(.custom(Font.bold, size: 24))
@@ -34,12 +32,10 @@ struct RandomRecipeView: View {
                         }
                     }
                 }
-               
-
+                
                 VStack {
                     Text("Get three random recipes 🎁 \nWhat will surprise you today?")
                         .font(.custom(Font.medium, size: 20))
-
                     GetRandomButton(text: "Get") {
                         Task {
                             do {
@@ -51,7 +47,7 @@ struct RandomRecipeView: View {
                     }
                 }
                 .padding(.bottom, 10)
-
+                
                 Spacer(minLength: 100)
             }
         }

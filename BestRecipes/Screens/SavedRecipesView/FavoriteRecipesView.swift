@@ -48,18 +48,13 @@ struct FavoriteRecipesView: View {
                                                 }
                                                 .frame(width: 32, height: 32)
                                             }
-                                            
                                         }
                                         .padding(.horizontal, 15)
                                         .padding(5)
                                         Spacer()
                                     }
                                 }
-                                
                             }
-                            
-                            
-                            
                         }
                     }
                 }
@@ -110,7 +105,6 @@ struct FavoriteRecipesView: View {
                             }
                             .padding()
                         }
-                        
                     }
                     .frame(width: 300, height: 150)
                 }

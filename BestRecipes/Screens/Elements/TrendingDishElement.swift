@@ -57,7 +57,6 @@ struct TrendingDishElement: View {
                                 Text("\(dish.readyInMinutes):00")
                                     .font(.custom(Font.medium, size: 13))
                                     .foregroundStyle(.brBlack.opacity(0.9))
-                                
                             }
                             .padding(8)
                         }
@@ -78,8 +77,6 @@ struct TrendingDishElement: View {
                         .scaledToFill()
                         .frame(width: 32, height: 32)
                         .clipShape(Circle())
-                        
-                        
                 } else {
                     CachedAsyncImage(url: URLManager.shared.createURLForImage(id: dish.id, size: .size90), transaction: .init(animation: .easeInOut)) { imageIn in
                         switch imageIn {
@@ -93,7 +90,6 @@ struct TrendingDishElement: View {
                                     .foregroundStyle(.gray)
                             }
                         }
-                        
                     }
                     .frame(width: 32, height: 32)
                     .clipShape(Circle())
@@ -106,7 +102,6 @@ struct TrendingDishElement: View {
                 Spacer()
             }
             .offset(y: -13)
-            
         }
         .frame(width: bigSize ? 343 : 280, height: 254)
     }

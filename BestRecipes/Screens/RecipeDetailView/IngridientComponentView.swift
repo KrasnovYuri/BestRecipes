@@ -15,9 +15,9 @@ struct IngridientComponentView: View {
         let imageURL = URL(string: baseURL + imagePath)
         return imageURL
     }
-
+    
     var ingridient: ExtendedIngredient
-
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
@@ -33,7 +33,7 @@ struct IngridientComponentView: View {
                             image
                                 .resizable()
                                 .scaledToFit()
-                                
+                            
                         } placeholder: {
                             ProgressView()
                         }
@@ -67,6 +67,5 @@ struct IngridientComponentView: View {
 }
 
 #Preview {
-
     IngridientComponentView(ingridient: ExtendedIngredient(id: 93647, aisle: "Pasta and Rice", image: "chili-powder.jpg", consistency: "SOLID", name: "sale e pepe", nameClean: "pastina", original: "Sale e pepe", originalName: "Sale e pepe", amount: 1, unit: "serving", meta: [], measures: MeasuresBig(us: Metric(amount: 1, unitShort: "serving", unitLong: "serving"), metric: Metric(amount: 283.495, unitShort: "g", unitLong: "gramm"))))
 }

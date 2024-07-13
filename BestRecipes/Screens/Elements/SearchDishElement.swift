@@ -51,7 +51,6 @@ struct SearchDishElement: View {
                 Text("\(dish.ingredientsCount) Ingredients | \(dish.readyInMinutes) minutes")
                     .font(.custom(Font.medium, size: 14))
                     .shadow(radius: 10)
-                
             }
             .foregroundColor(.white)
             .offset(x: -5, y: 50)

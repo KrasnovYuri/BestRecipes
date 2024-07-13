@@ -3,29 +3,23 @@ import SwiftUI
 
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct CachedAsyncImage<Content>: View where Content: View {
-    
     @State private var phase: AsyncImagePhase
-    
     private let urlRequest: URLRequest?
-    
     private let urlSession: URLSession
-    
     private let scale: CGFloat
-    
     private let transaction: Transaction
-    
     private let content: (AsyncImagePhase) -> Content
     
     public var body: some View {
         content(phase)
             .task(id: urlRequest, load)
     }
-
+    
     public init(url: URL?, urlCache: URLCache = .shared,  scale: CGFloat = 1) where Content == Image {
         let urlRequest = url == nil ? nil : URLRequest(url: url!)
         self.init(urlRequest: urlRequest, urlCache: urlCache, scale: scale)
     }
-
+    
     public init(urlRequest: URLRequest?, urlCache: URLCache = .shared,  scale: CGFloat = 1) where Content == Image {
         self.init(urlRequest: urlRequest, urlCache: urlCache, scale: scale) { phase in
 #if os(macOS)
@@ -35,12 +29,12 @@ public struct CachedAsyncImage<Content>: View where Content: View {
 #endif
         }
     }
-
+    
     public init<I, P>(url: URL?, urlCache: URLCache = .shared,  scale: CGFloat = 1, @ViewBuilder content: @escaping (Image) -> I, @ViewBuilder placeholder: @escaping () -> P) where Content == _ConditionalContent<I, P>, I : View, P : View {
         let urlRequest = url == nil ? nil : URLRequest(url: url!)
         self.init(urlRequest: urlRequest, urlCache: urlCache, scale: scale, content: content, placeholder: placeholder)
     }
-
+    
     public init<I, P>(urlRequest: URLRequest?, urlCache: URLCache = .shared,  scale: CGFloat = 1, @ViewBuilder content: @escaping (Image) -> I, @ViewBuilder placeholder: @escaping () -> P) where Content == _ConditionalContent<I, P>, I : View, P : View {
         self.init(urlRequest: urlRequest, urlCache: urlCache, scale: scale) { phase in
             if let image = phase.image {
@@ -50,12 +44,12 @@ public struct CachedAsyncImage<Content>: View where Content: View {
             }
         }
     }
-
+    
     public init(url: URL?, urlCache: URLCache = .shared, scale: CGFloat = 1, transaction: Transaction = Transaction(), @ViewBuilder content: @escaping (AsyncImagePhase) -> Content) {
         let urlRequest = url == nil ? nil : URLRequest(url: url!)
         self.init(urlRequest: urlRequest, urlCache: urlCache, scale: scale, transaction: transaction, content: content)
     }
-
+    
     public init(urlRequest: URLRequest?, urlCache: URLCache = .shared, scale: CGFloat = 1, transaction: Transaction = Transaction(), @ViewBuilder content: @escaping (AsyncImagePhase) -> Content) {
         let configuration = URLSessionConfiguration.default
         configuration.urlCache = urlCache
@@ -105,7 +99,6 @@ public struct CachedAsyncImage<Content>: View where Content: View {
 
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 private extension AsyncImage {
-    
     struct LoadingError: Error {
     }
 }

@@ -32,7 +32,7 @@ struct RecipeDetails: Codable {
     let analyzedInstructions: [AnalyzedInstruction]?
     let originalID: Int?
     let spoonacularScore: Double
-
+    
     enum CodingKeys: String, CodingKey {
         case vegetarian, vegan, glutenFree, dairyFree, veryHealthy, cheap, veryPopular, sustainable, lowFodmap, weightWatcherSmartPoints, gaps, preparationMinutes, cookingMinutes, aggregateLikes, healthScore, creditsText, sourceName, pricePerServing, extendedIngredients, id, title, readyInMinutes, servings
         case sourceURL = "sourceUrl"
@@ -150,6 +150,7 @@ struct AnalyzedInstruction: Codable {
     let name: String
     let steps: [Step]
 }
+
 struct Step: Codable {
     let number: Int
     let step: String

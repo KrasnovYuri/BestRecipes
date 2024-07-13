@@ -45,7 +45,6 @@
 		92117AB62C32D8260010C7B3 /* TextData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AB52C32D8260010C7B3 /* TextData.swift */; };
 		92117AB82C32D8460010C7B3 /* NetworkServiceAA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AB72C32D8460010C7B3 /* NetworkServiceAA.swift */; };
 		92117ABA2C32D8680010C7B3 /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117AB92C32D8680010C7B3 /* URLManager.swift */; };
-		92117ABC2C32ECE10010C7B3 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92117ABB2C32ECE10010C7B3 /* TestView.swift */; };
 		922258B22C370A650009A768 /* SearchDishElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922258B12C370A650009A768 /* SearchDishElement.swift */; };
 		922258B52C370ACC0009A768 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922258B42C370ACC0009A768 /* SearchView.swift */; };
 		926E9BDB2C37E2E80060DEB7 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E9BDA2C37E2E80060DEB7 /* UIApplication.swift */; };
@@ -100,7 +99,6 @@
 		92117AB52C32D8260010C7B3 /* TextData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextData.swift; sourceTree = "<group>"; };
 		92117AB72C32D8460010C7B3 /* NetworkServiceAA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceAA.swift; sourceTree = "<group>"; };
 		92117AB92C32D8680010C7B3 /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
-		92117ABB2C32ECE10010C7B3 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		921B6E8A2C3437B2002E812E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		922258B12C370A650009A768 /* SearchDishElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDishElement.swift; sourceTree = "<group>"; };
 		922258B42C370ACC0009A768 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -316,7 +314,6 @@
 				92117AB52C32D8260010C7B3 /* TextData.swift */,
 				92117AB72C32D8460010C7B3 /* NetworkServiceAA.swift */,
 				92117AB92C32D8680010C7B3 /* URLManager.swift */,
-				92117ABB2C32ECE10010C7B3 /* TestView.swift */,
 				44E00E622C368BDD003DA7EB /* UserDefaultsService.swift */,
 				44CD99692C3A78D1009C4C4B /* CachedAsyncImage.swift */,
 			);
@@ -456,7 +453,6 @@
 				44E00E5D2C368B66003DA7EB /* RatingElement.swift in Sources */,
 				44CD99732C3D66CE009C4C4B /* CuisineAllListView.swift in Sources */,
 				92EA88AD2C31D5F600FD3423 /* Color+Ext.swift in Sources */,
-				92117ABC2C32ECE10010C7B3 /* TestView.swift in Sources */,
 				7AB0857C2C343AE800FEF512 /* RecipeDetails.swift in Sources */,
 				92117AB22C32D7F80010C7B3 /* DishBigModel.swift in Sources */,
 				92117AAE2C32D6FC0010C7B3 /* DishesListView.swift in Sources */,
