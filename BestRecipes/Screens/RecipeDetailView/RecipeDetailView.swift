@@ -45,7 +45,6 @@ struct RecipeDetailView: View {
                                         .frame(maxWidth: 343, maxHeight: 200)
                                     ProgressView()
                                 }
-                                    
                             }
                             .clipShape(RoundedRectangle(cornerRadius: 20))
                             .padding(.horizontal, 6)
@@ -54,7 +53,6 @@ struct RecipeDetailView: View {
                             HStack {
                                 Spacer()
                                 VStack {
-                                    
                                     ZStack {
                                         Circle()
                                             .frame(width: 35)
@@ -73,7 +71,6 @@ struct RecipeDetailView: View {
                                     }
                                     Spacer()
                                 }
-                                
                             }
                             .frame(maxWidth: 343, maxHeight: 200)
                         }
@@ -86,16 +83,13 @@ struct RecipeDetailView: View {
                                 .font(.custom(Font.light, size: 14))
                                 .foregroundStyle(.gray)
                         }
-                        
                         Spacer()
-                        
                         // save recipe
                         //                    HStack {
                         if !userRecipe {
                             Button {
                                 modelData.saveToFavorite(id: id)
                                 saved = true
-                                
                             } label: {
                                 HStack {
                                     ZStack {
@@ -125,7 +119,6 @@ struct RecipeDetailView: View {
                                 .padding(.trailing, saved ? 30 : 0)
                             }
                         }
-                        
                     }
                     .padding(.leading, 15)
                     
@@ -137,7 +130,6 @@ struct RecipeDetailView: View {
                                 Text("Instructions")
                                     .font(.custom(Font.semiBold, size: 20))
                                     .padding(.vertical, 6)
-                                
                                 ForEach(instructions, id: \.name) { instruction in
                                     ForEach(instruction.steps, id: \.number) { step in
                                         HStack(alignment: .top) {
@@ -163,7 +155,6 @@ struct RecipeDetailView: View {
                         Spacer()
                     }
                     .padding(.horizontal)
-                    
                     VStack {
                         ForEach(dish.extendedIngredients, id: \.id) { ingredient in
                             IngridientComponentView(ingridient: ingredient)
@@ -172,9 +163,7 @@ struct RecipeDetailView: View {
                 }
                 .blur(radius: delete ? 20 : 0)
                 Spacer(minLength: 30)
-                
             }
-            
             
             if delete {
                 ZStack {
@@ -185,7 +174,7 @@ struct RecipeDetailView: View {
                         Text("Delete from favorite?")
                             .multilineTextAlignment(.center)
                             .font(.custom(Font.semiBold, size: 18))
-//                            .padding(10)
+                        //                            .padding(10)
                             .padding(.top, 20)
                             .frame(height: 50)
                         HStack {
@@ -203,9 +192,6 @@ struct RecipeDetailView: View {
                                         .scaledToFit()
                                         .foregroundStyle(.brRed)
                                         .scaleEffect(0.8)
-//                                    Text("Yes")
-//                                        .font(.custom(Font.bold, size: 18))
-//                                        .foregroundStyle(.brRed)
                                 }
                             }
                             .frame(width: 100, height: 50)
@@ -220,16 +206,12 @@ struct RecipeDetailView: View {
                                         .scaledToFit()
                                         .foregroundStyle(.black)
                                         .scaleEffect(0.8)
-//                                    Text("No")
-//                                        .font(.custom(Font.bold, size: 18))
-//                                        .foregroundStyle(.black)
                                 }
                             }
                             .frame(width: 100, height: 50)
                         }
                         .padding()
                     }
-                    
                 }
                 .frame(width: 300, height: 150)
             }
@@ -245,7 +227,6 @@ struct RecipeDetailView: View {
             if !userRecipe {
                 modelData.saveRecent(id: id)
                 modelData.loadRecentDishes()
-                
                 saved = modelData.checkFavorite(id: id)
                 Task {
                     do {
@@ -276,7 +257,6 @@ struct RecipeDetailView: View {
             }
         }
     }
-    
 }
 
 #Preview {

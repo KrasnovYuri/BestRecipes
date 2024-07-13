@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct FavoriteButton: View {
-
+    
     @Binding var isSaved: Bool
-
+    
     var body: some View {
         Button {
             isSaved.toggle()

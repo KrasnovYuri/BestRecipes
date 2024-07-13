@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ProfileView: View {
     @StateObject var modelData: ModelData
-    @State private var profileImage: UIImage? //= UIImage(named: "defaultProfileImage")
+    @State private var profileImage: UIImage?
     @State private var showImagePicker: Bool = false
     @State private var delete: Bool = false
     @State private var deleteId: Int = 0
-    //
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -60,7 +60,6 @@ struct ProfileView: View {
                                         .padding()
                                 }
                                 .frame(height:30)
-                                
                             }
                             VStack {
                                 HStack {
@@ -80,19 +79,15 @@ struct ProfileView: View {
                                         .padding()
                                 }
                                 .frame(height:30)
-                                
                             }
                             .padding(.top, 10)
-                            
                         }
                         .padding(.leading)
-                        
                     }
                     .padding(.horizontal, 16)
                     HStack {
                         Text("My recipes")
                             .font(.custom(Font.semiBold, size: 30))
-                        
                         Spacer()
                         //                Button {
                         //                    UserDefaultsService.shared.removeData(forKey: "Saved")
@@ -148,7 +143,6 @@ struct ProfileView: View {
                                         }
                                     }
                                     .padding(.vertical, 25)
-                                    
                                 }
                             }
                             Spacer(minLength: 80)
@@ -203,7 +197,6 @@ struct ProfileView: View {
                             }
                             .padding()
                         }
-                        
                     }
                     .frame(width: 300, height: 150)
                 }
@@ -227,7 +220,6 @@ struct ProfileView: View {
             }
         }
     }
-    
 }
 
 extension ProfileView {

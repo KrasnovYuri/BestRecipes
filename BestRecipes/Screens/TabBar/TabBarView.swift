@@ -51,7 +51,6 @@ struct TabBarView: View {
                 }
                 Spacer()
             }
-            
         }
         .animation(.easeInOut, value: animIndex)
         .frame(height: 110)

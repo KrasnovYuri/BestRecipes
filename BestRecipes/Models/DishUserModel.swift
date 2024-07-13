@@ -26,8 +26,8 @@ struct DishUserModel: Identifiable, Codable {
         readyInMinutes = 0
         creditsText = "0"
         ingredientsCount = 0
-        
     }
+    
     init(title: String, id: Int, score: Double, time: Int, credits: String, imagePath: String, ingredients: [UserIngredient], serves: Int) {
         self.title = title
         self.id = id

@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct SearchView: View {
-    
     @StateObject var modelData: ModelData
     @State var searchText: String = ""
     @Binding var active: Bool
-    
     
     var body: some View {
         NavigationView {
@@ -25,7 +23,6 @@ struct SearchView: View {
                     HStack {
                         Image(.search)
                             .padding(.horizontal, 10)
-                        
                         TextField("Search recipes", text: $modelData.searchText)
                             .font(.custom(Font.regular, fixedSize: 16))
                             .autocorrectionDisabled()
@@ -44,7 +41,6 @@ struct SearchView: View {
                     }
                 }
                 .frame(height: 60)
-                
                 .onTapGesture {
                     active = true
                 }
@@ -63,8 +59,6 @@ struct SearchView: View {
                                     SearchDishElement(rating: 5.0, dish: dish)
                                         .padding(.vertical, 5)
                                 }
-
-                               
                             }
                             Spacer(minLength: 100)
                         }
@@ -73,7 +67,6 @@ struct SearchView: View {
                     .animation(.easeInOut(duration: 1), value: active)
                 }
             }
-            
         }
         .frame(height: active ? 760 : 60 )
     }
@@ -83,9 +76,7 @@ struct SearchView: View {
                 try await modelData.fetchSearch()
             }
         }
-        
     }
-    
 }
 
 #Preview {

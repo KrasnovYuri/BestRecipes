@@ -11,10 +11,9 @@ struct OnboardingView: View {
     @State var selectedPage = 0
     var body: some View {
         TabView(selection: $selectedPage) {
-
             PageView(selectedPage: $selectedPage, imageName: "Onboarding1", title: "Recipes from all ", subtitle: "over the World", buttonTitle: "Continue").tag(0)
                 .gesture(DragGesture())
-               
+            
             PageView(selectedPage: $selectedPage, imageName: "Onboarding2", title: "Recipes with ", subtitle: "each and every detail", buttonTitle: "Continue").tag(1)
                 .gesture(DragGesture())
             
@@ -44,52 +43,50 @@ struct PageView: View {
                     .ignoresSafeArea()
             }
             .frame(width: 400)
-                VStack() {
-                    Spacer()
-                    VStack(alignment: .center) {
-                        Text(title)
-                            .foregroundColor(.white)
-                        Text(subtitle)
-                            .foregroundColor(.brGold)
-                    }
-                    .frame(maxWidth: UIScreen.main.bounds.width)
-                    .font(.custom(Font.bold, size: 40))
-                    HStack{
-                        ForEach(0..<3) { num in
-                            Rectangle()
-                                .fill(selectedPage == num ? Color.brGold : Color.white)
-                                .cornerRadius(10)
-                                .frame(width: 50, height: 10)
-                              
-                        }
-                    }
-                    .padding()
-                    Button(action: {
-                        nextView()
-                    }) {
-                        Text(buttonTitle)
-                            .font(.custom(Font.bold, size: 20))
-                            .foregroundColor(.white)
-                            .padding()
-                            .padding(.horizontal, 30)
-                            .background(Color.red)
-                            .cornerRadius(30)
-                    }
-                    .padding(.bottom, 10)
-                    if selectedPage != 2 {
-                        Button {
-                            isOnboarding =  false
-                        } label: {
-                            Text("Skip")
-                                .foregroundColor(.white)
-                        }
+            VStack() {
+                Spacer()
+                VStack(alignment: .center) {
+                    Text(title)
+                        .foregroundColor(.white)
+                    Text(subtitle)
+                        .foregroundColor(.brGold)
+                }
+                .frame(maxWidth: UIScreen.main.bounds.width)
+                .font(.custom(Font.bold, size: 40))
+                HStack{
+                    ForEach(0..<3) { num in
+                        Rectangle()
+                            .fill(selectedPage == num ? Color.brGold : Color.white)
+                            .cornerRadius(10)
+                            .frame(width: 50, height: 10)
                     }
                 }
-                .padding(.bottom, 30)
-                .background(Color.black.opacity(0.5))
+                .padding()
+                Button(action: {
+                    nextView()
+                }) {
+                    Text(buttonTitle)
+                        .font(.custom(Font.bold, size: 20))
+                        .foregroundColor(.white)
+                        .padding()
+                        .padding(.horizontal, 30)
+                        .background(Color.red)
+                        .cornerRadius(30)
+                }
+                .padding(.bottom, 10)
+                if selectedPage != 2 {
+                    Button {
+                        isOnboarding =  false
+                    } label: {
+                        Text("Skip")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
+            .padding(.bottom, 30)
+            .background(Color.black.opacity(0.5))
         }
         .frame(width: 400)
-     
     }
 }
 
@@ -102,7 +99,6 @@ extension PageView {
                 selectedPage += 1
             }
         }
-      
     }
 }
 

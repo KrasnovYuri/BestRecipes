@@ -50,7 +50,6 @@ struct AddDishView: View {
                                             Text("Add photo")
                                                 .foregroundStyle(.brWhite)
                                         }
-                                        
                                     }.onTapGesture {
                                         self.showImagePicker = true
                                     }
@@ -64,7 +63,6 @@ struct AddDishView: View {
                                 TextField("Enter dish name", text: $title)
                                     .font(.custom(Font.regular, size: 14))
                                     .padding(.horizontal, 10)
-                                
                             }.frame(height: 44)
                                 .padding(.vertical, 10)
                             VStack {
@@ -79,7 +77,6 @@ struct AddDishView: View {
                                     Spacer()
                                 }
                                 .padding(.vertical, 10)
-                                //                ScrollView(.vertical, showsIndicators: false) {
                                 VStack {
                                     if ingredients.count != 0 {
                                         ForEach($ingredients, id: \.id) { ingredient in
@@ -93,7 +90,6 @@ struct AddDishView: View {
                                                         .padding(.horizontal, 10)
                                                 }
                                                 .frame(width: 200)
-                                                //                                        Spacer()
                                                 ZStack {
                                                     RoundedRectangle(cornerRadius: 10)
                                                         .stroke(lineWidth: 1)
@@ -112,7 +108,6 @@ struct AddDishView: View {
                                                     case "sp": ingredient.wrappedValue.unit = "gr"
                                                     default : ingredient.wrappedValue.unit = "gr"
                                                     }
-                                                    
                                                 } label: {
                                                     ZStack {
                                                         RoundedRectangle(cornerRadius: 10)
@@ -124,7 +119,6 @@ struct AddDishView: View {
                                                             .padding(.horizontal, 10)
                                                     }
                                                     .frame(width: 50)
-                                                    
                                                 }
                                                 Button {
                                                     ingredients = ingredients.filter({ UserIngredient in
@@ -133,7 +127,6 @@ struct AddDishView: View {
                                                 } label: {
                                                     Image("minusButton")
                                                 }
-                                                
                                             }
                                             .frame(height: 45)
                                         }
@@ -152,11 +145,8 @@ struct AddDishView: View {
                                     }
                                 }
                             }
-                            
-                            
                         }
                         .frame(width: 370)
-                        
                     }
                     Spacer()
                     HStack {
@@ -232,7 +222,6 @@ struct AddDishView: View {
                             }
                         }
                     }
-                    
                     .frame(width: 350, height: 200)
                 }
             }
@@ -278,10 +267,6 @@ extension AddDishView {
             print("Ошибка при сохранении/чтении изображения: \(error)")
         }
     }
-    
-    
-    
-    
 }
 
 #Preview {

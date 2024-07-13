@@ -46,14 +46,10 @@ struct CuisineAllListView: View {
                             Image("Arrow")
                                 .padding()
                         }
-                        
                     }
-                    
                     .frame(width: 370, height: 60)
                     .padding(2)
                 }
-                
-                
             }
         }
         .navigationBarBackButtonHidden(true)

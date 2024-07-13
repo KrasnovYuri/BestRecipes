@@ -11,8 +11,8 @@ struct CuisineListView: View {
     @StateObject var modelData: ModelData
     @State var cuisine: String
     @State var dishesList: [DishLightModel] = []
-    @State var tabBarToggle: Bool = true
     let service = NetworkServiceAA()
+    
     var body: some View {
         VStack {
             ScrollView (.vertical, showsIndicators: false ) {
@@ -25,7 +25,7 @@ struct CuisineListView: View {
                                     HStack {
                                         RatingElement(bg: true, rating: dish.spoonacularScore)
                                         Spacer()
-                                        FavoriteElement(checkFavorite: true)
+                                        FavoriteElement(checkFavorite: modelData.checkFavorite(id: dish.id))
                                     }
                                     .padding(.horizontal, 7)
                                     Spacer()
@@ -49,16 +49,15 @@ struct CuisineListView: View {
                     BackButtonView()
                 }
             }
-                .onAppear {
-                    print("onAppear")
-                    Task {
-                        do {
-                            dishesList = try await service.getDishByCuisine(cuisine: cuisine, numberLimit: 10)
-                        } catch {
-                            print("CuisineListView error")
-                        }
+            .onAppear {
+                Task {
+                    do {
+                        dishesList = try await service.getDishByCuisine(cuisine: cuisine, numberLimit: 10)
+                    } catch {
+                        print("CuisineListView error")
                     }
                 }
+            }
         }
     }
 }

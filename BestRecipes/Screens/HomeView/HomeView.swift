@@ -13,9 +13,9 @@ struct HomeView: View {
     @State var userChoiseCourse = "Main Course"
     @Binding var searchEnable: Bool
     @StateObject var modelData: ModelData
+    
     var body: some View {
         NavigationView {
-     
             ScrollView(.vertical) {
                 //                header
                 HStack {
@@ -45,8 +45,6 @@ struct HomeView: View {
                                     Image(systemName: "arrow.right")
                                         .foregroundStyle(.brBlack)
                                 }
-                                
-                                
                             }
                         }
                         .padding(.horizontal, 16)
@@ -68,12 +66,10 @@ struct HomeView: View {
                                             }
                                         }
                                         .padding(.leading, 16)
-                                        
                                     }
                                 }
                             }
                         }
-                        
                         .frame(height: 280)
                     }
                     //Popular category
@@ -95,21 +91,20 @@ struct HomeView: View {
                                         ZStack {
                                             RoundedRectangle(cornerRadius: 10)
                                                 .frame(height: 34)
-                                                .foregroundStyle( userChoiseCourse != course ? .white : .brRed)
+                                                .foregroundStyle(userChoiseCourse != course ? .white : .brRed)
                                             Text(course.lowercased().localizedCapitalized)
                                                 .font(.custom(Font.medium, size: 12))
                                                 .padding(5)
                                                 .padding(.horizontal, 5)
-                                                .foregroundStyle(( userChoiseCourse == course ? .white : .brRed))
+                                                .foregroundStyle((userChoiseCourse == course ? .white : .brRed))
                                         }
                                         .padding(.leading, modelData.foodCategoryArray[0] == course ? 16 : 0)
-                                        
                                     }
                                 }
                             }
                         }
                         // Popular dish list
-                        ScrollView(.horizontal) {
+                        ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 ForEach(modelData.foodCategoryPopularDishes, id: \.id) { dish in
                                     NavigationLink{
@@ -123,7 +118,6 @@ struct HomeView: View {
                                                     Spacer()
                                                     FavoriteElement(checkFavorite: modelData.checkFavorite(id: dish.id))
                                                         .padding(10)
-                                                    
                                                 }
                                             }
                                             .padding(.leading, 16)
@@ -133,10 +127,8 @@ struct HomeView: View {
                                     }
                                 }
                             }
-                            
                         }
                         .ignoresSafeArea()
-
                     }
                     //Recent View
                     VStack {
@@ -205,8 +197,7 @@ struct HomeView: View {
                                             }
                                             .onDisappear {
                                                 
-                                                    modelData.tabBarHide = false
-                                                
+                                                modelData.tabBarHide = false
                                             }
                                     } label: {
                                         VStack{
@@ -228,14 +219,9 @@ struct HomeView: View {
                     }
                     Spacer(minLength: 80)
                 }
-                    
-                    
-                    
             }
         }.navigationViewStyle(.stack)
-        
     }
-    
 }
 
 #Preview {

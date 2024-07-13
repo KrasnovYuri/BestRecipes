@@ -16,7 +16,6 @@ struct DishLightModel: Identifiable, Codable {
     let ingredientsCount: Int
     var imagePath: String = ""
     
-    
     init(_ dish: RecipeDetails) {
         title = dish.title
         id = dish.id
@@ -34,6 +33,7 @@ struct DishLightModel: Identifiable, Codable {
         creditsText = "povar"
         ingredientsCount = 13
     }
+    
     init(title: String, id: Int, spoonacularScore: Double, readyInMinutes: Int, creditsText: String, ingredientsCount: Int) {
         self.title = title
         self.id = id
@@ -52,7 +52,6 @@ struct DishLightModel: Identifiable, Codable {
         ingredientsCount = userModel.ingredientsCount
         imagePath = "userDish\(userModel.id).jpg"
     }
-    
 }
 
 

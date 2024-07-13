@@ -52,7 +52,6 @@ enum Course: String, CaseIterable {
     case fingerfood
     case snack
     case drink
-    
 }
 
 enum FoodCategory: String, CaseIterable {

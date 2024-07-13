@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct GetRandomButton: View {
-
     var text = "Get Random"
     var action = {}
-
+    
     var body: some View {
         Button(action: action) {
             Text(text)

@@ -10,7 +10,6 @@ import SwiftyJSON
 
 actor NetworkServiceAA {
     
-    
     // MARK: - Search, get dishes by name with autocomplition
     func getDishesByName(name: String, numberLimit: Int) async throws -> [DishLightModel] {
         guard let url = URLManager.shared.createURL(name, numberLimit: numberLimit) else {
@@ -136,7 +135,7 @@ actor NetworkServiceAA {
         }
         return []
     }
-
+    
     // MARK: - get popular dishes
     
     func getTrendingDishes(numberLimit: Int) async throws -> [DishLightModel] {
@@ -157,7 +156,7 @@ actor NetworkServiceAA {
         }
         return []
     }
-
+    
     //MARK: - get dish by Int(id) array
     func getRecipeBulk(intArray: [Int]) async throws -> [DishLightModel] {
         guard let url = URLManager.shared.createURLBulk(id: intArray) else { throw NetworkError.badURL }
