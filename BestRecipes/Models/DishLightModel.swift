@@ -14,6 +14,7 @@ struct DishLightModel: Identifiable, Codable {
     let readyInMinutes: Int
     let creditsText: String
     let ingredientsCount: Int
+    var imagePath: String = ""
     
     
     init(_ dish: RecipeDetails) {
@@ -41,20 +42,18 @@ struct DishLightModel: Identifiable, Codable {
         self.creditsText = creditsText
         self.ingredientsCount = ingredientsCount
     }
-}
-
-
-struct UserIngredient: Identifiable, Codable {
-    var id: String
-    var title: String
-    var amount: String
-    var unit: String
     
-    init() {
-        id = UUID().uuidString
-        title = ""
-        amount = ""
-        unit = Unit.gr.rawValue
+    init (userModel: DishUserModel) {
+        title = userModel.title
+        id = userModel.id
+        spoonacularScore = userModel.spoonacularScore
+        readyInMinutes = userModel.readyInMinutes
+        creditsText = userModel.creditsText
+        ingredientsCount = userModel.ingredientsCount
+        imagePath = "userDish\(userModel.id).jpg"
     }
+    
 }
+
+
 

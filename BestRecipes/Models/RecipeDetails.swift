@@ -18,7 +18,7 @@ struct RecipeDetails: Codable {
     let aggregateLikes, healthScore: Int
     let creditsText, sourceName: String
     let pricePerServing: Double
-    let extendedIngredients: [ExtendedIngredient]
+    var extendedIngredients: [ExtendedIngredient]
     let id: Int
     let title: String
     let readyInMinutes, servings: Int
@@ -77,6 +77,50 @@ struct RecipeDetails: Codable {
         analyzedInstructions = []
         originalID = nil
         spoonacularScore = 56.0
+    }
+    
+    init(userDish: DishUserModel) {
+        vegetarian = true
+        vegan = true
+        glutenFree = true
+        dairyFree = true
+        veryHealthy = true
+        cheap = true
+        veryPopular = true
+        sustainable = true
+        lowFodmap = true
+        weightWatcherSmartPoints =  0
+        gaps = ""
+        preparationMinutes = userDish.readyInMinutes
+        cookingMinutes = userDish.readyInMinutes
+        aggregateLikes = userDish.readyInMinutes
+        healthScore = 100
+        creditsText = userDish.creditsText
+        sourceName = userDish.creditsText
+        pricePerServing = 0.0
+        var extendedIngredientsIn: [ExtendedIngredient] = []
+        for ingredient in userDish.ingredients {
+            if let userAmountInt = Int(ingredient.amount) {
+                extendedIngredientsIn.append(ExtendedIngredient(id: Int.random(in: 1...30000), aisle: "", image: "", consistency: "", name: ingredient.title, nameClean: ingredient.title, original: ingredient.title, originalName: ingredient.title, amount: Double(userAmountInt), unit: ingredient.unit, meta: [], measures: MeasuresBig(us: Metric(amount: Double(userAmountInt), unitShort: ingredient.unit, unitLong: ingredient.unit), metric: Metric(amount: Double(userAmountInt), unitShort: ingredient.unit, unitLong: ingredient.unit))))
+            }
+        }
+        extendedIngredients = extendedIngredientsIn
+        id = userDish.id
+        title = userDish.title
+        readyInMinutes = userDish.readyInMinutes
+        servings = userDish.readyInMinutes
+        sourceURL = ""
+        image = ""
+        imageType = ""
+        summary = ""
+        cuisines = []
+        dishTypes = []
+        diets = []
+        occasions = []
+        instructions = ""
+        analyzedInstructions = []
+        originalID = nil
+        spoonacularScore = Double(userDish.spoonacularScore)
     }
 }
 

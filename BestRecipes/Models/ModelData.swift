@@ -10,6 +10,9 @@ import SwiftUI
 
 @MainActor
 class ModelData: ObservableObject {
+    //user name
+    @Published var userName: String = ""
+    @Published var userSurname: String = ""
     
     // trending dishes
     @Published var trendingDishes: [DishLightModel] = []
@@ -25,9 +28,6 @@ class ModelData: ObservableObject {
     @Published var tabBarHide: Bool = false
     
     //    UserDefaults "Recent"
-//    @State var recentDishesID: [Int] = []
-//    @Published var recentDishes: [DishLightModel] = []
-
     @Published var recentDishesID: [Int] = []
     @Published var recentDishes: [DishLightModel] = []
     
@@ -36,6 +36,8 @@ class ModelData: ObservableObject {
     @Published var favoriteDishesID: [Int] = []
     @Published var favoriteDishes: [DishLightModel] = []
     
+    // saced array "Saved" UserDefaults ket
+    @Published var savedDishies: [DishUserModel] = []
     //service
     let service = NetworkServiceAA()
     
@@ -54,11 +56,17 @@ class ModelData: ObservableObject {
             print("fetch dish by food category problem")
         }
         
-        //TODO: -get recent from userDef and ID
+        //get dishes from UserDef
         recentDishesID = getUserDef("Recent")
         loadRecentDishes()
         favoriteDishesID = getUserDef("Favorite")
         loadFavoriteDishes()
+        loadSavedRecipes()
+        loadUserName()
+        
+        print("Names")
+        print(userName)
+        print(userSurname)
     }
     // Fetch dish by cuisine
     func fetchDishByCuisine(_ cuisine: String) async throws {
@@ -146,7 +154,64 @@ class ModelData: ObservableObject {
             loadFavoriteDishes()
         }
     }
+    func loadSavedRecipes() {
+        if let savedRecepies: [DishUserModel] = UserDefaultsService.shared.get(forKey: "Saved") {
+            savedDishies = savedRecepies
+        }
+    }
+    func saveSavedRecipe (recipe: DishUserModel) {
+        if savedDishies.isEmpty {
+            UserDefaultsService.shared.save(structs: [recipe], forKey: "Saved")
+            savedDishies = [recipe]
+        } else {
+            if var savedRecepies: [DishUserModel] = UserDefaultsService.shared.get(forKey: "Saved") {
+                savedRecepies.append(recipe)
+                UserDefaultsService.shared.save(structs: savedRecepies, forKey: "Saved")
+                savedDishies = savedRecepies
+            }
+        }
+    }
+    func deleteFromSaved(recipeId: Int) {
+        if let savedRecepies: [DishUserModel] = UserDefaultsService.shared.get(forKey: "Saved") {
+            let result = savedRecepies.filter { dish in
+                dish.id != recipeId
+            }
+            UserDefaultsService.shared.save(structs: result, forKey: "Saved")
+            savedDishies = result
+        }
+    }
+    func loadProfileImage(path: String) -> Image {
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let folderURL = documentsURL.appendingPathComponent("BestRecipes")
+        let fileURL = folderURL.appendingPathComponent(path)
+        if FileManager.default.fileExists(atPath: folderURL.path),
+           let loadImage = UIImage(contentsOfFile: fileURL.path) {
+            return Image(uiImage: loadImage)
+        }
+        return Image(systemName: "xmark")
+     }
+    func loadUserName () {
+        if let username: String = UserDefaultsService.shared.get(forKey: "nameUser") {
+            if username.count < 1 {
+                UserDefaultsService.shared.save(structs: "Gordon", forKey: "nameUser")
+                self.userName = "Gordon"
+            } else {
+                userName = username
+            }
+        }
+        if let surname : String = UserDefaultsService.shared.get(forKey: "surnameUser") {
+            if surname.count < 1 {
+                UserDefaultsService.shared.save(structs: "Ramsey", forKey: "nameUser")
+                self.userSurname = "Ramsey"
+            } else {
+                userSurname = surname
+            }
+        }
+        
+    }
+    
     init() {
+        
         Task {
             do {
                 try await fetchAllData()
