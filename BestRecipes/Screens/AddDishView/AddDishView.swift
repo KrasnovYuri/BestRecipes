@@ -66,7 +66,6 @@ struct AddDishView: View {
                                     .font(.custom(Font.regular, size: 14))
                                     .padding(.horizontal, 10)
                                 
-                                
                             }.frame(height: 44)
                                 .padding(.vertical, 10)
                             VStack {
@@ -240,7 +239,7 @@ struct AddDishView: View {
             }
             //Animation
             .animation(.easeInOut, value: ingredients.count)
-            
+            .animation(.easeInOut, value: saved)
             //On Appear
             .onAppear {
                 id = Int.random(in: 1...30000)

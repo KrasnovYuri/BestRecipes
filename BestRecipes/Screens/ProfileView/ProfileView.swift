@@ -120,7 +120,7 @@ struct ProfileView: View {
                             ForEach(modelData.savedDishies, id: \.id) { dish in
                                 NavigationLink {
                                     Text("")
-                                    //                            RecipeDetailView(modelData: modelData, id: dish.id)
+                                    RecipeDetailView(modelData: modelData, disappearIsOn: true, id: dish.id, dish: RecipeDetails(), userRecipe: true)
                                 } label: {
                                     ZStack {
                                         TrendingDishElement(bigSize: true, dishUser: dish)

@@ -188,7 +188,7 @@ class ModelData: ObservableObject {
            let loadImage = UIImage(contentsOfFile: fileURL.path) {
             return Image(uiImage: loadImage)
         }
-        return Image(systemName: "person")
+        return Image(systemName: "xmark")
      }
     func loadUserName () {
         if let username: String = UserDefaultsService.shared.get(forKey: "nameUser") {

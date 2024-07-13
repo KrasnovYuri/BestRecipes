@@ -17,6 +17,7 @@ struct RecipeDetailView: View {
     @State var isSet: Bool = true
     @State var saved: Bool = false
     @State var delete: Bool = false
+    @State var userRecipe: Bool = false
     
     var body: some View {
         ZStack {
@@ -24,42 +25,58 @@ struct RecipeDetailView: View {
                 VStack {
                     Spacer(minLength: 20)
                     ZStack {
-                        
-                        AsyncImage(url: URL(string: dish.image)) { image in
-                            image
+                        if userRecipe {
+                            modelData.loadProfileImage(path: "userDish\(dish.id).jpg")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(maxWidth: 343, maxHeight: 200)
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        .padding(.horizontal, 6)
-                        HStack {
-                            Spacer()
-                            VStack {
-                                
+                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                                .padding(.horizontal, 6)
+                        } else {
+                            AsyncImage(url: URL(string: dish.image)) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(maxWidth: 343, maxHeight: 200)
+                            } placeholder: {
                                 ZStack {
-                                    Circle()
-                                        .frame(width: 35)
-                                        .foregroundStyle(.white.opacity(0.6))
-                                    
-                                    Circle()
-                                        .stroke()
-                                        .foregroundStyle(saved ? .brRed : .brGray)
-                                        .frame(width: 35)
-                                    
-                                    Image(saved ? "TabBarBookmarkActive" : "TabBarBookmarkInactive")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 22, height: 22)
-                                        .padding(17)
+                                    Rectangle()
+                                        .foregroundStyle(.white)
+                                        .frame(maxWidth: 343, maxHeight: 200)
+                                    ProgressView()
                                 }
-                                Spacer()
+                                    
                             }
-                            
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .padding(.horizontal, 6)
                         }
-                        .frame(maxWidth: 343, maxHeight: 200)
+                        if !userRecipe {
+                            HStack {
+                                Spacer()
+                                VStack {
+                                    
+                                    ZStack {
+                                        Circle()
+                                            .frame(width: 35)
+                                            .foregroundStyle(.white.opacity(0.6))
+                                        
+                                        Circle()
+                                            .stroke()
+                                            .foregroundStyle(saved ? .brRed : .brGray)
+                                            .frame(width: 35)
+                                        
+                                        Image(saved ? "TabBarBookmarkActive" : "TabBarBookmarkInactive")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 22, height: 22)
+                                            .padding(17)
+                                    }
+                                    Spacer()
+                                }
+                                
+                            }
+                            .frame(maxWidth: 343, maxHeight: 200)
+                        }
                     }
                     // rating
                     HStack {
@@ -74,36 +91,39 @@ struct RecipeDetailView: View {
                         
                         // save recipe
                         //                    HStack {
-                        Button {
-                            modelData.saveToFavorite(id: id)
-                            saved = true
-                            
-                        } label: {
-                            HStack {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .foregroundStyle(saved ? .brRed : .brNeutral )
-                                    HStack {
-                                        
-                                        Text(saved ? "Saved" : "Save it?" )
-                                            .foregroundStyle(saved ? .white : .black )
-                                            .font(.custom(Font.regular, size: 14))
-                                            .lineLimit(1)
-                                    }
-                                }
-                                .frame(width: 80)
-                            }
-                        }
-                        .disabled(saved)
-                        .padding(.trailing, !saved ? 30 : 0)
-                        if saved {
+                        if !userRecipe {
                             Button {
-                                delete = true
-                            } label : {
-                                Image(systemName: "trash.fill")
-                                    .foregroundStyle(saved ? .brRed : .brNeutral )
+                                modelData.saveToFavorite(id: id)
+                                saved = true
+                                
+                            } label: {
+                                HStack {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .foregroundStyle(saved ? .brRed : .brNeutral )
+                                        HStack {
+                                            
+                                            Text(saved ? "Saved" : "Save it?" )
+                                                .foregroundStyle(saved ? .white : .black )
+                                                .font(.custom(Font.regular, size: 14))
+                                                .lineLimit(1)
+                                        }
+                                    }
+                                    .frame(width: 80)
+                                }
                             }
-                            .padding(.trailing, saved ? 30 : 0)
+                            .disabled(saved)
+                            .padding(.trailing, !saved ? 30 : 0)
+                            
+                            if saved {
+                                Button {
+                                    delete = true
+                                } label : {
+                                    Image(systemName: "trash.fill")
+                                        .foregroundStyle(saved ? .brRed : .brNeutral )
+                                }
+                                .padding(.trailing, saved ? 30 : 0)
+                            }
                         }
                         
                     }
@@ -220,15 +240,19 @@ struct RecipeDetailView: View {
         // onAppear and disappear
         .onAppear {
             modelData.tabBarHide = true
-            modelData.saveRecent(id: id)
-            modelData.loadRecentDishes()
-            
-            saved = modelData.checkFavorite(id: id)
-            Task {
-                do {
-                    dish = try await service.getDishById(id: id)
-                } catch {
-                    
+            print("ingredients")
+            print(dish.extendedIngredients.count)
+            if !userRecipe {
+                modelData.saveRecent(id: id)
+                modelData.loadRecentDishes()
+                
+                saved = modelData.checkFavorite(id: id)
+                Task {
+                    do {
+                        dish = try await service.getDishById(id: id)
+                    } catch {
+                        
+                    }
                 }
             }
         }

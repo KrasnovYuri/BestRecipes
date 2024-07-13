@@ -11,7 +11,7 @@ struct TestView: View {
 
     // random dishes
 
-    @StateObject private var modelData = ModelData()
+//    @StateObject private var modelData = ModelData()
     var check = [1,2,3,4,5]
 
     var body: some View {
@@ -21,10 +21,15 @@ struct TestView: View {
 //                    UserDefaultsService.shared.removeData(forKey: "userName")
 //                    UserDefaultsService.shared.removeData(forKey: "userSurname")
 //                    UserDefaultsService.shared.save(structs: "Gordon", forKey: "userName")
-//                    if let saved: String = UserDefaultsService.shared.get(forKey: "userName") {
-//                        print(saved)
-////                       
-//                    }
+                    var userDish = DishUserModel()
+                    userDish.ingredients.append(UserIngredient())
+                    userDish.ingredients.append(UserIngredient())
+                    UserDefaultsService.shared.save(structs: userDish, forKey: "Saved")
+                    print("here")
+                    if let saved: [DishUserModel] = UserDefaultsService.shared.get(forKey: "Saved") {
+                        print(saved.count)
+//
+                    }
                     
                 } label: {
                     Text("Button")
