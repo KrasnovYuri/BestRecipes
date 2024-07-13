@@ -200,6 +200,14 @@ struct HomeView: View {
                                 ForEach(modelData.cuisineArray, id: \.self) { cuisine in
                                     NavigationLink {
                                         CuisineListView(modelData: modelData, cuisine: cuisine)
+                                            .onAppear {
+                                                modelData.tabBarHide = true
+                                            }
+                                            .onDisappear {
+                                                
+                                                    modelData.tabBarHide = false
+                                                
+                                            }
                                     } label: {
                                         VStack{
                                             Image(cuisine)
