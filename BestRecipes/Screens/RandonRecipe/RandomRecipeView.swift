@@ -16,13 +16,25 @@ struct RandomRecipeView: View {
     var body: some View {
         NavigationView {
 
-            VStack(spacing: 13) {
+            VStack() {
+
                 HStack {
                     Text("Random recipes")
                         .font(.custom(Font.bold, size: 24))
                     Spacer()
                 }
                 .padding(.horizontal, 16)
+                ScrollView(showsIndicators: false) {
+                    ForEach(dishesList, id: \.id) { dish in
+                        NavigationLink(destination: RecipeDetailView(modelData: modelData, disappearIsOn: true, id: dish.id)) {
+                            HStack {
+                                TrendingDishElement(bigSize: true, dish: dish)
+                            }
+                            .padding(.vertical, 10)
+                        }
+                    }
+                }
+               
 
                 VStack {
                     Text("Get three random recipes 🎁 \nWhat will surprise you today?")
@@ -40,23 +52,12 @@ struct RandomRecipeView: View {
                 }
                 .padding(.bottom, 10)
 
-                ScrollView(showsIndicators: false) {
-                    ForEach(dishesList, id: \.id) { dish in
-                        NavigationLink(destination: RecipeDetailView(modelData: modelData, disappearIsOn: true, id: dish.id)) {
-                            HStack {
-                                TrendingDishElement(bigSize: true, dish: dish)
-                            }
-                            .padding(.vertical, 10)
-                        }
-                    }
-                }
-
-                Spacer(minLength: 80)
+                Spacer(minLength: 100)
             }
         }
     }
 }
 
 #Preview {
-    DishesListView(modelData: ModelData(), dishesList: [], textHeader: "")
+    RandomRecipeView(modelData: ModelData(), dishesList: [])
 }
