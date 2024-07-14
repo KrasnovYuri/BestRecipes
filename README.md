@@ -2,17 +2,20 @@
 ![phones](https://github.com/user-attachments/assets/decb6422-5c63-4de9-a26c-deae350a25fa)
 
 
-### Development Team: 
-
-
 # BestRecipes — an app for iOS where you will find thousands of recipes for various dishes with exact cooking instructions. Save your favorite dishes. Also, create your own recipes. Project created at [Swift Marathon](https://t.me/swiftmarathon)
 
 ## Technologies
 - Swift, SwiftUI
-- Combine
+- Swift Modern Concurrency
 - MVVM
-- RestAPI
+- Spoonacular API
 - iOS 15.0 +
+
+## The project team
+- [Yuri](https://github.com/KrasnovYuri) — Team Leader, iOS Developer
+- [Ruslan](https://github.com/ARuslanDenisov) — Team Leader, iOS Developer
+- [Evgeniy](https://github.com/EKukarskiy) — iOS Developer
+- [Denis](https://github.com/analitk9) — iOS Developer
 
 ---
 
@@ -43,8 +46,5 @@
 
 * User data: personal photo, name
 * List of user-conscious recipes
-
-
-
 
 
