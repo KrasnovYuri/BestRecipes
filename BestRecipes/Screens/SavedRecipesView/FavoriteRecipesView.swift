@@ -57,6 +57,7 @@ struct FavoriteRecipesView: View {
                             }
                         }
                     }
+                    Spacer(minLength: 80)
                 }
                 .padding(10)
                 .blur(radius: delete ? 20 : 0 )
@@ -111,6 +112,7 @@ struct FavoriteRecipesView: View {
             }
             //animation
             .animation(.easeInOut, value: delete)
+            .animation(.easeInOut, value: modelData.favoriteDishes.count)
         }
     }
 }

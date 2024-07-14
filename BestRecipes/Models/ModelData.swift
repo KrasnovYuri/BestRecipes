@@ -145,6 +145,7 @@ class ModelData: ObservableObject {
         if favoriteDishesID.contains(id) {
             let arrayIn = favoriteDishesID.filter { a in id != a }
             favoriteDishesID = arrayIn
+            UserDefaultsService.shared.save(structs: arrayIn, forKey: "Favorite")
             loadFavoriteDishes()
         }
     }
